@@ -56,7 +56,7 @@
         },
         {
             "name": "up-version",
-            "command": "gittey test && \"DotVersion.exe\" --subpatch ./lib/"
+            "command": "gittey test && gittey up-version:unsafe"
         },
         {
             "name": "up-version:unsafe",
