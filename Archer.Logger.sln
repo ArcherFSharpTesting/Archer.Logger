@@ -7,6 +7,15 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Archer.Logger.Lib", "Lib\Ar
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Archer.Logger.Tests", "Tests\Archer.Logger.Tests.fsproj", "{6E6F337D-0F46-49ED-B6D3-7770540BC23B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{7C9DD364-173D-4D40-B521-61276C9E25C1}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		Directory.Build.props = Directory.Build.props
+		gittey-config.json = gittey-config.json
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

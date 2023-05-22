@@ -9,4 +9,16 @@
     <Compile Include="Program.fs" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Archer.Arrow.Lib" Version="0.0.0.35" />
+    <PackageReference Include="Archer.Bow.Lib" Version="0.0.9.32" />
+    <PackageReference Include="Archer.CoreTypes.Lib" Version="0.0.13.38" />
+    <PackageReference Include="Archer.Fletching.Lib" Version="0.0.0.22" />
+    <PackageReference Include="MicroLang.Lib" Version="0.0.12.47" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Lib\Archer.Logger.Lib.fsproj" />
+  </ItemGroup>
+
 </Project>
