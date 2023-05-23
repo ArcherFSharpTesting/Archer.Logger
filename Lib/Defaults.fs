@@ -31,8 +31,8 @@ let resultSummaryReporter (getMessage: 'a -> string) (getSummary: ITestInfo -> s
     |> getMessage
     |> getSummary testInfo
     
-let defaultTestResultSummaryReporter (testResult: TestResult) =
-    resultSummaryReporter getTestResultMessage resultMessageSummaryReporter testResult  
+let defaultTestResultSummaryReporter: TestResult -> ITestInfo -> string =
+    resultSummaryReporter getTestResultMessage resultMessageSummaryReporter
     
-let defaultTestExecutionResultSummaryReporter (testExecutionResult: TestExecutionResult) =
-    resultSummaryReporter getTestExecutionResultMessage resultMessageSummaryReporter testExecutionResult
+let defaultTestExecutionResultSummaryReporter: TestExecutionResult -> ITestInfo -> string =
+    resultSummaryReporter getTestExecutionResultMessage resultMessageSummaryReporter
