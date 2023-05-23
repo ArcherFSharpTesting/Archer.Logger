@@ -26,6 +26,7 @@
     <Compile Include="Indent Reporter Should.fs" />
     <Compile Include="TestExecutionResult Detail Reporter Should.fs" />
     <Compile Include="Program.fs" />
+    <Content Include="TestExecutionResult_Detail_Reporter_Should.Provide_a_detailed_setup_exception_failure_report.approved.txt" />
   </ItemGroup>
 
   <ItemGroup>

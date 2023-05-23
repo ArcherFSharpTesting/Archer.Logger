@@ -20,7 +20,7 @@ let private feature =
         )
     )
     
-let ``Provide a detailed result for setup exception failure`` =
+let ``Provide a detailed setup exception failure report`` =
     feature.Test (fun (reporter, failureBuilder) environment ->
         let testInfo = environment.TestInfo
         let indent = IndentReporter 0
@@ -32,5 +32,7 @@ let ``Provide a detailed result for setup exception failure`` =
             |> detailedTestExecutionResultReporter indent testInfo
             |> Should.MeetStandard reporter testInfo
     )
+    
+// let ``Provide a detailed setup canceled failure report``
 
 let ``Test Cases`` = feature.GetTests ()
