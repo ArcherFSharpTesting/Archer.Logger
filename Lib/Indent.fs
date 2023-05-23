@@ -22,6 +22,6 @@ type IndentReporter (tabCount) =
     
     new () = IndentReporter 0
     
-    member _.Report value = reporter value
+    member _.Report value = reporter (if value = null then "" else value)
     member _.Indent () = IndentReporter (tabCount + 1)
     member _.Indent count = IndentReporter (tabCount + count)
