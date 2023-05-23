@@ -1,0 +1,1 @@
+﻿Test Execution Result Summary Reporter Should.Format a test success result into a single line (Success) @ 23

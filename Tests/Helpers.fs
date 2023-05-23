@@ -8,6 +8,7 @@ open ApprovalTests
 let reporterTestBuilder = Arrow.NewFeature (
     "Archer.Logger.Tests",
     "",
+    
     Setup (fun _ ->
         [
             Searching
@@ -16,10 +17,12 @@ let reporterTestBuilder = Arrow.NewFeature (
                 |> findFirstReporter<Reporters.InlineTextReporter>
                 |> findFirstReporter<Reporters.AllFailingTestsClipboardReporter>
                 |> unWrapReporter
+                
+            Reporters.BeyondCompareReporter () :> Core.IApprovalFailureReporter
 
-            Reporters.ClipboardReporter() :> Core.IApprovalFailureReporter;
+            Reporters.ClipboardReporter() :> Core.IApprovalFailureReporter
 
-            Reporters.QuietReporter() :> Core.IApprovalFailureReporter;
+            Reporters.QuietReporter() :> Core.IApprovalFailureReporter
         ]
         |> buildReporter
         |> Ok

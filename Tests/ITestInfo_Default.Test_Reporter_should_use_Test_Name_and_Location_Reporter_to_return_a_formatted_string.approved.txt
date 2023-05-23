@@ -1,2 +1,0 @@
-﻿Archer.Logger.Tests.ITestInfo Default.Test Reporter should use Test Name and Location Reporter to return a formatted string
-.\Tests\ITestInfo Default.fs @ 60

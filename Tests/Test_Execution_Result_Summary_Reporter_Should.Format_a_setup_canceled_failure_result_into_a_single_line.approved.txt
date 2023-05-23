@@ -1,0 +1,1 @@
+﻿Test Execution Result Summary Reporter Should.Format a setup canceled failure result into a single line (Canceled) @ 63

@@ -2,6 +2,7 @@
 open Archer
 open Archer.CoreTypes.InternalTypes
 open Archer.CoreTypes.InternalTypes.RunnerTypes
+open Archer.Logger
 open Archer.Logger.Tests
 open MicroLang.Lang
 
@@ -17,11 +18,11 @@ runner.RunnerLifecycleEvent
         | TestEndExecution testExecutionResult ->
             match testExecutionResult with
             | TestExecutionResult TestSuccess -> ()
-            | TestExecutionResult (TestFailure (TestIgnored _)) ->
-                let report = $"%A{test} : (Ignored)"
+            | TestExecutionResult testResult ->
+                let report = testResultSummaryReporter testResult test
                 printfn $"%s{report}"
             | _ ->
-                let report = $"%A{test} : (Fail) @ %i{test.Location.LineNumber}"
+                let report = $"%A{test} : (Other Failure) @ %i{test.Location.LineNumber}"
                 printfn $"%s{report}"
             
         | _ -> ()
@@ -31,6 +32,7 @@ runner.RunnerLifecycleEvent
 
 runner
 |> addMany [
-    ``ITestInfo Default``.``Test Cases``
+    ``TestResult Summary Reporter Should``.``Test Cases``
+    ``Test Execution Result Summary Reporter Should``.``Test Cases``
 ]
 |> runAndReport

@@ -1,1 +1,0 @@
-﻿Archer.Logger.Tests.ITestInfo Default.Test Name Reporter Should return a formatted name

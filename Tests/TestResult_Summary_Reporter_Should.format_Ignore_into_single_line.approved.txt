@@ -1,0 +1,1 @@
+﻿TestResult Summary Reporter Should.format Ignore into single line (Ignored) @ 58

@@ -1,0 +1,1 @@
+﻿Test Execution Result Summary Reporter Should.Format a general teardown failure result into a single line (Teardown Failure) @ 70
