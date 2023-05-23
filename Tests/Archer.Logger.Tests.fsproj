@@ -24,9 +24,10 @@
     <Content Include="Test_Execution_Result_Summary_Reporter_Should.Format_a_general_teardown_failure_result_into_a_single_line.approved.txt" />
     <Content Include="Test_Execution_Result_Summary_Reporter_Should.Format_a_teardown_cancel_failure_result_into_a_single_line.approved.txt" />
     <Compile Include="Indent Reporter Should.fs" />
+    <Compile Include="TestExecutionResult Detail Reporter Should.fs" />
     <Content Include="TestExecutionResult_Detail_Reporter_Should.Provide_a_detailed_setup_exception_failure_report.approved.txt" />
     <Content Include="TestExecutionResult_Detail_Reporter_Should.Provide_a_detailed_setup_canceled_failure_report.approved.txt" />
-    <Compile Include="TestExecutionResult Detail Reporter Should.fs" />
+    <Content Include="TestExecutionResult_Detail_Reporter_Should.Provide_a_detailed_general_setup_failure_report.approved.txt" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 
