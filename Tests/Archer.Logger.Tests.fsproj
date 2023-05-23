@@ -23,6 +23,7 @@
     <Content Include="Test_Execution_Result_Summary_Reporter_Should.Format_a_setup_canceled_failure_result_into_a_single_line.approved.txt" />
     <Content Include="Test_Execution_Result_Summary_Reporter_Should.Format_a_general_teardown_failure_result_into_a_single_line.approved.txt" />
     <Content Include="Test_Execution_Result_Summary_Reporter_Should.Format_a_teardown_cancel_failure_result_into_a_single_line.approved.txt" />
+    <Compile Include="Indent Reporter Should.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 

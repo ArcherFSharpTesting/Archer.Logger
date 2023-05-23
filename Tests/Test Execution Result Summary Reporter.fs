@@ -10,7 +10,7 @@ let private feature =
     reporterTestBuilder
     |> Sub.Feature (
         TestTags [
-            Category "Test Reporter"
+            Category "Summary Reporters"
             Category "Approvals"
         ],
         Setup (fun reporter ->
@@ -32,49 +32,49 @@ let ``Format a test success result for a different test`` =
     )
     
 let ``Format a general test execution failure result into a single line`` =
-    feature.Test (fun (reporter, failureBuilder: TestExecutionResultFailureBuilder) environment ->
+    feature.Test (fun (reporter, failureBuilder) environment ->
         let failure = failureBuilder.GeneralExecutionFailure.GeneralFailure "Something happened"
         defaultTestExecutionResultSummaryReporter failure environment.TestInfo
         |> Should.MeetStandard reporter environment.TestInfo
     )
     
 let ``Format a test execution cancel failure result into a single line`` =
-    feature.Test (fun (reporter, failureBuilder: TestExecutionResultFailureBuilder) environment ->
+    feature.Test (fun (reporter, failureBuilder) environment ->
         let failure = failureBuilder.GeneralExecutionFailure.CancelFailure ()
         defaultTestExecutionResultSummaryReporter failure environment.TestInfo
         |> Should.MeetStandard reporter environment.TestInfo
     )
     
 let ``Format a general test failure result into a single line`` =
-    feature.Test (fun (reporter, failureBuilder: TestExecutionResultFailureBuilder) environment ->
+    feature.Test (fun (reporter, failureBuilder) environment ->
         let failure = failureBuilder.TestExecutionResult.GeneralTestExpectationFailure "Bad test"
         defaultTestExecutionResultSummaryReporter failure environment.TestInfo
         |> Should.MeetStandard reporter environment.TestInfo
     )
     
 let ``Format a setup failure result into a single line`` =
-    feature.Test (fun (reporter, failureBuilder: TestExecutionResultFailureBuilder) environment ->
+    feature.Test (fun (reporter, failureBuilder) environment ->
         let failure = failureBuilder.SetupExecutionFailure.ExceptionFailure (System.Exception "Something boomed")
         defaultTestExecutionResultSummaryReporter failure environment.TestInfo
         |> Should.MeetStandard reporter environment.TestInfo
     )
     
 let ``Format a setup canceled failure result into a single line`` =
-    feature.Test (fun (reporter, failureBuilder: TestExecutionResultFailureBuilder) environment ->
+    feature.Test (fun (reporter, failureBuilder) environment ->
         let failure = failureBuilder.SetupExecutionFailure.CancelFailure ()
         defaultTestExecutionResultSummaryReporter failure environment.TestInfo
         |> Should.MeetStandard reporter environment.TestInfo
     )
     
 let ``Format a general teardown failure result into a single line`` =
-    feature.Test (fun (reporter, failureBuilder: TestExecutionResultFailureBuilder) environment ->
+    feature.Test (fun (reporter, failureBuilder) environment ->
         let failure = failureBuilder.TeardownExecutionFailure.GeneralFailure "Something not right"
         defaultTestExecutionResultSummaryReporter failure environment.TestInfo
         |> Should.MeetStandard reporter environment.TestInfo
     )
     
 let ``Format a teardown cancel failure result into a single line`` =
-    feature.Test (fun (reporter, failureBuilder: TestExecutionResultFailureBuilder) environment ->
+    feature.Test (fun (reporter, failureBuilder) environment ->
         let failure = failureBuilder.TeardownExecutionFailure.CancelFailure ()
         defaultTestExecutionResultSummaryReporter failure environment.TestInfo
         |> Should.MeetStandard reporter environment.TestInfo

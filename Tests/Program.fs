@@ -31,5 +31,6 @@ runner
 |> addMany [
     ``TestResult Summary Reporter Should``.``Test Cases``
     ``Test Execution Result Summary Reporter Should``.``Test Cases``
+    ``Indent Reporter Should``.``Test Cases``
 ]
 |> runAndReport
