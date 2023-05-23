@@ -6,7 +6,7 @@ open System
 let private indentReporter tabCount (value: string) =
     if 0 < tabCount
     then
-        let lines = value.Split ([|Environment.NewLine|], StringSplitOptions.None)
+        let lines = value.Split ([|Environment.NewLine; "\n"; "\r"|], StringSplitOptions.None)
         lines
         |> Array.map (fun line ->
             let tabs = "".PadLeft (tabCount, '\t')

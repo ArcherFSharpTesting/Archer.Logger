@@ -1,0 +1,3 @@
+﻿TestExecutionResult Detail Reporter Should.Provide a detailed setup canceled failure report @ 37
+(C:\Development\github\Archer\Archer.Logger\Tests\TestExecutionResult Detail Reporter Should.fs)
+	SetupExecutionFailure: (Canceled)

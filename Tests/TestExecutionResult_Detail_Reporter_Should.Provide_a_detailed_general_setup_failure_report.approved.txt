@@ -1,0 +1,7 @@
+﻿TestExecutionResult Detail Reporter Should.Provide a detailed general setup failure report @ 47
+(C:\Development\github\Archer\Archer.Logger\Tests\TestExecutionResult Detail Reporter Should.fs)
+	SetupExecutionFailure @ ".\Tests\TestExecutionResult Detail Reporter Should.fs@51"
+		General Failure:
+			This setup is wrong
+			Just Wrong
+			Bail out

@@ -33,6 +33,24 @@ let ``Provide a detailed setup exception failure report`` =
             |> Should.MeetStandard reporter testInfo
     )
     
-// let ``Provide a detailed setup canceled failure report``
+let ``Provide a detailed setup canceled failure report`` =
+    feature.Test (fun (reporter, failureBuilder) environment ->
+        let testInfo = environment.TestInfo
+        let indent = IndentReporter 0
+        
+        failureBuilder.SetupExecutionFailure.CancelFailure ()
+        |> detailedTestExecutionResultReporter indent testInfo
+        |> Should.MeetStandard reporter testInfo
+    )
+    
+let ``Provide a detailed general setup failure report`` =
+    feature.Test (fun (reporter, failureBuilder) environment ->
+        let testInfo = environment.TestInfo
+        let indent = IndentReporter 0
+        
+        failureBuilder.SetupExecutionFailure.GeneralFailure "This setup is wrong\nJust Wrong\nBail out"
+        |> detailedTestExecutionResultReporter indent testInfo
+        |> Should.MeetStandard reporter testInfo
+    )
 
 let ``Test Cases`` = feature.GetTests ()

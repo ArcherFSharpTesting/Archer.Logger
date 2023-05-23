@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <Compile Include="StringHelpers.fs" />
+    <Compile Include="LocationHelpers.fs" />
     <Compile Include="Summaries.fs" />
     <Compile Include="Indent.fs" />
     <Compile Include="Detail.fs" />
