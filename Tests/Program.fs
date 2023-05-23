@@ -18,11 +18,8 @@ runner.RunnerLifecycleEvent
         | TestEndExecution testExecutionResult ->
             match testExecutionResult with
             | TestExecutionResult TestSuccess -> ()
-            | TestExecutionResult testResult ->
-                let report = testResultSummaryReporter testResult test
-                printfn $"%s{report}"
-            | _ ->
-                let report = $"%A{test} : (Other Failure) @ %i{test.Location.LineNumber}"
+            | result ->
+                let report = defaultTestExecutionResultSummaryReporter result test
                 printfn $"%s{report}"
             
         | _ -> ()

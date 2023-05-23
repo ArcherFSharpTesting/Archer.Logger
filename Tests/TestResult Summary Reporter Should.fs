@@ -18,13 +18,13 @@ let private feature =
     
 let ``format success into single line`` =
     feature.Test (fun reporter environment ->
-        testResultSummaryReporter TestSuccess environment.TestInfo
+        defaultTestResultSummaryReporter TestSuccess environment.TestInfo
         |> Should.MeetStandard reporter environment.TestInfo
     )
     
 let ``format success from a different test`` =
     feature.Test (fun reporter environment ->
-        testResultSummaryReporter TestSuccess environment.TestInfo
+        defaultTestResultSummaryReporter TestSuccess environment.TestInfo
         |> Should.MeetStandard reporter environment.TestInfo
     )
     
@@ -36,7 +36,7 @@ let ``format failure into single line`` =
         ),
         TestBody (fun (reporter, failureBuilder: TestResultFailureBuilder<TestResult>) environment ->
             let failure = failureBuilder.GeneralTestExpectationFailure "BadNews"
-            testResultSummaryReporter failure environment.TestInfo
+            defaultTestResultSummaryReporter failure environment.TestInfo
             |> Should.MeetStandard reporter environment.TestInfo
         )
     )
@@ -49,7 +49,7 @@ let ``format different failure into single line`` =
         ),
         TestBody (fun (reporter, failureBuilder: TestResultFailureBuilder<TestResult>) environment ->
             let failure = failureBuilder.ValidationFailure {ActualValue = 33; ExpectedValue = "Hello" }
-            testResultSummaryReporter failure environment.TestInfo
+            defaultTestResultSummaryReporter failure environment.TestInfo
             |> Should.MeetStandard reporter environment.TestInfo
         )
     )
@@ -62,7 +62,7 @@ let ``format Ignore into single line`` =
         ),
         TestBody (fun (reporter, failureBuilder: TestResultFailureBuilder<TestResult>) environment ->
             let failure = failureBuilder.IgnoreFailure (Some "Don't do this")
-            testResultSummaryReporter failure environment.TestInfo
+            defaultTestResultSummaryReporter failure environment.TestInfo
             |> Should.MeetStandard reporter environment.TestInfo
         )
     )
