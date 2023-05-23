@@ -6,15 +6,23 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="Helpers.fs" />
+    <Compile Include="ITestInfo Default.fs" />
+    <Content Include="ITestInfo_Default.Test_Name_Reporter_Should_return_a_formatted_name.approved.txt" />
+    <Content Include="ITestInfo_Default.Test_Name_Reporter_Should_be_able_to_return_a_different_name.approved.txt" />
+    <Content Include="ITestInfo_Default.Test_Location_Reporter_should_return_a_formatted_location.approved.txt" />
+    <Content Include="ITestInfo_Default.Test_Location_Reporter_should_be_able_to_return_a_different_location.approved.txt" />
+    <Content Include="ITestInfo_Default.Test_Reporter_should_use_Test_Name_and_Location_Reporter_to_return_a_formatted_string.approved.txt" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Archer.Arrow.Lib" Version="0.0.0.35" />
-    <PackageReference Include="Archer.Bow.Lib" Version="0.0.9.32" />
-    <PackageReference Include="Archer.CoreTypes.Lib" Version="0.0.13.38" />
-    <PackageReference Include="Archer.Fletching.Lib" Version="0.0.0.22" />
-    <PackageReference Include="MicroLang.Lib" Version="0.0.12.47" />
+    <PackageReference Include="Archer.Arrow.Lib" Version="0.0.0.41" />
+    <PackageReference Include="Archer.Bow.Lib" Version="0.0.9.35" />
+    <PackageReference Include="Archer.CoreTypes.Lib" Version="0.0.13.41" />
+    <PackageReference Include="Archer.Fletching.Lib" Version="0.0.0.24" />
+    <PackageReference Include="MicroLang.Lib" Version="0.0.12.50" />
+    <PackageReference Update="FSharp.Core" Version="7.0.300" />
   </ItemGroup>
 
   <ItemGroup>

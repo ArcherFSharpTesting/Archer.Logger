@@ -3,14 +3,16 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <RootNamespace>Archer.Logger</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="Library.fs" />
+    <Compile Include="Defaults.fs" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Archer.CoreTypes.Lib" Version="0.0.13.38" />
+    <PackageReference Include="Archer.CoreTypes.Lib" Version="0.0.13.41" />
+    <PackageReference Update="FSharp.Core" Version="7.0.300" />
   </ItemGroup>
 
 </Project>

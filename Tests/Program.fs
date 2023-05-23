@@ -2,6 +2,7 @@
 open Archer
 open Archer.CoreTypes.InternalTypes
 open Archer.CoreTypes.InternalTypes.RunnerTypes
+open Archer.Logger.Tests
 open MicroLang.Lang
 
 let runner = bow.Runner ()
@@ -30,6 +31,6 @@ runner.RunnerLifecycleEvent
 
 runner
 |> addMany [
-    // ?
+    ``ITestInfo Default``.``Test Cases``
 ]
 |> runAndReport
