@@ -54,11 +54,16 @@ let private getTestExpectationMessage (indentReporter: IndentReporter) (codeLoca
     match failure with
     | ExpectationOtherFailure message ->
         [
-            indentReporter.Report "TestExpectationFailure (Other)"
+            indentReporter.Report "Expectation Failure (Other)"
             indentReporter.Indent().Report message
         ]
+    | ExpectationVerificationFailure failure ->
+        [
+            indentReporter.Report "Validation Failure"
+            indentReporter.Indent().Report $"Expected: %A{failure.Expected}" |> replace "\"\"" "\""
+            indentReporter.Indent().Report $"Actual:   %A{failure.Actual}" |> replace "\"\"" "\""
+        ]
     | FailureWithMessage (message, failure) -> failwith "todo"
-    | ExpectationVerificationFailure failure -> failwith "todo"
     |> String.concat Environment.NewLine
 let private getTestFailureMessage (indentReporter: IndentReporter) (failure: TestFailure) =
     

@@ -1,5 +1,5 @@
 ﻿TestExecutionResult Detail Reporter Should.Provide a detailed test expectation other failure with no message report @ 97
 (.\Tests\TestExecutionResult Detail Reporter Should.fs)
-	TestExpectationFailure (Other)
+	Expectation Failure (Other)
 		Hello World
 		Today is great
