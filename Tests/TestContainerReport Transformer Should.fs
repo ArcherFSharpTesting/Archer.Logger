@@ -26,10 +26,10 @@ let private getTime add =
 let getTest (testFeature: IFeature<unit>) index =
     testFeature.Test ($"Test %d{index}", fun _ -> TestSuccess)
     
-let private getReport () =
+let private getReport pathN nameN =
     let fb = TestExecutionResultFailureBuilder ()
-    let containerPath = "Name Space Containing"
-    let containerName = "A test module name"
+    let containerPath = $"%d{pathN} Name Space Containing"
+    let containerName = $"A test module%d{nameN} name"
     let testFeature = Arrow.NewFeature (containerPath, containerName)
     
     let failures =
@@ -67,7 +67,7 @@ let private feature =
         ],
         Setup (fun reporter ->
             let indentReporter = IndentTransformer 0
-            Ok (reporter, getReport (), indentReporter)
+            Ok (reporter, getReport 0 0, indentReporter)
         )
     )
     
