@@ -68,7 +68,7 @@ let defaultTestContainerReportFailuresTransformer (indenter: IIndentTransformer)
         |> List.groupBy (fun c -> c.ContainerFullName |> getRootNamePath c.ContainerName)
         |> List.sortBy fst
         
-    let rec getReport (indenter: IIndentTransformer) (reportGroups: (string * TestContainerReport list) list) current (acc: string) =
+    let rec getReport (indenter: IIndentTransformer) (reportGroups: (string * TestContainerReport list) list) (acc: string) =
         match reportGroups with
         | [] -> acc
         | (path, items)::tail ->
@@ -80,6 +80,6 @@ let defaultTestContainerReportFailuresTransformer (indenter: IIndentTransformer)
             ]
             |> List.filter (fun v -> 0 < v.Length)
             |> String.concat Environment.NewLine
-            |> getReport indenter tail path 
+            |> getReport indenter tail 
             
-    getReport indenter reportGroups "" ""
+    getReport indenter reportGroups ""
