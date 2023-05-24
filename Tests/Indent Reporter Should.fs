@@ -73,6 +73,17 @@ let ``When given zero indent called with one return string given to it starting 
         |> Should.BeEqualTo $"\t%s{expected}"
     )
     
+let ``When given TwoSpaces in constructor it will indent with two spaces`` =
+    feature.Test (fun _ ->
+        let expected = "Hello World"
+        
+        let reporter = IndentReporter (1, TwoSpaces)
+        let result = reporter.Report expected
+        
+        result
+        |> Should.BeEqualTo $"  %s{expected}"
+    )
+    
 // Many
 let ``When given 2 return string given to it starting two tabs`` =
     feature.Test (fun _ ->
