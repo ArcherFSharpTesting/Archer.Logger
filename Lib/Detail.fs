@@ -50,8 +50,15 @@ let private getSetupTeardownFailureMessage (assembly: Assembly) (indentReporter:
     |> String.concat Environment.NewLine
     |> trimEnd
     
-let private getTestFailureMessage (assembly: Assembly) (indentReporter: IndentReporter) (failure: TestFailure) =
-    let rec getTestFailureMessage (assembly: Assembly) (indentReporter: IndentReporter) (failure: TestFailure) acc =
+let private getTestExpectationMessage (indentReporter: IndentReporter) (codeLocation: CodeLocation) (failure: TestExpectationFailure) =
+    match failure with
+    | FailureWithMessage (message, failure) -> failwith "todo"
+    | ExpectationVerificationFailure failure -> failwith "todo"
+    | ExpectationOtherFailure message -> failwith "todo"
+    
+let private getTestFailureMessage (indentReporter: IndentReporter) (failure: TestFailure) =
+    
+    let rec getTestFailureMessage (indentReporter: IndentReporter) (failure: TestFailure) =
         match failure with
         | TestExceptionFailure ex ->
             [
@@ -65,15 +72,17 @@ let private getTestFailureMessage (assembly: Assembly) (indentReporter: IndentRe
             [
                 indentReporter.Report $"Test Failure: (%s{msg}) @%d{codeLocation.LineNumber}"
             ]
-        | TestExpectationFailure (testExpectationFailure, codeLocation) -> failwith "todo"
-        | CombinationFailure (failureA, failureB) -> failwith "todo"
-        
-    getTestFailureMessage assembly indentReporter failure []
-    |> String.concat Environment.NewLine
+        | TestExpectationFailure (failure, codeLocation) ->
+            getTestExpectationMessage indentReporter codeLocation failure
 
-let private getTestResultMessage (assembly: Assembly) (indentReporter: IndentReporter) (testResult: TestResult) =
+        | CombinationFailure (failureA, failureB) -> failwith "todo"
+        |> String.concat Environment.NewLine
+        
+    getTestFailureMessage indentReporter failure
+
+let private getTestResultMessage (indentReporter: IndentReporter) (testResult: TestResult) =
     match testResult with
-    | TestFailure failure -> getTestFailureMessage assembly indentReporter failure
+    | TestFailure failure -> getTestFailureMessage indentReporter failure
     | TestSuccess -> failwith "todo"
 
 let detailedTestExecutionResultReporter (indentReporter: IndentReporter) (testInfo: ITestInfo) (result: TestExecutionResult) =
@@ -83,7 +92,7 @@ let detailedTestExecutionResultReporter (indentReporter: IndentReporter) (testIn
         | SetupExecutionFailure failure ->
             getSetupTeardownFailureMessage assembly (indentReporter.Indent ()) "SetupExecutionFailure" failure
         | TestExecutionResult testResult ->
-            getTestResultMessage assembly (indentReporter.Indent ()) testResult
+            getTestResultMessage (indentReporter.Indent ()) testResult
         | TeardownExecutionFailure setupTeardownFailure -> failwith "todo"
         | GeneralExecutionFailure generalTestingFailure -> failwith "todo"
     
