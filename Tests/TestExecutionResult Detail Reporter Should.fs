@@ -115,4 +115,23 @@ let ``Provide a detailed test validation failure with no message report`` =
         |> Should.MeetStandard reporter testInfo
     )
     
+let ``Provide a detailed test validation failure with failure comment with no message report`` =
+    feature.Test (
+        Setup (fun (reporter, _) ->
+            let fb = TestResultFailureBuilder id
+            Ok (reporter, fb)
+        ),
+        TestBody (fun (reporter, failureBuilder: TestResultFailureBuilder<TestResult>) environment ->
+            let testInfo = environment.TestInfo
+            let indent = IndentReporter 0
+            
+            failureBuilder.ValidationFailure { ExpectedValue = "The World Is Great"; ActualValue = "The world is greater" }
+            |> withFailureComment "Things are not great"
+            |> TestExecutionResult
+            |> detailedTestExecutionResultReporter indent testInfo
+            |> replace (getSolutionRoot (Assembly.GetAssembly typeof<IndentReporter>)) "."
+            |> Should.MeetStandard reporter testInfo
+        )
+    )
+    
 let ``Test Cases`` = feature.GetTests ()

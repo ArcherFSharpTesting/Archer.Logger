@@ -50,7 +50,7 @@ let private getSetupTeardownFailureMessage (assembly: Assembly) (indentReporter:
     |> String.concat Environment.NewLine
     |> trimEnd
     
-let private getTestExpectationMessage (indentReporter: IndentReporter) (codeLocation: CodeLocation) (failure: TestExpectationFailure) =
+let rec private getTestExpectationMessage (indentReporter: IndentReporter) (codeLocation: CodeLocation) (failure: TestExpectationFailure) =
     match failure with
     | ExpectationOtherFailure message ->
         [
@@ -63,7 +63,12 @@ let private getTestExpectationMessage (indentReporter: IndentReporter) (codeLoca
             indentReporter.Indent().Report $"Expected: %A{failure.Expected}" |> replace "\"\"" "\""
             indentReporter.Indent().Report $"Actual:   %A{failure.Actual}" |> replace "\"\"" "\""
         ]
-    | FailureWithMessage (message, failure) -> failwith "todo"
+    | FailureWithMessage (message, failure) ->
+        [
+            getTestExpectationMessage indentReporter codeLocation failure
+            indentReporter.Report "Failure Comment:"
+            indentReporter.Indent().Report message
+        ]
     |> String.concat Environment.NewLine
 let private getTestFailureMessage (indentReporter: IndentReporter) (failure: TestFailure) =
     
