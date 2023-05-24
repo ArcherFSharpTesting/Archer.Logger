@@ -38,7 +38,26 @@ let ``Format a test failure report`` =
             }
             Test = testFeature.Test (fun _ -> TestSuccess)
         }
-        |> getTestFailureReport indentReporter
+        |> getTestFailureReportReport indentReporter
+        |> Should.MeetStandard reporter testInfo
+    )
+    
+let ``Format a test success report`` =
+    feature.Test (fun (reporter, failureBuilder) environment ->
+        let testInfo = environment.TestInfo
+        let testFeature = Arrow.NewFeature ("Test", "Feature")
+        let indentReporter = IndentReporter 0
+        
+        {
+            Time = {
+                Setup = TimeSpan (0, 0, 0, 0, 15) 
+                Test =  TimeSpan (0, 0, 0, 0, 300)
+                Teardown = TimeSpan (0, 0, 0, 150)
+                Total = TimeSpan (0, 0, 0, 0, 465)
+            }
+            Test = testFeature.Test (fun _ -> TestSuccess)
+        }
+        |> getTestSuccessReportReport indentReporter
         |> Should.MeetStandard reporter testInfo
     )
 

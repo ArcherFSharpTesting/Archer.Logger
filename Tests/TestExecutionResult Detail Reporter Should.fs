@@ -33,7 +33,7 @@ let ``Provide a detailed setup exception failure report`` =
             Exception "Boom Boom Bang" |> raise
         with ex ->
             failureBuilder.SetupExecutionFailure.ExceptionFailure ex
-            |> detailedTestExecutionResultReporter indent testInfo
+            |> detailedTestExecutionResultReporter indent testInfo None
             |> replace (getSolutionRoot (Assembly.GetAssembly typeof<IndentReporter>)) "."
             |> Should.MeetStandard reporter testInfo
     )
@@ -44,7 +44,7 @@ let ``Provide a detailed setup canceled failure report`` =
         let indent = IndentReporter 0
         
         failureBuilder.SetupExecutionFailure.CancelFailure ()
-        |> detailedTestExecutionResultReporter indent testInfo
+        |> detailedTestExecutionResultReporter indent testInfo None
         |> Should.MeetStandard reporter testInfo
     )
     
@@ -54,7 +54,7 @@ let ``Provide a detailed general setup failure report`` =
         let indent = IndentReporter 0
         
         failureBuilder.SetupExecutionFailure.GeneralFailure "This setup is wrong\nJust Wrong\nBail out"
-        |> detailedTestExecutionResultReporter indent testInfo
+        |> detailedTestExecutionResultReporter indent testInfo None
         |> Should.MeetStandard reporter testInfo
     )
     
@@ -67,7 +67,7 @@ let ``Provide a detailed test exception failure report`` =
             ArgumentException "A bad argument" |> raise
         with ex ->
             failureBuilder.TestExecutionResult.ExceptionFailure ex
-            |> detailedTestExecutionResultReporter indent testInfo
+            |> detailedTestExecutionResultReporter indent testInfo None
             |> replace (getSolutionRoot (Assembly.GetAssembly typeof<IndentReporter>)) "."
             |> Should.MeetStandard reporter testInfo
     )
@@ -78,7 +78,7 @@ let ``Provide a detailed test ignored failure report`` =
         let indent = IndentReporter 0
         
         failureBuilder.TestExecutionResult.IgnoreFailure (Some "This is an ignored test")
-        |> detailedTestExecutionResultReporter indent testInfo
+        |> detailedTestExecutionResultReporter indent testInfo None
         |> Should.MeetStandard reporter testInfo
     )
     
@@ -88,7 +88,7 @@ let ``Provide a detailed test ignored failure with no message report`` =
         let indent = IndentReporter 0
         
         failureBuilder.TestExecutionResult.IgnoreFailure ()
-        |> detailedTestExecutionResultReporter indent testInfo
+        |> detailedTestExecutionResultReporter indent testInfo None
         |> Should.MeetStandard reporter testInfo
     )
     
@@ -98,7 +98,7 @@ let ``Provide a detailed test expectation other failure with no message report``
         let indent = IndentReporter 0
         
         failureBuilder.TestExecutionResult.GeneralTestExpectationFailure "Hello World\nToday is great"
-        |> detailedTestExecutionResultReporter indent testInfo
+        |> detailedTestExecutionResultReporter indent testInfo None
         |> Should.MeetStandard reporter testInfo
     )
     
@@ -108,7 +108,7 @@ let ``Provide a detailed test validation failure with no message report`` =
         let indent = IndentReporter 0
         
         failureBuilder.TestExecutionResult.ValidationFailure { ExpectedValue = "The World Is Great"; ActualValue = "The world is greater" }
-        |> detailedTestExecutionResultReporter indent testInfo
+        |> detailedTestExecutionResultReporter indent testInfo None
         |> Should.MeetStandard reporter testInfo
     )
     
@@ -125,7 +125,7 @@ let ``Provide a detailed test validation failure with failure comment with no me
             failureBuilder.ValidationFailure { ExpectedValue = "The World Is Great"; ActualValue = "The world is greater" }
             |> withFailureComment "Things are not great"
             |> TestExecutionResult
-            |> detailedTestExecutionResultReporter indent testInfo
+            |> detailedTestExecutionResultReporter indent testInfo None
             |> Should.MeetStandard reporter testInfo
         )
     )
@@ -141,7 +141,7 @@ let ``Provide a detailed test combination failure report`` =
         CombinationFailure ((failureA, None), (failureB, Some { FilePath = "D:\\og"; FileName = "Bark.ruf"; LineNumber = 99 }))
         |> TestFailure
         |> TestExecutionResult
-        |> detailedTestExecutionResultReporter indent testInfo
+        |> detailedTestExecutionResultReporter indent testInfo None
         |> Should.MeetStandard reporter testInfo
     )
     
@@ -152,7 +152,7 @@ let ``Provide a detailed test success report`` =
         
         TestSuccess
         |> TestExecutionResult
-        |> detailedTestExecutionResultReporter indent testInfo
+        |> detailedTestExecutionResultReporter indent testInfo None
         |> Should.MeetStandard reporter testInfo
     )
     
@@ -162,7 +162,7 @@ let ``Provide a detailed test teardown cancel report`` =
         let indent = IndentReporter 0
         
         failureBuilder.TeardownExecutionFailure.CancelFailure ()
-        |> detailedTestExecutionResultReporter indent testInfo
+        |> detailedTestExecutionResultReporter indent testInfo None
         |> Should.MeetStandard reporter testInfo
     )
     
@@ -172,7 +172,7 @@ let ``Provide a detailed general cancel failure report`` =
         let indent = IndentReporter 0
         
         failureBuilder.GeneralExecutionFailure.CancelFailure ()
-        |> detailedTestExecutionResultReporter indent testInfo
+        |> detailedTestExecutionResultReporter indent testInfo None
         |> Should.MeetStandard reporter testInfo
     )
     
@@ -182,7 +182,7 @@ let ``Provide a detailed general general failure report`` =
         let indent = IndentReporter 0
         
         failureBuilder.GeneralExecutionFailure.GeneralFailure "A general general failure"
-        |> detailedTestExecutionResultReporter indent testInfo
+        |> detailedTestExecutionResultReporter indent testInfo None
         |> Should.MeetStandard reporter testInfo
     )
     
@@ -196,7 +196,7 @@ let ``Provide a detailed general exception failure report`` =
             |> raise
         with ex ->
             failureBuilder.GeneralExecutionFailure.ExceptionFailure ex
-            |> detailedTestExecutionResultReporter indent testInfo
+            |> detailedTestExecutionResultReporter indent testInfo None
             |> replace (getSolutionRoot (Assembly.GetAssembly typeof<IndentReporter>)) "."
             |> Should.MeetStandard reporter testInfo
     )

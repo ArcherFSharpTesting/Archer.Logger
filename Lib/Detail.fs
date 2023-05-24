@@ -4,6 +4,7 @@ open System
 open System.IO
 open System.Reflection
 open Archer
+open Archer.CoreTypes.InternalTypes
 open Archer.Logger.StringHelpers
 open Archer.Logger.LocationHelpers
 
@@ -154,7 +155,7 @@ let private getGeneralTestingFailureMessage (indentReporter: IndentReporter) (te
         ]
     |> String.concat Environment.NewLine
 
-let detailedTestExecutionResultReporter (indentReporter: IndentReporter) (testInfo: ITestInfo) (result: TestExecutionResult) =
+let detailedTestExecutionResultReporter (indentReporter: IndentReporter) (testInfo: ITestInfo) (timing: TestTiming option) (result: TestExecutionResult) =
     let assembly = Assembly.GetCallingAssembly ()
     let msg =
         match result with
@@ -166,11 +167,16 @@ let detailedTestExecutionResultReporter (indentReporter: IndentReporter) (testIn
             getSetupTeardownFailureMessage assembly (indentReporter.Indent ()) "TeardownExecutionFailure" failure
         | GeneralExecutionFailure failure ->
             getGeneralTestingFailureMessage (indentReporter.Indent ()) failure
+            
+    let timingStr =
+        match timing with
+        | None -> ""
+        | Some value -> $" [%A{value.Total}]"
     
     let path = getRelativePath assembly (DirectoryInfo $"%s{testInfo.Location.FilePath}%c{Path.DirectorySeparatorChar}")
     let path = Path.Combine (path, testInfo.Location.FileName)
     [
-        indentReporter.Report $"%s{testInfo.ContainerName}.%s{testInfo.TestName} @ %d{testInfo.Location.LineNumber}"
+        indentReporter.Report $"%s{testInfo.ContainerName}.%s{testInfo.TestName} @ %d{testInfo.Location.LineNumber}%s{timingStr}"
         indentReporter.Report $"(%s{path})"
         msg
     ]
