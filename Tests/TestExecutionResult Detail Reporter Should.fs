@@ -150,4 +150,16 @@ let ``Provide a detailed test combination failure report`` =
         |> Should.MeetStandard reporter testInfo
     )
     
+let ``Provide a detailed test success report`` =
+    feature.Test (fun (reporter, _) environment ->
+        let testInfo = environment.TestInfo
+        let indent = IndentReporter 0
+        
+        TestSuccess
+        |> TestExecutionResult
+        |> detailedTestExecutionResultReporter indent testInfo
+        |> replace (getSolutionRoot (Assembly.GetAssembly typeof<IndentReporter>)) "."
+        |> Should.MeetStandard reporter testInfo
+    )
+    
 let ``Test Cases`` = feature.GetTests ()

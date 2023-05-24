@@ -135,7 +135,7 @@ let private getTestFailureMessage assembly (indentReporter: IndentReporter) (fai
 let private getTestResultMessage assembly (indentReporter: IndentReporter) (testResult: TestResult) =
     match testResult with
     | TestFailure failure -> getTestFailureMessage assembly indentReporter failure
-    | TestSuccess -> failwith "todo"
+    | TestSuccess -> indentReporter.Report "Test Result: Success"
 
 let detailedTestExecutionResultReporter (indentReporter: IndentReporter) (testInfo: ITestInfo) (result: TestExecutionResult) =
     let assembly = Assembly.GetCallingAssembly ()
