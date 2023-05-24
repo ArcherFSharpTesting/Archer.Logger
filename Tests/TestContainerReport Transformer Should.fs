@@ -67,13 +67,23 @@ let private feature =
         ],
         Setup (fun reporter ->
             let indentReporter = IndentTransformer 0
-            Ok (reporter, getReport 0 0, indentReporter)
+            
+            let reports =
+                [
+                    for path in 0..2 do
+                        for name in 3..5 do
+                            yield path, name
+                ]
+                |> List.map (fun (a, b) -> getReport a b)
+            
+            Ok (reporter, reports, indentReporter)
         )
     )
     
 let ``Transform test container failures`` =
-    feature.Test (fun (reporter, report, indenter) environment ->
+    feature.Test (fun (reporter, reports, indenter) environment ->
         let testInfo = environment.TestInfo
+        let report = reports |> List.head
         
         report
         |> defaultTestContainerReportFailureTransformer indenter
@@ -81,8 +91,9 @@ let ``Transform test container failures`` =
     )
     
 let ``Transform test container successes`` =
-    feature.Test (fun (reporter, report, indenter) environment ->
+    feature.Test (fun (reporter, reports, indenter) environment ->
         let testInfo = environment.TestInfo
+        let report = reports |> List.head
         
         report
         |> defaultTestContainerReportSuccessReporter indenter

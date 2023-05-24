@@ -1,6 +1,6 @@
 ﻿0 Name Space Containing
 	Successes
-		A test module0 name
+		A test module3 name
 			Test 3 @ 27 [00:00:00.0005720]
 			(.\Tests\TestContainerReport Transformer Should.fs)
 				Test Result: Success

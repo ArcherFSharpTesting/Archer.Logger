@@ -1,6 +1,6 @@
 ﻿0 Name Space Containing
 	Failures
-		A test module0 name
+		A test module3 name
 			Test 0 @ 27 [00:00:00.0001220]
 			(.\Tests\TestContainerReport Transformer Should.fs)
 				Validation Failure
