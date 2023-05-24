@@ -37,6 +37,9 @@
     <Content Include="TestExecutionResult_Detail_Reporter_Should.Provide_a_detailed_test_teardown_cancel_report.approved.txt" />
     <Content Include="TestExecutionResult_Detail_Reporter_Should.Provide_a_detailed_test_validation_failure_with_failure_comment_with_no_message_report.approved.txt" />
     <Content Include="TestExecutionResult_Detail_Reporter_Should.Provide_a_detailed_test_validation_failure_with_no_message_report.approved.txt" />
+    <Content Include="TestExecutionResult_Detail_Reporter_Should.Provide_a_detailed_general_cancel_failure_report.approved.txt" />
+    <Content Include="TestExecutionResult_Detail_Reporter_Should.Provide_a_detailed_general_exception_failure_report.approved.txt" />
+    <Content Include="TestExecutionResult_Detail_Reporter_Should.Provide_a_detailed_general_general_failure_report.approved.txt" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 

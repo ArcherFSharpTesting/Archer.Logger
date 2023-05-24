@@ -1,0 +1,3 @@
+﻿TestExecutionResult Detail Reporter Should.Provide a detailed general cancel failure report @ 169
+(.\Tests\TestExecutionResult Detail Reporter Should.fs)
+	General Failure: (Canceled)

@@ -1,0 +1,5 @@
+﻿TestExecutionResult Detail Reporter Should.Provide a detailed general exception failure report @ 189
+(.\Tests\TestExecutionResult Detail Reporter Should.fs)
+	General Failure
+		System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values. (Parameter 'gone to far this time')
+			at Archer.Logger.Tests.TestExecutionResult Detail Reporter Should.Provide a detailed general exception failure report@189-1.Invoke(TestEnvironment environment) in .\Tests\TestExecutionResult Detail Reporter Should.fs:line 195

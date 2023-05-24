@@ -140,9 +140,20 @@ let private getTestResultMessage assembly (indentReporter: IndentReporter) (test
     
 let private getGeneralTestingFailureMessage assembly (indentReporter: IndentReporter) (testResult: GeneralTestingFailure) =
     match testResult with
-    | GeneralFailure message -> failwith "todo"
-    | GeneralExceptionFailure e -> failwith "todo"
-    | GeneralCancelFailure -> failwith "todo"
+    | GeneralCancelFailure ->
+        [
+            indentReporter.Report "General Failure: (Canceled)"
+        ]
+    | GeneralFailure message ->
+        [
+            indentReporter.Report "General Failure:"
+            indentReporter.Indent().Report message
+        ]
+    | GeneralExceptionFailure ex ->
+        [
+            getExceptionDetail indentReporter "General Failure" ex
+        ]
+    |> String.concat Environment.NewLine
 
 let detailedTestExecutionResultReporter (indentReporter: IndentReporter) (testInfo: ITestInfo) (result: TestExecutionResult) =
     let assembly = Assembly.GetCallingAssembly ()
@@ -154,7 +165,8 @@ let detailedTestExecutionResultReporter (indentReporter: IndentReporter) (testIn
             getTestResultMessage assembly (indentReporter.Indent ()) testResult
         | TeardownExecutionFailure failure ->
             getSetupTeardownFailureMessage assembly (indentReporter.Indent ()) "TeardownExecutionFailure" failure
-        | GeneralExecutionFailure failure -> failwith "todo"
+        | GeneralExecutionFailure failure ->
+            getGeneralTestingFailureMessage assembly (indentReporter.Indent ()) failure
     
     let path = getRelativePath assembly (DirectoryInfo $"%s{testInfo.Location.FilePath}%c{Path.DirectorySeparatorChar}")
     let path = Path.Combine (path, testInfo.Location.FileName)
