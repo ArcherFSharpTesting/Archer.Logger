@@ -60,8 +60,8 @@ let rec private getTestExpectationMessage (indentReporter: IIndentReporter) (cod
     | ExpectationVerificationFailure failure ->
         [
             indentReporter.Report "Validation Failure"
-            indentReporter.Indent().Report $"Expected: %A{failure.Expected}" |> replace "\"\"" "\""
-            indentReporter.Indent().Report $"Actual:   %A{failure.Actual}" |> replace "\"\"" "\""
+            indentReporter.Indent().Report $"Expected: %s{failure.Expected}"
+            indentReporter.Indent().Report $"Actual:   %s{failure.Actual}"
         ]
     | FailureWithMessage (message, failure) ->
         [

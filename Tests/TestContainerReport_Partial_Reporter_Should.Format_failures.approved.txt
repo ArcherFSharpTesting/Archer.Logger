@@ -2,17 +2,17 @@
 	Test 0 @ 27 [00:00:00.0001220]
 	(.\Tests\TestContainerReport Partial Reporter Should.fs)
 		Validation Failure
-			Expected: "0"
-			Actual:   "-10"
+			Expected: 0
+			Actual:   -10
 
 	Test 1 @ 27 [00:00:00.0002720]
 	(.\Tests\TestContainerReport Partial Reporter Should.fs)
 		Validation Failure
-			Expected: "100"
-			Actual:   "90"
+			Expected: 100
+			Actual:   90
 
 	Test 2 @ 27 [00:00:00.0004220]
 	(.\Tests\TestContainerReport Partial Reporter Should.fs)
 		Validation Failure
-			Expected: "200"
-			Actual:   "190"
+			Expected: 200
+			Actual:   190

@@ -45,8 +45,10 @@ let defaultTestContainerReportFailureReporter (indenter: IIndentReporter) (repor
         |> removeLastChar
         |> trim
     
+    let l1 = indenter.Indent()
     [
         indenter.Report namePath
-        defaultTestContainerReportFailurePartialReporter (indenter.Indent ()) report
+        l1.Report "Failures"
+        defaultTestContainerReportFailurePartialReporter (l1.Indent ()) report
     ]
     |> linesToString

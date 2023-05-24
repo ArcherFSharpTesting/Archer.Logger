@@ -203,4 +203,14 @@ let ``Provide a detailed general exception failure report`` =
             |> Should.MeetStandard reporter testInfo
     )
     
+let ``Provide a detailed test validation failure of integers with no message report`` =
+    feature.Test (fun (reporter, failureBuilder) environment ->
+        let testInfo = environment.TestInfo
+        let indent = IndentReporter 0
+        
+        failureBuilder.TestExecutionResult.ValidationFailure { ExpectedValue = 100; ActualValue = 200 }
+        |> defaultDetailedTestExecutionResultReporter indent testInfo None
+        |> Should.MeetStandard reporter testInfo
+    )
+    
 let ``Test Cases`` = feature.GetTests ()
