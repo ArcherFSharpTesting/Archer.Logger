@@ -76,7 +76,7 @@ let ``Format failures`` =
         let testInfo = environment.TestInfo
         
         report
-        |> testContainerReportFailurePartialReporter indentReporter
+        |> defaultTestContainerReportFailurePartialReporter indentReporter
         |> Should.MeetStandard reporter testInfo
     )
     
@@ -85,7 +85,7 @@ let ``Format successes`` =
         let testInfo = environment.TestInfo
         
         report
-        |> testContainerReportSuccessPartialReporter indentReporter
+        |> defaultTestContainerReportSuccessPartialReporter indentReporter
         |> Should.MeetStandard reporter testInfo
     )
     
