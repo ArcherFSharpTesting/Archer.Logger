@@ -43,7 +43,7 @@ let ``Format a test failure report`` =
     )
     
 let ``Format a test success report`` =
-    feature.Test (fun (reporter, failureBuilder) environment ->
+    feature.Test (fun (reporter, _) environment ->
         let testInfo = environment.TestInfo
         let testFeature = Arrow.NewFeature ("Test", "Feature")
         let indentReporter = IndentReporter 0
