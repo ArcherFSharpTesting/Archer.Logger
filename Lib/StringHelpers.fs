@@ -16,6 +16,10 @@ let replace (toBeReplaced: string) (toReplace: string) (inValue: string) =
 let appendNewLine value =
     $"%s{value}%s{Environment.NewLine}"
     
+let appendNewLineIfNotEmpty value =
+    if String.IsNullOrEmpty value then value
+    else $"%s{value}%s{Environment.NewLine}"
+    
 let removeLastChar (value: string) =
     value.Remove (value.Length - 1)
     
