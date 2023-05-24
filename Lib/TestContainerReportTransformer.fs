@@ -83,3 +83,25 @@ let defaultTestContainerReportFailuresTransformer (indenter: IIndentTransformer)
             |> getReport indenter tail 
             
     getReport indenter reportGroups ""
+    
+let defaultTestContainerReportSuccessesTransformer (indenter: IIndentTransformer) (reports: TestContainerReport list) =
+    let reportGroups =
+        reports
+        |> List.groupBy (fun c -> c.ContainerFullName |> getRootNamePath c.ContainerName)
+        |> List.sortBy fst
+        
+    let rec getReport (indenter: IIndentTransformer) (reportGroups: (string * TestContainerReport list) list) (acc: string) =
+        match reportGroups with
+        | [] -> acc
+        | (path, items)::tail ->
+            [
+                acc |> appendNewLineIfNotEmpty
+                indenter.Transform path
+                indenter.Indent().Transform "Successes"
+                items |> List.map (defaultTestContainerReportSuccessPartialTransformer (indenter.Indent().Indent ())) |> String.concat (Environment.NewLine + Environment.NewLine)
+            ]
+            |> List.filter (fun v -> 0 < v.Length)
+            |> String.concat Environment.NewLine
+            |> getReport indenter tail 
+            
+    getReport indenter reportGroups ""

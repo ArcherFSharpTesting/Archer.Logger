@@ -1,0 +1,122 @@
+﻿0 Name Space Containing
+	Successes
+		A test module3 name
+			Test 3 @ 27 [00:00:00.0005720]
+			(.\Tests\TestContainerReport Transformer Should.fs)
+				Test Result: Success
+
+			Test 4 @ 27 [00:00:00.0007220]
+			(.\Tests\TestContainerReport Transformer Should.fs)
+				Test Result: Success
+
+			Test 5 @ 27 [00:00:00.0008720]
+			(.\Tests\TestContainerReport Transformer Should.fs)
+				Test Result: Success
+
+		A test module4 name
+			Test 3 @ 27 [00:00:00.0005720]
+			(.\Tests\TestContainerReport Transformer Should.fs)
+				Test Result: Success
+
+			Test 4 @ 27 [00:00:00.0007220]
+			(.\Tests\TestContainerReport Transformer Should.fs)
+				Test Result: Success
+
+			Test 5 @ 27 [00:00:00.0008720]
+			(.\Tests\TestContainerReport Transformer Should.fs)
+				Test Result: Success
+
+		A test module5 name
+			Test 3 @ 27 [00:00:00.0005720]
+			(.\Tests\TestContainerReport Transformer Should.fs)
+				Test Result: Success
+
+			Test 4 @ 27 [00:00:00.0007220]
+			(.\Tests\TestContainerReport Transformer Should.fs)
+				Test Result: Success
+
+			Test 5 @ 27 [00:00:00.0008720]
+			(.\Tests\TestContainerReport Transformer Should.fs)
+				Test Result: Success
+
+1 Name Space Containing
+	Successes
+		A test module3 name
+			Test 3 @ 27 [00:00:00.0005720]
+			(.\Tests\TestContainerReport Transformer Should.fs)
+				Test Result: Success
+
+			Test 4 @ 27 [00:00:00.0007220]
+			(.\Tests\TestContainerReport Transformer Should.fs)
+				Test Result: Success
+
+			Test 5 @ 27 [00:00:00.0008720]
+			(.\Tests\TestContainerReport Transformer Should.fs)
+				Test Result: Success
+
+		A test module4 name
+			Test 3 @ 27 [00:00:00.0005720]
+			(.\Tests\TestContainerReport Transformer Should.fs)
+				Test Result: Success
+
+			Test 4 @ 27 [00:00:00.0007220]
+			(.\Tests\TestContainerReport Transformer Should.fs)
+				Test Result: Success
+
+			Test 5 @ 27 [00:00:00.0008720]
+			(.\Tests\TestContainerReport Transformer Should.fs)
+				Test Result: Success
+
+		A test module5 name
+			Test 3 @ 27 [00:00:00.0005720]
+			(.\Tests\TestContainerReport Transformer Should.fs)
+				Test Result: Success
+
+			Test 4 @ 27 [00:00:00.0007220]
+			(.\Tests\TestContainerReport Transformer Should.fs)
+				Test Result: Success
+
+			Test 5 @ 27 [00:00:00.0008720]
+			(.\Tests\TestContainerReport Transformer Should.fs)
+				Test Result: Success
+
+2 Name Space Containing
+	Successes
+		A test module3 name
+			Test 3 @ 27 [00:00:00.0005720]
+			(.\Tests\TestContainerReport Transformer Should.fs)
+				Test Result: Success
+
+			Test 4 @ 27 [00:00:00.0007220]
+			(.\Tests\TestContainerReport Transformer Should.fs)
+				Test Result: Success
+
+			Test 5 @ 27 [00:00:00.0008720]
+			(.\Tests\TestContainerReport Transformer Should.fs)
+				Test Result: Success
+
+		A test module4 name
+			Test 3 @ 27 [00:00:00.0005720]
+			(.\Tests\TestContainerReport Transformer Should.fs)
+				Test Result: Success
+
+			Test 4 @ 27 [00:00:00.0007220]
+			(.\Tests\TestContainerReport Transformer Should.fs)
+				Test Result: Success
+
+			Test 5 @ 27 [00:00:00.0008720]
+			(.\Tests\TestContainerReport Transformer Should.fs)
+				Test Result: Success
+
+		A test module5 name
+			Test 3 @ 27 [00:00:00.0005720]
+			(.\Tests\TestContainerReport Transformer Should.fs)
+				Test Result: Success
+
+			Test 4 @ 27 [00:00:00.0007220]
+			(.\Tests\TestContainerReport Transformer Should.fs)
+				Test Result: Success
+
+			Test 5 @ 27 [00:00:00.0008720]
+			(.\Tests\TestContainerReport Transformer Should.fs)
+				Test Result: Success

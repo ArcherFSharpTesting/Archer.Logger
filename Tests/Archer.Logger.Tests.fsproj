@@ -50,6 +50,8 @@
     <Compile Include="TestContainerReport Transformer Should.fs" />
     <Content Include="TestContainerReport_Transformer_Should.Transform_test_container_failures.approved.txt" />
     <Content Include="TestContainerReport_Transformer_Should.Transform_test_container_successes.approved.txt" />
+    <Content Include="TestContainerReport_Transformer_Should.Transform_multiple_test_containers_failures.approved.txt" />
+    <Content Include="TestContainerReport_Transformer_Should.Transform_multiple_test_containers_successes.approved.txt" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 

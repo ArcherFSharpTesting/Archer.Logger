@@ -109,4 +109,14 @@ let ``Transform multiple test containers failures`` =
         |> Should.MeetStandard reporter testInfo
     )
     
+    
+let ``Transform multiple test containers successes`` =
+    feature.Test (fun (reporter, reports, indenter) environment ->
+        let testInfo = environment.TestInfo
+        
+        reports
+        |> defaultTestContainerReportSuccessesTransformer indenter
+        |> Should.MeetStandard reporter testInfo
+    )
+    
 let ``Test Cases`` = feature.GetTests ()
