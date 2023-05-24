@@ -1,7 +1,7 @@
-﻿TestExecutionResult Detail Reporter Should.Provide a detailed test combination failure report @ 134
+﻿TestExecutionResult Detail Reporter Should.Provide a detailed test combination failure report @ 136
 (.\Tests\TestExecutionResult Detail Reporter Should.fs)
 	Combination Failure
 		Test Failure
 			System.Exception: Boo
-		Test Failure: (Ignored "No watch me") @134
+		Test Failure: (Ignored "No watch me") @136
 			D:\og\Bark.ruf@99

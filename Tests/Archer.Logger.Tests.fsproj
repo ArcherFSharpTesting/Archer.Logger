@@ -43,6 +43,8 @@
     <Compile Include="Test Result Report Reporter Should.fs" />
     <Content Include="Test_Result_Report_Reporter_Should.Format_a_test_failure_report.approved.txt" />
     <Content Include="Test_Result_Report_Reporter_Should.Format_a_test_success_report.approved.txt" />
+    <Compile Include="TestContainerReport Partial Reporter Should.fs" />
+    <Content Include="TestContainerReport_Partial_Reporter_Should.Format_failures.approved.txt" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 

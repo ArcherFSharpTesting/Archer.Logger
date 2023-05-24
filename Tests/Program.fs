@@ -34,5 +34,6 @@ runner
     ``Indent Reporter Should``.``Test Cases``
     ``TestExecutionResult Detail Reporter Should``.``Test Cases``
     ``Test Result Report Reporter Should``.``Test Cases``
+    ``TestContainerReport Partial Reporter Should``.``Test Cases``
 ]
 |> runAndReport

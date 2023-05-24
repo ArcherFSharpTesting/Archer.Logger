@@ -10,8 +10,10 @@ let private feature =
     reporterTestBuilder
     |> Sub.Feature (
         TestTags [
+            Category "Reporters"
             Category "Summary Reporters"
             Category "Approvals"
+            Category "TestExecutionResult"
         ],
         Setup (fun reporter ->
             let fb = TestExecutionResultFailureBuilder ()

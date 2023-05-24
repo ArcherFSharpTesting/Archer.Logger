@@ -1,1 +1,1 @@
-﻿TestResult Summary Reporter Should.format failure into single line (Failure) @ 31
+﻿TestResult Summary Reporter Should.format failure into single line (Failure) @ 32

@@ -1,1 +1,1 @@
-﻿TestResult Summary Reporter Should.format success from a different test (Success) @ 25
+﻿TestResult Summary Reporter Should.format success from a different test (Success) @ 26

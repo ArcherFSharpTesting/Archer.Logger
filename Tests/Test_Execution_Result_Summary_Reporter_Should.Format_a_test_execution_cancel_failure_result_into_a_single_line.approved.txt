@@ -1,1 +1,1 @@
-﻿Test Execution Result Summary Reporter Should.Format a test execution cancel failure result into a single line (Canceled) @ 42
+﻿Test Execution Result Summary Reporter Should.Format a test execution cancel failure result into a single line (Canceled) @ 44

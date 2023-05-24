@@ -1,1 +1,1 @@
-﻿Test Execution Result Summary Reporter Should.Format a general test execution failure result into a single line (General Failure) @ 35
+﻿Test Execution Result Summary Reporter Should.Format a general test execution failure result into a single line (General Failure) @ 37

@@ -10,8 +10,9 @@ let private feature =
     reporterTestBuilder
     |> Sub.Feature (
         TestTags [
-            Category "Test Reporter"
+            Category "Reporters"
             Category "Approvals"
+            Category "TestResult"
         ]
     )
     
