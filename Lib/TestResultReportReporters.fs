@@ -15,6 +15,10 @@ let getTestSuccessReportReporter (timingFormatter: TestTiming option -> TimingHe
 let getShortTitleTestFailureReport (indentReporter: IndentReporter) (result: TestFailureReport) =
     let assembly = Assembly.GetCallingAssembly ()
     getTestFailureReportReporter getTitleTimingString shortTestTitleFormatter getRelativeFilePath getExecutionResultMessage assembly indentReporter result
+    
+let getShortTitleTestSuccessReport (indentReporter: IndentReporter) (result: TestSuccessReport) =
+    let assembly = Assembly.GetCallingAssembly ()
+    getTestSuccessReportReporter getTitleTimingString shortTestTitleFormatter getRelativeFilePath getExecutionResultMessage assembly indentReporter result
 
 let getDefaultTestFailureReportReport (indentReporter: IndentReporter) (result: TestFailureReport) =
     defaultDetailedTestExecutionResultReporter indentReporter result.Test (Some result.Time) result.Result
