@@ -138,7 +138,7 @@ let private getTestResultMessage assembly (indentReporter: IndentReporter) (test
     | TestFailure failure -> getTestFailureMessage assembly indentReporter failure
     | TestSuccess -> indentReporter.Report "Test Result: Success"
     
-let private getGeneralTestingFailureMessage assembly (indentReporter: IndentReporter) (testResult: GeneralTestingFailure) =
+let private getGeneralTestingFailureMessage (indentReporter: IndentReporter) (testResult: GeneralTestingFailure) =
     match testResult with
     | GeneralCancelFailure ->
         [
@@ -166,7 +166,7 @@ let detailedTestExecutionResultReporter (indentReporter: IndentReporter) (testIn
         | TeardownExecutionFailure failure ->
             getSetupTeardownFailureMessage assembly (indentReporter.Indent ()) "TeardownExecutionFailure" failure
         | GeneralExecutionFailure failure ->
-            getGeneralTestingFailureMessage assembly (indentReporter.Indent ()) failure
+            getGeneralTestingFailureMessage (indentReporter.Indent ()) failure
     
     let path = getRelativePath assembly (DirectoryInfo $"%s{testInfo.Location.FilePath}%c{Path.DirectorySeparatorChar}")
     let path = Path.Combine (path, testInfo.Location.FileName)
