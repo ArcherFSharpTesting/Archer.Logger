@@ -56,5 +56,19 @@ let ``Provide a detailed general setup failure report`` =
         |> detailedTestExecutionResultReporter indent testInfo
         |> Should.MeetStandard reporter testInfo
     )
-
+    
+let ``Provide a detailed test exception failure report`` =
+    feature.Test (fun (reporter, failureBuilder) environment ->
+        let testInfo = environment.TestInfo
+        let indent = IndentReporter 0
+        
+        try
+            ArgumentException "A bad argument" |> raise
+        with ex ->
+            failureBuilder.TestExecutionResult.ExceptionFailure ex
+            |> detailedTestExecutionResultReporter indent testInfo
+            |> replace (getSolutionRoot (Assembly.GetAssembly typeof<IndentReporter>)) "."
+            |> Should.MeetStandard reporter testInfo
+    )
+    
 let ``Test Cases`` = feature.GetTests ()
