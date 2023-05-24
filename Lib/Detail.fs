@@ -70,6 +70,7 @@ let rec private getTestExpectationMessage (indentReporter: IndentReporter) (code
             indentReporter.Indent().Report message
         ]
     |> String.concat Environment.NewLine
+
 let private getTestFailureMessage assembly (indentReporter: IndentReporter) (failure: TestFailure) =
     
     let rec getTestFailureMessage (indentReporter: IndentReporter) (failure: TestFailure) =
@@ -136,6 +137,12 @@ let private getTestResultMessage assembly (indentReporter: IndentReporter) (test
     match testResult with
     | TestFailure failure -> getTestFailureMessage assembly indentReporter failure
     | TestSuccess -> indentReporter.Report "Test Result: Success"
+    
+let private getGeneralTestingFailureMessage assembly (indentReporter: IndentReporter) (testResult: GeneralTestingFailure) =
+    match testResult with
+    | GeneralFailure message -> failwith "todo"
+    | GeneralExceptionFailure e -> failwith "todo"
+    | GeneralCancelFailure -> failwith "todo"
 
 let detailedTestExecutionResultReporter (indentReporter: IndentReporter) (testInfo: ITestInfo) (result: TestExecutionResult) =
     let assembly = Assembly.GetCallingAssembly ()
@@ -145,8 +152,9 @@ let detailedTestExecutionResultReporter (indentReporter: IndentReporter) (testIn
             getSetupTeardownFailureMessage assembly (indentReporter.Indent ()) "SetupExecutionFailure" failure
         | TestExecutionResult testResult ->
             getTestResultMessage assembly (indentReporter.Indent ()) testResult
-        | TeardownExecutionFailure setupTeardownFailure -> failwith "todo"
-        | GeneralExecutionFailure generalTestingFailure -> failwith "todo"
+        | TeardownExecutionFailure failure ->
+            getSetupTeardownFailureMessage assembly (indentReporter.Indent ()) "TeardownExecutionFailure" failure
+        | GeneralExecutionFailure failure -> failwith "todo"
     
     let path = getRelativePath assembly (DirectoryInfo $"%s{testInfo.Location.FilePath}%c{Path.DirectorySeparatorChar}")
     let path = Path.Combine (path, testInfo.Location.FileName)
