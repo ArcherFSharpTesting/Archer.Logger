@@ -44,7 +44,7 @@ let private getRootNamePath (name: string) (fullNamePath: string) =
     |> removeLastChar
     |> trim
     
-let defaultTestContainerReportFailureReporter (indenter: IIndentReporter) (report: TestContainerReport) =
+let testContainerReportReporter (partialReporter: IIndentReporter -> TestContainerReport -> string) name (indenter: IIndentReporter) (report: TestContainerReport) =
     let namePath =
         report.ContainerFullName
         |> getRootNamePath report.ContainerName
@@ -52,21 +52,14 @@ let defaultTestContainerReportFailureReporter (indenter: IIndentReporter) (repor
     let l1 = indenter.Indent()
     [
         indenter.Report namePath
-        l1.Report "Failures"
-        defaultTestContainerReportFailurePartialReporter (l1.Indent ()) report
+        l1.Report name
+        partialReporter (l1.Indent ()) report
     ]
     |> linesToString
+    
+let defaultTestContainerReportFailureReporter (indenter: IIndentReporter) (report: TestContainerReport) =
+    testContainerReportReporter defaultTestContainerReportFailurePartialReporter "Failures" indenter report 
 
 let defaultTestContainerReportSuccessReporter (indenter: IIndentReporter) (report: TestContainerReport) =
-    let namePath =
-        report.ContainerFullName
-        |> getRootNamePath report.ContainerName
-    
-    let l1 = indenter.Indent()
-    [
-        indenter.Report namePath
-        l1.Report "Successes"
-        defaultTestContainerReportSuccessPartialReporter (l1.Indent ()) report
-    ]
-    |> linesToString
+    testContainerReportReporter defaultTestContainerReportSuccessPartialReporter "Successes" indenter report 
     
