@@ -2,6 +2,7 @@
 
 open System.IO
 open System.Reflection
+open Archer
 
 let getSolutionRoot (assembly: Assembly) =
     let assemblyPath = (assembly.Location |> FileInfo).Directory.FullName
@@ -21,3 +22,19 @@ let getSolutionRoot (assembly: Assembly) =
 let getRelativePath (assembly: Assembly) (dir: DirectoryInfo) =
     let rootPath = getSolutionRoot assembly
     dir.FullName.Replace(rootPath, ".")
+    
+let getRelativePathFromPath assembly path =
+    path
+    |> DirectoryInfo
+    |> getRelativePath assembly
+    
+let getRelativePathFromTest assembly (test: ITestLocationInfo) =
+    test.Location.FilePath
+    |> getRelativePathFromPath assembly
+    
+let getRelativeFilePath assembly (test: ITestLocationInfo) =
+    let path =
+        test
+        |> getRelativePathFromTest assembly
+    
+    Path.Combine (path, test.Location.FileName)

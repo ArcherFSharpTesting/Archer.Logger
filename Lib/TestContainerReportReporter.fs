@@ -8,7 +8,7 @@ open Archer.Logger.TestResultReportReporters
 let testContainerReportFailurePartialReporter (indentReporter: IndentReporter) (report: TestContainerReport) =
     let failures =
         report.Failures
-        |> List.map ((getTestFailureReportReport (indentReporter.Indent ())) >> fun value -> $"%s{value}%s{Environment.NewLine}")
+        |> List.map ((getDefaultTestFailureReportReport (indentReporter.Indent ())) >> fun value -> $"%s{value}%s{Environment.NewLine}")
         |> String.concat Environment.NewLine
         |> trimEnd
         

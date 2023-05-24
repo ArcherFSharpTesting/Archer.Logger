@@ -42,7 +42,7 @@ let ``Format a test failure report`` =
                 }
                 Test = testFeature.Test (fun _ -> TestSuccess)
             }
-            |> getTestFailureReportReport indentReporter
+            |> getDefaultTestFailureReportReport indentReporter
             |> Should.MeetStandard reporter testInfo
     )
     
@@ -65,7 +65,7 @@ let ``Format a test success report`` =
                 }
                 Test = testFeature.Test (fun _ -> TestSuccess)
             }
-            |> getTestSuccessReportReport indentReporter
+            |> getDefaultTestSuccessReportReport indentReporter
             |> Should.MeetStandard reporter testInfo
     )
 

@@ -154,30 +154,42 @@ let private getGeneralTestingFailureMessage (indentReporter: IndentReporter) (te
             getExceptionDetail indentReporter "General Failure" ex
         ]
     |> String.concat Environment.NewLine
-
-let detailedTestExecutionResultReporter (indentReporter: IndentReporter) (testInfo: ITestInfo) (timing: TestTiming option) (result: TestExecutionResult) =
-    let assembly = Assembly.GetCallingAssembly ()
-    let msg =
-        match result with
-        | SetupExecutionFailure failure ->
-            getSetupTeardownFailureMessage assembly (indentReporter.Indent ()) "SetupExecutionFailure" failure
-        | TestExecutionResult testResult ->
-            getTestResultMessage assembly (indentReporter.Indent ()) testResult
-        | TeardownExecutionFailure failure ->
-            getSetupTeardownFailureMessage assembly (indentReporter.Indent ()) "TeardownExecutionFailure" failure
-        | GeneralExecutionFailure failure ->
-            getGeneralTestingFailureMessage (indentReporter.Indent ()) failure
-            
-    let timingStr =
-        match timing with
-        | None -> ""
-        | Some value -> $" [%A{value.Total}]"
     
-    let path = getRelativePath assembly (DirectoryInfo $"%s{testInfo.Location.FilePath}%c{Path.DirectorySeparatorChar}")
-    let path = Path.Combine (path, testInfo.Location.FileName)
+let getExecutionResultMessage assembly (indentReporter: IndentReporter) = function
+    | SetupExecutionFailure failure ->
+        getSetupTeardownFailureMessage assembly (indentReporter.Indent ()) "SetupExecutionFailure" failure
+    | TestExecutionResult testResult ->
+        getTestResultMessage assembly (indentReporter.Indent ()) testResult
+    | TeardownExecutionFailure failure ->
+        getSetupTeardownFailureMessage assembly (indentReporter.Indent ()) "TeardownExecutionFailure" failure
+    | GeneralExecutionFailure failure ->
+        getGeneralTestingFailureMessage (indentReporter.Indent ()) failure
+        
+let getTitleTimingString = function
+    | None -> ""
+    | Some value -> $" [%A{value.Total}]"
+    
+let shortTestTitleFormatter (timingHeader: string) (testInfo: ITestInfo) =
+    $"%s{testInfo.TestName} @ %d{testInfo.Location.LineNumber}%s{timingHeader}"
+    
+let fullTestTitleFormatter (timingHeader: string) (testInfo: ITestInfo) =
+    $"%s{testInfo.ContainerName}.%s{shortTestTitleFormatter timingHeader testInfo}"
+    
+type TimingHeader = string
+    
+let detailedTestExecutionResultReporter (timingFormatter: TestTiming option -> TimingHeader) (titleFormatter: TimingHeader -> ITestInfo -> string) (pathFormatter: Assembly -> ITestInfo -> string) (resultReporter: Assembly -> IndentReporter -> TestExecutionResult -> string) (assembly: Assembly) (indentReporter: IndentReporter) (testInfo: ITestInfo) (timing: TestTiming option) (result: TestExecutionResult) =
+    let resultReport = resultReporter assembly indentReporter result
+    let timingStr = timingFormatter timing
+    let title = titleFormatter timingStr testInfo
+    let path = pathFormatter assembly testInfo
+    
     [
-        indentReporter.Report $"%s{testInfo.ContainerName}.%s{testInfo.TestName} @ %d{testInfo.Location.LineNumber}%s{timingStr}"
+        indentReporter.Report title
         indentReporter.Report $"(%s{path})"
-        msg
+        resultReport
     ]
     |> String.concat Environment.NewLine
+    
+let defaultDetailedTestExecutionResultReporter (indentReporter: IndentReporter) (testInfo: ITestInfo) (timing: TestTiming option) (result: TestExecutionResult) =
+    let assembly = Assembly.GetCallingAssembly ()
+    detailedTestExecutionResultReporter getTitleTimingString fullTestTitleFormatter getRelativeFilePath getExecutionResultMessage assembly indentReporter testInfo timing result

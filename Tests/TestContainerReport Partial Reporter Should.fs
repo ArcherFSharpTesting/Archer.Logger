@@ -36,7 +36,7 @@ let private getReport () =
         [0..2]
         |> List.map (fun index ->
             {
-                Result = fb.TestExecutionResult.ValidationFailure ({ExpectedValue = index * 100; ActualValue = (index * 100) - 10 })
+                Result = fb.TestExecutionResult.ValidationFailure {ExpectedValue = index * 100; ActualValue = (index * 100) - 10 }
                 Time = getTime index
                 Test =  getTest testFeature index
             }
