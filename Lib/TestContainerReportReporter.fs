@@ -1,6 +1,7 @@
 ﻿module Archer.Logger.TestContainerReportReporter
 
 open System
+open Archer
 open Archer.CoreTypes.InternalTypes
 open Archer.Logger.StringHelpers
 open Archer.Logger.TestResultReportReporters
@@ -37,3 +38,15 @@ let defaultTestContainerReportFailurePartialReporter (indentReporter: IIndentRep
     
 let defaultTestContainerReportSuccessPartialReporter (indentReporter: IIndentReporter) (report: TestContainerReport) =
     testContainerPartialReporter<TestSuccessReport> (fun c -> c.Successes) getShortTitleTestSuccessReport reportSuccesses indentReporter report
+    
+let defaultTestContainerReportFailureReporter (indenter: IIndentReporter) (report: TestContainerReport) =
+    let namePath =
+        report.ContainerFullName.Replace (report.ContainerName, "")
+        |> removeLastChar
+        |> trim
+    
+    [
+        indenter.Report namePath
+        defaultTestContainerReportFailurePartialReporter (indenter.Indent ()) report
+    ]
+    |> linesToString

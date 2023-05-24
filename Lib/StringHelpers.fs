@@ -15,3 +15,11 @@ let replace (toBeReplaced: string) (toReplace: string) (inValue: string) =
     
 let appendNewLine value =
     $"%s{value}%s{Environment.NewLine}"
+    
+let removeLastChar (value: string) =
+    value.Remove (value.Length - 1)
+    
+let linesToString (items: string list) =
+    items
+    |> String.concat Environment.NewLine
+    |> trimEnd
