@@ -3,7 +3,7 @@ module Archer.Logger.Indent
 
 open System
 
-let private indentReporter (indent: string) indentCount (value: string) =
+let private indenter (indent: string) indentCount (value: string) =
     if 0 < indentCount
     then
         let lines = value.Split ([|Environment.NewLine; "\n"; "\r"|], StringSplitOptions.None)
@@ -23,14 +23,16 @@ let private indentReporter (indent: string) indentCount (value: string) =
 type IndentionType =
     | Tabs
     | TwoSpaces
+    | FourSpaces
     
 let indentionToString = function
     | TwoSpaces -> "  "
+    | FourSpaces -> "    "
     | _ -> "\t"
         
 type IndentReporter (indentionCount: int, indentionType: IndentionType) =
     let indent = indentionType |> indentionToString
-    let reporter = indentReporter indent indentionCount
+    let reporter = indenter indent indentionCount
     
     new () = IndentReporter (0, Tabs)
     new (indentionCount: int) = IndentReporter (indentionCount, Tabs)
