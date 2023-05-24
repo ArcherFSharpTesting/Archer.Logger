@@ -33,5 +33,6 @@ runner
     ``Test Execution Result Summary Reporter Should``.``Test Cases``
     ``Indent Reporter Should``.``Test Cases``
     ``TestExecutionResult Detail Reporter Should``.``Test Cases``
+    ``TestFailureReport Reporter Should``.``Test Cases``
 ]
 |> runAndReport
