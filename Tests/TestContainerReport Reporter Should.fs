@@ -80,4 +80,13 @@ let ``Format test container failures`` =
         |> Should.MeetStandard reporter testInfo
     )
     
+let ``Format test container successes`` =
+    feature.Test (fun (reporter, report, indenter) environment ->
+        let testInfo = environment.TestInfo
+        
+        report
+        |> defaultTestContainerReportSuccessReporter indenter
+        |> Should.MeetStandard reporter testInfo
+    )
+    
 let ``Test Cases`` = feature.GetTests ()

@@ -1,0 +1,14 @@
+﻿Name Space Containing
+	Successes
+		A test module name
+			Test 3 @ 27 [00:00:00.0005720]
+			(.\Tests\TestContainerReport Reporter Should.fs)
+				Test Result: Success
+
+			Test 4 @ 27 [00:00:00.0007220]
+			(.\Tests\TestContainerReport Reporter Should.fs)
+				Test Result: Success
+
+			Test 5 @ 27 [00:00:00.0008720]
+			(.\Tests\TestContainerReport Reporter Should.fs)
+				Test Result: Success

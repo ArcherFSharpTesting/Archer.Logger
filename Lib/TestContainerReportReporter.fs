@@ -39,11 +39,15 @@ let defaultTestContainerReportFailurePartialReporter (indentReporter: IIndentRep
 let defaultTestContainerReportSuccessPartialReporter (indentReporter: IIndentReporter) (report: TestContainerReport) =
     testContainerPartialReporter<TestSuccessReport> (fun c -> c.Successes) getShortTitleTestSuccessReport reportSuccesses indentReporter report
     
+let private getRootNamePath (name: string) (fullNamePath: string) =
+    fullNamePath.Replace (name, "")
+    |> removeLastChar
+    |> trim
+    
 let defaultTestContainerReportFailureReporter (indenter: IIndentReporter) (report: TestContainerReport) =
     let namePath =
-        report.ContainerFullName.Replace (report.ContainerName, "")
-        |> removeLastChar
-        |> trim
+        report.ContainerFullName
+        |> getRootNamePath report.ContainerName
     
     let l1 = indenter.Indent()
     [
@@ -52,3 +56,17 @@ let defaultTestContainerReportFailureReporter (indenter: IIndentReporter) (repor
         defaultTestContainerReportFailurePartialReporter (l1.Indent ()) report
     ]
     |> linesToString
+
+let defaultTestContainerReportSuccessReporter (indenter: IIndentReporter) (report: TestContainerReport) =
+    let namePath =
+        report.ContainerFullName
+        |> getRootNamePath report.ContainerName
+    
+    let l1 = indenter.Indent()
+    [
+        indenter.Report namePath
+        l1.Report "Successes"
+        defaultTestContainerReportSuccessPartialReporter (l1.Indent ()) report
+    ]
+    |> linesToString
+    
