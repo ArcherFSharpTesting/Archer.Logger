@@ -40,7 +40,8 @@
     <Content Include="TestExecutionResult_Detail_Reporter_Should.Provide_a_detailed_general_cancel_failure_report.approved.txt" />
     <Content Include="TestExecutionResult_Detail_Reporter_Should.Provide_a_detailed_general_exception_failure_report.approved.txt" />
     <Content Include="TestExecutionResult_Detail_Reporter_Should.Provide_a_detailed_general_general_failure_report.approved.txt" />
-    <Compile Include="TestFailureReport Reporter Should.fs" />
+    <Compile Include="Test Result Report Reporter Should.fs" />
+    <Content Include="Test_Result_Report_Reporter_Should.Format_a_test_failure_report.approved.txt" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 

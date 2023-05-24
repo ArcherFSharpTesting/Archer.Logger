@@ -1,0 +1,4 @@
+﻿Execution Time: 00:00:00.7110000
+Feature.Format a test failure report @ 39
+(.\Tests\Test Result Report Reporter Should.fs)
+	General Failure: (Canceled)
