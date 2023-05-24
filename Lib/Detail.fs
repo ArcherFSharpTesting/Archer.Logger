@@ -57,7 +57,14 @@ let private getTestFailureMessage (assembly: Assembly) (indentReporter: IndentRe
             [
                 getExceptionDetail indentReporter "Test Failure" ex
             ]
-        | TestIgnored (message, codeLocation) -> failwith "todo"
+        | TestIgnored (message, codeLocation) ->
+            let msg =
+                match message with
+                | None -> "Ignored"
+                | Some value -> $"Ignored %A{value}"
+            [
+                indentReporter.Report $"Test Failure: (%s{msg}) @%d{codeLocation.LineNumber}"
+            ]
         | TestExpectationFailure (testExpectationFailure, codeLocation) -> failwith "todo"
         | CombinationFailure (failureA, failureB) -> failwith "todo"
         
