@@ -19,8 +19,8 @@ runner.RunnerLifecycleEvent
             match testExecutionResult with
             | TestExecutionResult TestSuccess -> ()
             | result ->
-                let report = defaultTestExecutionResultSummaryReporter result test
-                printfn $"%s{report}"
+                let transformedResult = defaultTestExecutionResultSummaryTransformer result test
+                printfn $"%s{transformedResult}"
             
         | _ -> ()
     | RunnerEndExecution ->
@@ -29,12 +29,12 @@ runner.RunnerLifecycleEvent
 
 runner
 |> addMany [
-    ``TestResult Summary Reporter Should``.``Test Cases``
-    ``Test Execution Result Summary Reporter Should``.``Test Cases``
-    ``Indent Reporter Should``.``Test Cases``
-    ``TestExecutionResult Detail Reporter Should``.``Test Cases``
-    ``Test Result Report Reporter Should``.``Test Cases``
-    ``TestContainerReport Partial Reporter Should``.``Test Cases``
-    ``TestContainerReport Reporter Should``.``Test Cases``
+    ``TestResult Summary Transformer Should``.``Test Cases``
+    ``Test Execution Result Summary Transformer Should``.``Test Cases``
+    ``Indent Transformer Should``.``Test Cases``
+    ``TestExecutionResult Detail Transformer Should``.``Test Cases``
+    ``Test Result Report Transformer Should``.``Test Cases``
+    ``TestContainerReport Partial Transformer Should``.``Test Cases``
+    ``TestContainerReport Transformer Should``.``Test Cases``
 ]
 |> runAndReport

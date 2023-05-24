@@ -8,77 +8,77 @@ open Archer.CoreTypes.InternalTypes
 open Archer.Logger.StringHelpers
 open Archer.Logger.LocationHelpers
 
-let rec private getExceptionString (indentReporter: IIndentReporter) (ex : exn) =
+let rec private getExceptionString (indenter: IIndentTransformer) (ex : exn) =
     let inner =
         if (ex.InnerException = null) then ""
-        else getExceptionString (indentReporter.Indent ()) ex.InnerException
+        else getExceptionString (indenter.Indent ()) ex.InnerException
         
     let exType = ex.GetType()
     [
-        indentReporter.Report $"%s{exType.Namespace}.%s{exType.Name}: %s{ex.Message}"
-        indentReporter.Indent().Report (ex.StackTrace |> trim)
+        indenter.Transform $"%s{exType.Namespace}.%s{exType.Name}: %s{ex.Message}"
+        indenter.Indent().Transform (ex.StackTrace |> trim)
         inner
     ]
     |> String.concat Environment.NewLine
     |> trimEnd
     
-let getExceptionDetail (indentReporter: IIndentReporter) name (ex: Exception) =
+let getExceptionDetail (indenter: IIndentTransformer) name (ex: Exception) =
     [
-        indentReporter.Report name
-        getExceptionString (indentReporter.Indent ()) ex
+        indenter.Transform name
+        getExceptionString (indenter.Indent ()) ex
     ]
     |> String.concat Environment.NewLine
     
-let private getSetupTeardownFailureMessage (assembly: Assembly) (indentReporter: IIndentReporter) name (failure: SetupTeardownFailure) =
+let private getSetupTeardownFailureMessage (assembly: Assembly) (indenter: IIndentTransformer) name (failure: SetupTeardownFailure) =
     match failure with
     | SetupTeardownExceptionFailure ex ->
         [
-            getExceptionDetail indentReporter name ex
+            getExceptionDetail indenter name ex
         ]
     | SetupTeardownCanceledFailure ->
         [
-            indentReporter.Report $"%s{name}: (Canceled)"
+            indenter.Transform $"%s{name}: (Canceled)"
         ]
     | GeneralSetupTeardownFailure (message, location) ->
         let path = getRelativePath assembly (DirectoryInfo $"%s{location.FilePath}%c{Path.DirectorySeparatorChar}")
         let path = Path.Combine (path, location.FileName)
         [
-            indentReporter.Report $"%s{name} @ \"%s{path}@%d{location.LineNumber}\""
-            indentReporter.Indent().Report $"General Failure:"
-            indentReporter.Indent().Indent().Report message
+            indenter.Transform $"%s{name} @ \"%s{path}@%d{location.LineNumber}\""
+            indenter.Indent().Transform $"General Failure:"
+            indenter.Indent().Indent().Transform message
         ]
     |> String.concat Environment.NewLine
     |> trimEnd
     
-let rec private getTestExpectationMessage (indentReporter: IIndentReporter) (codeLocation: CodeLocation) (failure: TestExpectationFailure) =
+let rec private getTestExpectationMessage (indenter: IIndentTransformer) (codeLocation: CodeLocation) (failure: TestExpectationFailure) =
     match failure with
     | ExpectationOtherFailure message ->
         [
-            indentReporter.Report "Expectation Failure (Other)"
-            indentReporter.Indent().Report message
+            indenter.Transform "Expectation Failure (Other)"
+            indenter.Indent().Transform message
         ]
     | ExpectationVerificationFailure failure ->
         [
-            indentReporter.Report "Validation Failure"
-            indentReporter.Indent().Report $"Expected: %s{failure.Expected}"
-            indentReporter.Indent().Report $"Actual:   %s{failure.Actual}"
+            indenter.Transform "Validation Failure"
+            indenter.Indent().Transform $"Expected: %s{failure.Expected}"
+            indenter.Indent().Transform $"Actual:   %s{failure.Actual}"
         ]
     | FailureWithMessage (message, failure) ->
         [
-            getTestExpectationMessage indentReporter codeLocation failure
-            indentReporter.Report "Failure Comment:"
-            indentReporter.Indent().Report message
+            getTestExpectationMessage indenter codeLocation failure
+            indenter.Transform "Failure Comment:"
+            indenter.Indent().Transform message
         ]
     |> String.concat Environment.NewLine
 
-let private getTestFailureMessage assembly (indentReporter: IIndentReporter) (failure: TestFailure) =
+let private getTestFailureMessage assembly (indenter: IIndentTransformer) (failure: TestFailure) =
     
-    let rec getTestFailureMessage (indentReporter: IIndentReporter) (failure: TestFailure) =
+    let rec getTestFailureMessage (indenter: IIndentTransformer) (failure: TestFailure) =
         let message =
             match failure with
             | TestExceptionFailure ex ->
                 [
-                    getExceptionDetail indentReporter "Test Failure" ex
+                    getExceptionDetail indenter "Test Failure" ex
                 ]
             | TestIgnored (message, codeLocation) ->
                 let msg =
@@ -86,11 +86,11 @@ let private getTestFailureMessage assembly (indentReporter: IIndentReporter) (fa
                     | None -> "Ignored"
                     | Some value -> $"Ignored %A{value}"
                 [
-                    indentReporter.Report $"Test Failure: (%s{msg}) @%d{codeLocation.LineNumber}"
+                    indenter.Transform $"Test Failure: (%s{msg}) @%d{codeLocation.LineNumber}"
                 ]
             | TestExpectationFailure (failure, codeLocation) ->
                 [
-                    getTestExpectationMessage indentReporter codeLocation failure
+                    getTestExpectationMessage indenter codeLocation failure
                 ]
             | CombinationFailure ((failureA, maybeLocationA), (failureB, maybeLocationB)) ->
                 let getInfo (maybeLocation: CodeLocation option) =
@@ -106,24 +106,24 @@ let private getTestFailureMessage assembly (indentReporter: IIndentReporter) (fa
                 
                 let lengthMessageA =
                     if 0 < idA.Length
-                    then indentReporter.Indent().Indent().Report idA
+                    then indenter.Indent().Indent().Transform idA
                     else ""
                     
                 let lengthMessageB =
                     if 0 < idB.Length
-                    then indentReporter.Indent().Indent().Report idB
+                    then indenter.Indent().Indent().Transform idB
                     else ""
                 
                 [
                     [
-                        indentReporter.Report "Combination Failure"
+                        indenter.Transform "Combination Failure"
                     ]
                     [
-                        getTestFailureMessage (indentReporter.Indent ()) failureA
+                        getTestFailureMessage (indenter.Indent ()) failureA
                         lengthMessageA
                     ] |> List.filter (fun (v: string) -> 0 < v.Length)
                     [
-                        getTestFailureMessage (indentReporter.Indent ()) failureB
+                        getTestFailureMessage (indenter.Indent ()) failureB
                         lengthMessageB
                     ] |> List.filter (fun v -> 0 < v.Length)
                 ]
@@ -131,39 +131,39 @@ let private getTestFailureMessage assembly (indentReporter: IIndentReporter) (fa
         message                
         |> String.concat Environment.NewLine
         
-    getTestFailureMessage indentReporter failure
+    getTestFailureMessage indenter failure
 
-let private getTestResultMessage assembly (indentReporter: IIndentReporter) (testResult: TestResult) =
+let private getTestResultMessage assembly (indenter: IIndentTransformer) (testResult: TestResult) =
     match testResult with
-    | TestFailure failure -> getTestFailureMessage assembly indentReporter failure
-    | TestSuccess -> indentReporter.Report "Test Result: Success"
+    | TestFailure failure -> getTestFailureMessage assembly indenter failure
+    | TestSuccess -> indenter.Transform "Test Result: Success"
     
-let private getGeneralTestingFailureMessage (indentReporter: IIndentReporter) (testResult: GeneralTestingFailure) =
+let private getGeneralTestingFailureMessage (indenter: IIndentTransformer) (testResult: GeneralTestingFailure) =
     match testResult with
     | GeneralCancelFailure ->
         [
-            indentReporter.Report "General Failure: (Canceled)"
+            indenter.Transform "General Failure: (Canceled)"
         ]
     | GeneralFailure message ->
         [
-            indentReporter.Report "General Failure:"
-            indentReporter.Indent().Report message
+            indenter.Transform "General Failure:"
+            indenter.Indent().Transform message
         ]
     | GeneralExceptionFailure ex ->
         [
-            getExceptionDetail indentReporter "General Failure" ex
+            getExceptionDetail indenter "General Failure" ex
         ]
     |> String.concat Environment.NewLine
     
-let getExecutionResultMessage assembly (indentReporter: IIndentReporter) = function
+let getExecutionResultMessage assembly (indenter: IIndentTransformer) = function
     | SetupExecutionFailure failure ->
-        getSetupTeardownFailureMessage assembly (indentReporter.Indent ()) "SetupExecutionFailure" failure
+        getSetupTeardownFailureMessage assembly (indenter.Indent ()) "SetupExecutionFailure" failure
     | TestExecutionResult testResult ->
-        getTestResultMessage assembly (indentReporter.Indent ()) testResult
+        getTestResultMessage assembly (indenter.Indent ()) testResult
     | TeardownExecutionFailure failure ->
-        getSetupTeardownFailureMessage assembly (indentReporter.Indent ()) "TeardownExecutionFailure" failure
+        getSetupTeardownFailureMessage assembly (indenter.Indent ()) "TeardownExecutionFailure" failure
     | GeneralExecutionFailure failure ->
-        getGeneralTestingFailureMessage (indentReporter.Indent ()) failure
+        getGeneralTestingFailureMessage (indenter.Indent ()) failure
         
 let getTitleTimingString = function
     | None -> ""
@@ -177,19 +177,19 @@ let fullTestTitleFormatter (timingHeader: string) (testInfo: ITestInfo) =
     
 type TimingHeader = string
     
-let detailedTestExecutionResultReporter (timingFormatter: TestTiming option -> TimingHeader) (titleFormatter: TimingHeader -> ITestInfo -> string) (pathFormatter: Assembly -> ITestInfo -> string) (resultReporter: Assembly -> IIndentReporter -> TestExecutionResult -> string) (assembly: Assembly) (indentReporter: IIndentReporter) (testInfo: ITestInfo) (timing: TestTiming option) (result: TestExecutionResult) =
-    let resultReport = resultReporter assembly indentReporter result
-    let timingStr = timingFormatter timing
-    let title = titleFormatter timingStr testInfo
-    let path = pathFormatter assembly testInfo
+let detailedTestExecutionResultTransformer (timingTransformer: TestTiming option -> TimingHeader) (titleTransformer: TimingHeader -> ITestInfo -> string) (pathTransformer: Assembly -> ITestInfo -> string) (resultTransformer: Assembly -> IIndentTransformer -> TestExecutionResult -> string) (assembly: Assembly) (indenter: IIndentTransformer) (testInfo: ITestInfo) (timing: TestTiming option) (result: TestExecutionResult) =
+    let transformedResult = resultTransformer assembly indenter result
+    let timingStr = timingTransformer timing
+    let title = titleTransformer timingStr testInfo
+    let path = pathTransformer assembly testInfo
     
     [
-        indentReporter.Report title
-        indentReporter.Report $"(%s{path})"
-        resultReport
+        indenter.Transform title
+        indenter.Transform $"(%s{path})"
+        transformedResult
     ]
     |> String.concat Environment.NewLine
     
-let defaultDetailedTestExecutionResultReporter (indentReporter: IIndentReporter) (testInfo: ITestInfo) (timing: TestTiming option) (result: TestExecutionResult) =
+let defaultDetailedTestExecutionResultTransformer (indenter: IIndentTransformer) (testInfo: ITestInfo) (timing: TestTiming option) (result: TestExecutionResult) =
     let assembly = Assembly.GetCallingAssembly ()
-    detailedTestExecutionResultReporter getTitleTimingString fullTestTitleFormatter getRelativeFilePath getExecutionResultMessage assembly indentReporter testInfo timing result
+    detailedTestExecutionResultTransformer getTitleTimingString fullTestTitleFormatter getRelativeFilePath getExecutionResultMessage assembly indenter testInfo timing result

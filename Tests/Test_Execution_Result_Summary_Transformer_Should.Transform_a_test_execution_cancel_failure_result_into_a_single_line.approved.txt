@@ -1,0 +1,1 @@
+﻿Test Execution Result Summary Transformer Should.Transform a test execution cancel failure result into a single line (Canceled) @ 44

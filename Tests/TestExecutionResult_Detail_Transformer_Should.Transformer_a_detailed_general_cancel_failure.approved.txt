@@ -1,0 +1,3 @@
+﻿TestExecutionResult Detail Transformer Should.Transformer a detailed general cancel failure @ 172
+(.\Tests\TestExecutionResult Detail Transformer Should.fs)
+	General Failure: (Canceled)

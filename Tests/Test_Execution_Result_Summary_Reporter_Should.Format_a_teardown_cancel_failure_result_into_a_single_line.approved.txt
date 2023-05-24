@@ -1,1 +1,0 @@
-﻿Test Execution Result Summary Reporter Should.Format a teardown cancel failure result into a single line (Canceled) @ 79

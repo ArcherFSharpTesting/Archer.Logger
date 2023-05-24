@@ -1,3 +1,0 @@
-﻿TestExecutionResult Detail Reporter Should.Provide a detailed test success report @ 151
-(.\Tests\TestExecutionResult Detail Reporter Should.fs)
-	Test Result: Success

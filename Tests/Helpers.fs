@@ -5,7 +5,7 @@ open Archer.Arrows
 open Archer.ApprovalsSupport
 open ApprovalTests
 
-let reporterTestBuilder = Arrow.NewFeature (
+let loggerTestBuilder = Arrow.NewFeature (
     "Archer.Logger.Tests",
     "",
     

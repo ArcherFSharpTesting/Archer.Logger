@@ -1,0 +1,3 @@
+﻿Feature.Transform a test failure @ 43 [00:00:00.7110000]
+(.\Tests\Test Result Report Transformer Should.fs)
+	General Failure: (Canceled)

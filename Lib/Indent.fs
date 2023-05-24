@@ -30,23 +30,23 @@ let indentionToString = function
     | FourSpaces -> "    "
     | _ -> "\t"
     
-type IIndentReporter =
-    abstract member Report: value: string -> string
-    abstract member Indent: unit -> IIndentReporter
-    abstract member Indent: indentCount: int -> IIndentReporter
+type IIndentTransformer =
+    abstract member Transform: value: string -> string
+    abstract member Indent: unit -> IIndentTransformer
+    abstract member Indent: indentCount: int -> IIndentTransformer
         
-type IndentReporter (indentionCount: int, indentionType: IndentionType) =
+type IndentTransformer (indentionCount: int, indentionType: IndentionType) =
     let indent = indentionType |> indentionToString
-    let reporter = indenter indent indentionCount
+    let indenter = indenter indent indentionCount
     
-    new () = IndentReporter (0, Tabs)
-    new (indentionCount: int) = IndentReporter (indentionCount, Tabs)
+    new () = IndentTransformer (0, Tabs)
+    new (indentionCount: int) = IndentTransformer (indentionCount, Tabs)
     
-    member _.Report value = reporter (if value = null then "" else value)
-    member _.Indent () = IndentReporter (indentionCount + 1, indentionType) :> IIndentReporter
-    member _.Indent indentCount = IndentReporter (indentionCount + indentCount, indentionType) :> IIndentReporter
+    member _.Transform value = indenter (if value = null then "" else value)
+    member _.Indent () = IndentTransformer (indentionCount + 1, indentionType) :> IIndentTransformer
+    member _.Indent indentCount = IndentTransformer (indentionCount + indentCount, indentionType) :> IIndentTransformer
     
-    interface IIndentReporter with
-        member this.Report value = this.Report value
+    interface IIndentTransformer with
+        member this.Transform value = this.Transform value
         member this.Indent () = this.Indent ()
         member this.Indent indentCount = this.Indent indentCount

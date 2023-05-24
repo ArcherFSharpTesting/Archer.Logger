@@ -1,0 +1,1 @@
+﻿Test Execution Result Summary Transformer Should.Transform a setup failure result into a single line (Setup Failure) @ 58

@@ -1,1 +1,0 @@
-﻿TestResult Summary Reporter Should.format different failure into single line (Failure) @ 45

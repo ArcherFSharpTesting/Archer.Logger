@@ -1,0 +1,20 @@
+﻿Name Space Containing
+	Failures
+		A test module name
+			Test 0 @ 27 [00:00:00.0001220]
+			(.\Tests\TestContainerReport Transformer Should.fs)
+				Validation Failure
+					Expected: 0
+					Actual:   -10
+
+			Test 1 @ 27 [00:00:00.0002720]
+			(.\Tests\TestContainerReport Transformer Should.fs)
+				Validation Failure
+					Expected: 100
+					Actual:   90
+
+			Test 2 @ 27 [00:00:00.0004220]
+			(.\Tests\TestContainerReport Transformer Should.fs)
+				Validation Failure
+					Expected: 200
+					Actual:   190

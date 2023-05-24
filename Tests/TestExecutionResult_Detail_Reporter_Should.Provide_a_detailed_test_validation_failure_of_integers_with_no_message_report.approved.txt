@@ -1,5 +1,0 @@
-﻿TestExecutionResult Detail Reporter Should.Provide a detailed test validation failure of integers with no message report @ 207
-(.\Tests\TestExecutionResult Detail Reporter Should.fs)
-	Validation Failure
-		Expected: 100
-		Actual:   200

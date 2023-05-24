@@ -2,7 +2,7 @@
 
 open Archer
 
-let resultMessageSummaryReporter (testInfo: ITestInfo) resultMsg =
+let resultMessageSummaryTransformer (testInfo: ITestInfo) resultMsg =
     $"%s{testInfo.ContainerName}.%s{testInfo.TestName} (%s{resultMsg}) @ %d{testInfo.Location.LineNumber}"
     
 let getTestResultMessage = function
@@ -25,13 +25,13 @@ let getTestExecutionResultMessage = function
     | SetupExecutionFailure failure -> failure |> getSetupTeardownFailureMessage "Setup"
     | TeardownExecutionFailure failure -> failure |> getSetupTeardownFailureMessage "Teardown"
     
-let resultSummaryReporter (getMessage: 'a -> string) (getSummary: ITestInfo -> string -> string) (result: 'a) (testInfo: ITestInfo) =
+let resultSummaryTransformer (getMessage: 'a -> string) (getSummary: ITestInfo -> string -> string) (result: 'a) (testInfo: ITestInfo) =
     result
     |> getMessage
     |> getSummary testInfo
     
-let defaultTestResultSummaryReporter: TestResult -> ITestInfo -> string =
-    resultSummaryReporter getTestResultMessage resultMessageSummaryReporter
+let defaultTestResultSummaryTransformer: TestResult -> ITestInfo -> string =
+    resultSummaryTransformer getTestResultMessage resultMessageSummaryTransformer
     
-let defaultTestExecutionResultSummaryReporter: TestExecutionResult -> ITestInfo -> string =
-    resultSummaryReporter getTestExecutionResultMessage resultMessageSummaryReporter
+let defaultTestExecutionResultSummaryTransformer: TestExecutionResult -> ITestInfo -> string =
+    resultSummaryTransformer getTestExecutionResultMessage resultMessageSummaryTransformer

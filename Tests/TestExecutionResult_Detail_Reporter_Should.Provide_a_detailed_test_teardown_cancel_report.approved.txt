@@ -1,3 +1,0 @@
-﻿TestExecutionResult Detail Reporter Should.Provide a detailed test teardown cancel report @ 162
-(.\Tests\TestExecutionResult Detail Reporter Should.fs)
-	TeardownExecutionFailure: (Canceled)

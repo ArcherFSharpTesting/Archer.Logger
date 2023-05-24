@@ -1,3 +1,0 @@
-﻿Feature.Format a test success report @ 66 [00:00:00.4650000]
-(.\Tests\Test Result Report Reporter Should.fs)
-	Test Result: Success

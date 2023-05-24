@@ -1,5 +1,0 @@
-﻿TestExecutionResult Detail Reporter Should.Provide a detailed test validation failure with no message report @ 108
-(.\Tests\TestExecutionResult Detail Reporter Should.fs)
-	Validation Failure
-		Expected: "The World Is Great"
-		Actual:   "The world is greater"
