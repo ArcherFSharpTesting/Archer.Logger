@@ -18,8 +18,6 @@ let reporterTestBuilder = Arrow.NewFeature (
                 |> findFirstReporter<Reporters.AllFailingTestsClipboardReporter>
                 |> unWrapReporter
                 
-            Reporters.BeyondCompareReporter () :> Core.IApprovalFailureReporter
-
             Reporters.ClipboardReporter() :> Core.IApprovalFailureReporter
 
             Reporters.QuietReporter() :> Core.IApprovalFailureReporter

@@ -1,11 +1,14 @@
 ﻿module Archer.Logger.Tests.``TestExecutionResult Detail Reporter Should``
 
 open System
+open System.Reflection
 open Archer
 open Archer.Arrows
 open Archer.ApprovalsSupport
 open Archer.Fletching.Types.Internal
 open Archer.Logger
+open Archer.Logger.LocationHelpers
+open Archer.Logger.StringHelpers
 
 let private feature =
     reporterTestBuilder
@@ -30,6 +33,7 @@ let ``Provide a detailed setup exception failure report`` =
         with ex ->
             failureBuilder.SetupExecutionFailure.ExceptionFailure ex
             |> detailedTestExecutionResultReporter indent testInfo
+            |> replace (getSolutionRoot (Assembly.GetAssembly (typeof<IndentReporter>))) "."
             |> Should.MeetStandard reporter testInfo
     )
     

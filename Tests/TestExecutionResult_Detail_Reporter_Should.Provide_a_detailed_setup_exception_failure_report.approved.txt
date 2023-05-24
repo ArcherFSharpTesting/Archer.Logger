@@ -1,5 +1,5 @@
-﻿TestExecutionResult Detail Reporter Should.Provide a detailed setup exception failure report @ 24
-(C:\Development\github\Archer\Archer.Logger\Tests\TestExecutionResult Detail Reporter Should.fs)
+﻿TestExecutionResult Detail Reporter Should.Provide a detailed setup exception failure report @ 27
+(.\Tests\TestExecutionResult Detail Reporter Should.fs)
 	SetupExecutionFailure
 		System.Exception: Boom Boom Bang
-			at Archer.Logger.Tests.TestExecutionResult Detail Reporter Should.Provide a detailed setup exception failure report@24-1.Invoke(TestEnvironment environment) in C:\Development\github\Archer\Archer.Logger\Tests\TestExecutionResult Detail Reporter Should.fs:line 29
+			at Archer.Logger.Tests.TestExecutionResult Detail Reporter Should.Provide a detailed setup exception failure report@27-1.Invoke(TestEnvironment environment) in .\Tests\TestExecutionResult Detail Reporter Should.fs:line 32
