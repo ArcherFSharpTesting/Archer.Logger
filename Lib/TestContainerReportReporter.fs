@@ -17,3 +17,16 @@ let testContainerReportFailurePartialReporter (indentReporter: IndentReporter) (
         failures
     ]
     |> String.concat Environment.NewLine
+    
+let testContainerReportSuccessPartialReporter (indentReporter: IndentReporter) (report: TestContainerReport) =
+    let successes =
+        report.Successes
+        |> List.map ((getShortTitleTestSuccessReport (indentReporter.Indent ())) >> fun value -> $"%s{value}%s{Environment.NewLine}")
+        |> String.concat Environment.NewLine
+        |> trimEnd
+        
+    [
+        indentReporter.Report report.ContainerName
+        successes
+    ]
+    |> String.concat Environment.NewLine
