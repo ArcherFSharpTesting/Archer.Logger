@@ -71,7 +71,7 @@ let private feature =
         )
     )
     
-let ``Format test container failures`` =
+let ``Transform test container failures`` =
     feature.Test (fun (reporter, report, indenter) environment ->
         let testInfo = environment.TestInfo
         
@@ -80,7 +80,7 @@ let ``Format test container failures`` =
         |> Should.MeetStandard reporter testInfo
     )
     
-let ``Format test container successes`` =
+let ``Transform test container successes`` =
     feature.Test (fun (reporter, report, indenter) environment ->
         let testInfo = environment.TestInfo
         

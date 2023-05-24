@@ -48,8 +48,8 @@
     <Content Include="TestContainerReport_Partial_Transformer_Should.Format_failures.approved.txt" />
     <Content Include="TestContainerReport_Partial_Transformer_Should.Format_successes.approved.txt" />
     <Compile Include="TestContainerReport Transformer Should.fs" />
-    <Content Include="TestContainerReport_Transformer_Should.Format_test_container_failures.approved.txt" />
-    <Content Include="TestContainerReport_Transformer_Should.Format_test_container_successes.approved.txt" />
+    <Content Include="TestContainerReport_Transformer_Should.Transform_test_container_failures.approved.txt" />
+    <Content Include="TestContainerReport_Transformer_Should.Transform_test_container_successes.approved.txt" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 
