@@ -7,6 +7,7 @@ open Archer.Arrows
 open Archer.ApprovalsSupport
 open Archer.Fletching.Types.Internal
 open Archer.Logger
+open Archer.Logger.Detail
 open Archer.Logger.LocationHelpers
 open Archer.Logger.StringHelpers
 

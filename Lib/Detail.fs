@@ -1,5 +1,4 @@
-﻿[<AutoOpen>]
-module Archer.Logger.Detail
+﻿module Archer.Logger.Detail
 
 open System
 open System.IO

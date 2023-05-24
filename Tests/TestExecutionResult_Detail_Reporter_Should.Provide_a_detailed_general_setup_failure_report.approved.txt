@@ -1,6 +1,6 @@
-﻿TestExecutionResult Detail Reporter Should.Provide a detailed general setup failure report @ 51
+﻿TestExecutionResult Detail Reporter Should.Provide a detailed general setup failure report @ 52
 (.\Tests\TestExecutionResult Detail Reporter Should.fs)
-	SetupExecutionFailure @ ".\Tests\TestExecutionResult Detail Reporter Should.fs@55"
+	SetupExecutionFailure @ ".\Tests\TestExecutionResult Detail Reporter Should.fs@56"
 		General Failure:
 			This setup is wrong
 			Just Wrong

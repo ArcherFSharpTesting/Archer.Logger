@@ -1,3 +1,3 @@
-﻿TestExecutionResult Detail Reporter Should.Provide a detailed test ignored failure report @ 75
+﻿TestExecutionResult Detail Reporter Should.Provide a detailed test ignored failure report @ 76
 (.\Tests\TestExecutionResult Detail Reporter Should.fs)
-	Test Failure: (Ignored "This is an ignored test") @79
+	Test Failure: (Ignored "This is an ignored test") @80

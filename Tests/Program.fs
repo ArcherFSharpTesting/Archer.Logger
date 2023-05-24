@@ -2,7 +2,7 @@
 open Archer
 open Archer.CoreTypes.InternalTypes
 open Archer.CoreTypes.InternalTypes.RunnerTypes
-open Archer.Logger
+open Archer.Logger.Summaries
 open Archer.Logger.Tests
 open MicroLang.Lang
 

@@ -1,5 +1,4 @@
-﻿[<AutoOpen>]
-module Archer.Logger.Summaries
+﻿module Archer.Logger.Summaries
 
 open Archer
 

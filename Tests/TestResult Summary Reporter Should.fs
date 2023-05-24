@@ -1,11 +1,10 @@
 ﻿module Archer.Logger.Tests.``TestResult Summary Reporter Should``
 
-open System.IO
 open Archer
 open Archer.Arrows
 open Archer.ApprovalsSupport
 open Archer.Fletching.Types.Internal
-open Archer.Logger
+open Archer.Logger.Summaries
 
 let private feature =
     reporterTestBuilder

@@ -1,5 +1,5 @@
-﻿TestExecutionResult Detail Reporter Should.Provide a detailed test exception failure report @ 61
+﻿TestExecutionResult Detail Reporter Should.Provide a detailed test exception failure report @ 62
 (.\Tests\TestExecutionResult Detail Reporter Should.fs)
 	Test Failure
 		System.ArgumentException: A bad argument
-			at Archer.Logger.Tests.TestExecutionResult Detail Reporter Should.Provide a detailed test exception failure report@61-1.Invoke(TestEnvironment environment) in .\Tests\TestExecutionResult Detail Reporter Should.fs:line 66
+			at Archer.Logger.Tests.TestExecutionResult Detail Reporter Should.Provide a detailed test exception failure report@62-1.Invoke(TestEnvironment environment) in .\Tests\TestExecutionResult Detail Reporter Should.fs:line 67

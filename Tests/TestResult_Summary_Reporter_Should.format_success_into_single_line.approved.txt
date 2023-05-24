@@ -1,1 +1,1 @@
-﻿TestResult Summary Reporter Should.format success into single line (Success) @ 20
+﻿TestResult Summary Reporter Should.format success into single line (Success) @ 19
