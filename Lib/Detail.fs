@@ -70,35 +70,71 @@ let rec private getTestExpectationMessage (indentReporter: IndentReporter) (code
             indentReporter.Indent().Report message
         ]
     |> String.concat Environment.NewLine
-let private getTestFailureMessage (indentReporter: IndentReporter) (failure: TestFailure) =
+let private getTestFailureMessage assembly (indentReporter: IndentReporter) (failure: TestFailure) =
     
     let rec getTestFailureMessage (indentReporter: IndentReporter) (failure: TestFailure) =
-        match failure with
-        | TestExceptionFailure ex ->
-            [
-                getExceptionDetail indentReporter "Test Failure" ex
-            ]
-        | TestIgnored (message, codeLocation) ->
-            let msg =
-                match message with
-                | None -> "Ignored"
-                | Some value -> $"Ignored %A{value}"
-            [
-                indentReporter.Report $"Test Failure: (%s{msg}) @%d{codeLocation.LineNumber}"
-            ]
-        | TestExpectationFailure (failure, codeLocation) ->
-            [
-                getTestExpectationMessage indentReporter codeLocation failure
-            ]
-
-        | CombinationFailure (failureA, failureB) -> failwith "todo"
+        let message =
+            match failure with
+            | TestExceptionFailure ex ->
+                [
+                    getExceptionDetail indentReporter "Test Failure" ex
+                ]
+            | TestIgnored (message, codeLocation) ->
+                let msg =
+                    match message with
+                    | None -> "Ignored"
+                    | Some value -> $"Ignored %A{value}"
+                [
+                    indentReporter.Report $"Test Failure: (%s{msg}) @%d{codeLocation.LineNumber}"
+                ]
+            | TestExpectationFailure (failure, codeLocation) ->
+                [
+                    getTestExpectationMessage indentReporter codeLocation failure
+                ]
+            | CombinationFailure ((failureA, maybeLocationA), (failureB, maybeLocationB)) ->
+                let getInfo (maybeLocation: CodeLocation option) =
+                    match maybeLocation with
+                    | None -> ""
+                    | Some value ->
+                        let path = getRelativePath assembly (DirectoryInfo value.FilePath)
+                        let fullPath = Path.Combine (path, value.FileName)
+                        $"%s{fullPath}@%d{value.LineNumber}"
+            
+                let idA = maybeLocationA |> getInfo
+                let idB = maybeLocationB |> getInfo
+                
+                let lengthMessageA =
+                    if 0 < idA.Length
+                    then indentReporter.Indent().Indent().Report idA
+                    else ""
+                    
+                let lengthMessageB =
+                    if 0 < idB.Length
+                    then indentReporter.Indent().Indent().Report idB
+                    else ""
+                
+                [
+                    [
+                        indentReporter.Report "Combination Failure"
+                    ]
+                    [
+                        getTestFailureMessage (indentReporter.Indent ()) failureA
+                        lengthMessageA
+                    ] |> List.filter (fun (v: string) -> 0 < v.Length)
+                    [
+                        getTestFailureMessage (indentReporter.Indent ()) failureB
+                        lengthMessageB
+                    ] |> List.filter (fun v -> 0 < v.Length)
+                ]
+                |> List.concat
+        message                
         |> String.concat Environment.NewLine
         
     getTestFailureMessage indentReporter failure
 
-let private getTestResultMessage (indentReporter: IndentReporter) (testResult: TestResult) =
+let private getTestResultMessage assembly (indentReporter: IndentReporter) (testResult: TestResult) =
     match testResult with
-    | TestFailure failure -> getTestFailureMessage indentReporter failure
+    | TestFailure failure -> getTestFailureMessage assembly indentReporter failure
     | TestSuccess -> failwith "todo"
 
 let detailedTestExecutionResultReporter (indentReporter: IndentReporter) (testInfo: ITestInfo) (result: TestExecutionResult) =
@@ -108,7 +144,7 @@ let detailedTestExecutionResultReporter (indentReporter: IndentReporter) (testIn
         | SetupExecutionFailure failure ->
             getSetupTeardownFailureMessage assembly (indentReporter.Indent ()) "SetupExecutionFailure" failure
         | TestExecutionResult testResult ->
-            getTestResultMessage (indentReporter.Indent ()) testResult
+            getTestResultMessage assembly (indentReporter.Indent ()) testResult
         | TeardownExecutionFailure setupTeardownFailure -> failwith "todo"
         | GeneralExecutionFailure generalTestingFailure -> failwith "todo"
     

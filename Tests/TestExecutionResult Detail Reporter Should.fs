@@ -134,4 +134,20 @@ let ``Provide a detailed test validation failure with failure comment with no me
         )
     )
     
+let ``Provide a detailed test combination failure report`` =
+    feature.Test (fun (reporter, _) environment ->
+        let testInfo = environment.TestInfo
+        let indent = IndentReporter 0
+        
+        let failureA = TestExceptionFailure (Exception "Boo")
+        let failureB = TestIgnored (Some "No watch me", testInfo.Location)
+        
+        CombinationFailure ((failureA, None), (failureB, Some { FilePath = "D:\\og"; FileName = "Bark.ruf"; LineNumber = 99 }))
+        |> TestFailure
+        |> TestExecutionResult
+        |> detailedTestExecutionResultReporter indent testInfo
+        |> replace (getSolutionRoot (Assembly.GetAssembly typeof<IndentReporter>)) "."
+        |> Should.MeetStandard reporter testInfo
+    )
+    
 let ``Test Cases`` = feature.GetTests ()
