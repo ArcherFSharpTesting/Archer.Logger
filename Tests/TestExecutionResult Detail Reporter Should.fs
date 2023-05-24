@@ -93,4 +93,15 @@ let ``Provide a detailed test ignored failure with no message report`` =
         |> Should.MeetStandard reporter testInfo
     )
     
+let ``Provide a detailed test expectation other failure with no message report`` =
+    feature.Test (fun (reporter, failureBuilder) environment ->
+        let testInfo = environment.TestInfo
+        let indent = IndentReporter 0
+        
+        failureBuilder.TestExecutionResult.GeneralTestExpectationFailure "Hello World\nToday is great"
+        |> detailedTestExecutionResultReporter indent testInfo
+        |> replace (getSolutionRoot (Assembly.GetAssembly typeof<IndentReporter>)) "."
+        |> Should.MeetStandard reporter testInfo
+    )
+    
 let ``Test Cases`` = feature.GetTests ()
