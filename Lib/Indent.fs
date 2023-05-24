@@ -29,6 +29,11 @@ let indentionToString = function
     | TwoSpaces -> "  "
     | FourSpaces -> "    "
     | _ -> "\t"
+    
+type IIndentReporter =
+    abstract member Report: value: string -> string
+    abstract member Indent: unit -> IIndentReporter
+    abstract member Indent: indentCount: int -> IIndentReporter
         
 type IndentReporter (indentionCount: int, indentionType: IndentionType) =
     let indent = indentionType |> indentionToString
@@ -38,5 +43,10 @@ type IndentReporter (indentionCount: int, indentionType: IndentionType) =
     new (indentionCount: int) = IndentReporter (indentionCount, Tabs)
     
     member _.Report value = reporter (if value = null then "" else value)
-    member _.Indent () = IndentReporter (indentionCount + 1, indentionType)
-    member _.Indent count = IndentReporter (indentionCount + count, indentionType)
+    member _.Indent () = IndentReporter (indentionCount + 1, indentionType) :> IIndentReporter
+    member _.Indent indentCount = IndentReporter (indentionCount + indentCount, indentionType) :> IIndentReporter
+    
+    interface IIndentReporter with
+        member this.Report value = this.Report value
+        member this.Indent () = this.Indent ()
+        member this.Indent indentCount = this.Indent indentCount

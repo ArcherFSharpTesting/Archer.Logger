@@ -8,7 +8,7 @@ open Archer.CoreTypes.InternalTypes
 open Archer.Logger.StringHelpers
 open Archer.Logger.LocationHelpers
 
-let rec private getExceptionString (indentReporter: IndentReporter) (ex : exn) =
+let rec private getExceptionString (indentReporter: IIndentReporter) (ex : exn) =
     let inner =
         if (ex.InnerException = null) then ""
         else getExceptionString (indentReporter.Indent ()) ex.InnerException
@@ -22,14 +22,14 @@ let rec private getExceptionString (indentReporter: IndentReporter) (ex : exn) =
     |> String.concat Environment.NewLine
     |> trimEnd
     
-let getExceptionDetail (indentReporter: IndentReporter) name (ex: Exception) =
+let getExceptionDetail (indentReporter: IIndentReporter) name (ex: Exception) =
     [
         indentReporter.Report name
         getExceptionString (indentReporter.Indent ()) ex
     ]
     |> String.concat Environment.NewLine
     
-let private getSetupTeardownFailureMessage (assembly: Assembly) (indentReporter: IndentReporter) name (failure: SetupTeardownFailure) =
+let private getSetupTeardownFailureMessage (assembly: Assembly) (indentReporter: IIndentReporter) name (failure: SetupTeardownFailure) =
     match failure with
     | SetupTeardownExceptionFailure ex ->
         [
@@ -50,7 +50,7 @@ let private getSetupTeardownFailureMessage (assembly: Assembly) (indentReporter:
     |> String.concat Environment.NewLine
     |> trimEnd
     
-let rec private getTestExpectationMessage (indentReporter: IndentReporter) (codeLocation: CodeLocation) (failure: TestExpectationFailure) =
+let rec private getTestExpectationMessage (indentReporter: IIndentReporter) (codeLocation: CodeLocation) (failure: TestExpectationFailure) =
     match failure with
     | ExpectationOtherFailure message ->
         [
@@ -71,9 +71,9 @@ let rec private getTestExpectationMessage (indentReporter: IndentReporter) (code
         ]
     |> String.concat Environment.NewLine
 
-let private getTestFailureMessage assembly (indentReporter: IndentReporter) (failure: TestFailure) =
+let private getTestFailureMessage assembly (indentReporter: IIndentReporter) (failure: TestFailure) =
     
-    let rec getTestFailureMessage (indentReporter: IndentReporter) (failure: TestFailure) =
+    let rec getTestFailureMessage (indentReporter: IIndentReporter) (failure: TestFailure) =
         let message =
             match failure with
             | TestExceptionFailure ex ->
@@ -133,12 +133,12 @@ let private getTestFailureMessage assembly (indentReporter: IndentReporter) (fai
         
     getTestFailureMessage indentReporter failure
 
-let private getTestResultMessage assembly (indentReporter: IndentReporter) (testResult: TestResult) =
+let private getTestResultMessage assembly (indentReporter: IIndentReporter) (testResult: TestResult) =
     match testResult with
     | TestFailure failure -> getTestFailureMessage assembly indentReporter failure
     | TestSuccess -> indentReporter.Report "Test Result: Success"
     
-let private getGeneralTestingFailureMessage (indentReporter: IndentReporter) (testResult: GeneralTestingFailure) =
+let private getGeneralTestingFailureMessage (indentReporter: IIndentReporter) (testResult: GeneralTestingFailure) =
     match testResult with
     | GeneralCancelFailure ->
         [
@@ -155,7 +155,7 @@ let private getGeneralTestingFailureMessage (indentReporter: IndentReporter) (te
         ]
     |> String.concat Environment.NewLine
     
-let getExecutionResultMessage assembly (indentReporter: IndentReporter) = function
+let getExecutionResultMessage assembly (indentReporter: IIndentReporter) = function
     | SetupExecutionFailure failure ->
         getSetupTeardownFailureMessage assembly (indentReporter.Indent ()) "SetupExecutionFailure" failure
     | TestExecutionResult testResult ->
@@ -177,7 +177,7 @@ let fullTestTitleFormatter (timingHeader: string) (testInfo: ITestInfo) =
     
 type TimingHeader = string
     
-let detailedTestExecutionResultReporter (timingFormatter: TestTiming option -> TimingHeader) (titleFormatter: TimingHeader -> ITestInfo -> string) (pathFormatter: Assembly -> ITestInfo -> string) (resultReporter: Assembly -> IndentReporter -> TestExecutionResult -> string) (assembly: Assembly) (indentReporter: IndentReporter) (testInfo: ITestInfo) (timing: TestTiming option) (result: TestExecutionResult) =
+let detailedTestExecutionResultReporter (timingFormatter: TestTiming option -> TimingHeader) (titleFormatter: TimingHeader -> ITestInfo -> string) (pathFormatter: Assembly -> ITestInfo -> string) (resultReporter: Assembly -> IIndentReporter -> TestExecutionResult -> string) (assembly: Assembly) (indentReporter: IIndentReporter) (testInfo: ITestInfo) (timing: TestTiming option) (result: TestExecutionResult) =
     let resultReport = resultReporter assembly indentReporter result
     let timingStr = timingFormatter timing
     let title = titleFormatter timingStr testInfo
@@ -190,6 +190,6 @@ let detailedTestExecutionResultReporter (timingFormatter: TestTiming option -> T
     ]
     |> String.concat Environment.NewLine
     
-let defaultDetailedTestExecutionResultReporter (indentReporter: IndentReporter) (testInfo: ITestInfo) (timing: TestTiming option) (result: TestExecutionResult) =
+let defaultDetailedTestExecutionResultReporter (indentReporter: IIndentReporter) (testInfo: ITestInfo) (timing: TestTiming option) (result: TestExecutionResult) =
     let assembly = Assembly.GetCallingAssembly ()
     detailedTestExecutionResultReporter getTitleTimingString fullTestTitleFormatter getRelativeFilePath getExecutionResultMessage assembly indentReporter testInfo timing result
