@@ -75,4 +75,4 @@ let defaultTestFailContainerTransformer (indenter: IIndentTransformer) (failures
 let defaultTestFailContainerAllTransformer (indenter: IIndentTransformer) (failures: TestFailContainer list) =
     failures
     |> List.map (defaultTestFailContainerTransformer indenter)
-    |> String.concat Environment.NewLine
+    |> linesToString
