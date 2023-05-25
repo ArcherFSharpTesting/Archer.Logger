@@ -1,0 +1,7 @@
+﻿TestExecutionResult Detail Transformer Should.Transform a detailed test combination failure @ 136
+(.\Tests\TestExecutionResult Detail Transformer Should.fs)
+		Combination Failure
+			Test Failure
+				System.Exception: Boo
+			Test Failure: (Ignored "No watch me") @136
+				D:\og\Bark.ruf@99

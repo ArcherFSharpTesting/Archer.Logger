@@ -1,0 +1,5 @@
+﻿TestExecutionResult Detail Transformer Should.Transform a detailed test expectation other failure with no message @ 98
+(.\Tests\TestExecutionResult Detail Transformer Should.fs)
+		Expectation Failure (Other)
+			Hello World
+			Today is great

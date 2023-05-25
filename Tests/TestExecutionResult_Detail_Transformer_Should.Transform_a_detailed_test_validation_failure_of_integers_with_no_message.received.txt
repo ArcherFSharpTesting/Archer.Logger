@@ -1,0 +1,5 @@
+﻿TestExecutionResult Detail Transformer Should.Transform a detailed test validation failure of integers with no message @ 207
+(.\Tests\TestExecutionResult Detail Transformer Should.fs)
+		Validation Failure
+			Expected: 100
+			Actual:   200

@@ -12,6 +12,7 @@
     <Compile Include="Summaries.fs" />
     <Compile Include="Indent.fs" />
     <Compile Include="Detail.fs" />
+    <Compile Include="TestFailContainerTransformer.fs" />
   </ItemGroup>
 
   <ItemGroup>

@@ -42,6 +42,7 @@
     <Content Include="TestExecutionResult_Detail_Transformer_Should.Transform_a_detailed_test_validation_failure_with_no_message.approved.txt" />
     <Content Include="TestExecutionResult_Detail_Transformer_Should.Transformer_a_detailed_general_cancel_failure.approved.txt" />
     <Content Include="TestExecutionResult_Detail_Transformer_Should.Transformer_a_detailed_general_general_failure.approved.txt" />
+    <Compile Include="TestFailContainer Transformer Should.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 
@@ -49,7 +50,7 @@
     <PackageReference Include="Archer.Arrow.Lib" Version="0.0.0.41" />
     <PackageReference Include="Archer.Bow.Lib" Version="0.0.9.36" />
     <PackageReference Include="Archer.CoreTypes.Lib" Version="0.0.13.42" />
-    <PackageReference Include="Archer.Fletching.Lib" Version="0.0.0.27" />
+    <PackageReference Include="Archer.Fletching.Lib" Version="0.0.0.29" />
     <PackageReference Include="MicroLang.Lib" Version="0.0.12.51" />
     <PackageReference Update="FSharp.Core" Version="7.0.300" />
   </ItemGroup>

@@ -29,7 +29,7 @@ let getExceptionDetail (indenter: IIndentTransformer) name (ex: Exception) =
     ]
     |> String.concat Environment.NewLine
     
-let private getSetupTeardownFailureMessage (assembly: Assembly) (indenter: IIndentTransformer) name (failure: SetupTeardownFailure) =
+let getSetupTeardownFailureMessage name (assembly: Assembly) (indenter: IIndentTransformer) (failure: SetupTeardownFailure) =
     match failure with
     | SetupTeardownExceptionFailure ex ->
         [
@@ -133,12 +133,12 @@ let private getTestFailureMessage assembly (indenter: IIndentTransformer) (failu
         
     getTestFailureMessage indenter failure
 
-let private getTestResultMessage assembly (indenter: IIndentTransformer) (testResult: TestResult) =
+let getTestResultMessage assembly (indenter: IIndentTransformer) (testResult: TestResult) =
     match testResult with
     | TestFailure failure -> getTestFailureMessage assembly indenter failure
     | TestSuccess -> indenter.Transform "Test Result: Success"
     
-let private getGeneralTestingFailureMessage (indenter: IIndentTransformer) (testResult: GeneralTestingFailure) =
+let getGeneralTestingFailureMessage (indenter: IIndentTransformer) (testResult: GeneralTestingFailure) =
     match testResult with
     | GeneralCancelFailure ->
         [
@@ -157,11 +157,11 @@ let private getGeneralTestingFailureMessage (indenter: IIndentTransformer) (test
     
 let getExecutionResultMessage assembly (indenter: IIndentTransformer) = function
     | SetupExecutionFailure failure ->
-        getSetupTeardownFailureMessage assembly (indenter.Indent ()) "SetupExecutionFailure" failure
+        getSetupTeardownFailureMessage "SetupExecutionFailure" assembly (indenter.Indent ()) failure
     | TestExecutionResult testResult ->
         getTestResultMessage assembly (indenter.Indent ()) testResult
     | TeardownExecutionFailure failure ->
-        getSetupTeardownFailureMessage assembly (indenter.Indent ()) "TeardownExecutionFailure" failure
+        getSetupTeardownFailureMessage "TeardownExecutionFailure" assembly (indenter.Indent ()) failure
     | GeneralExecutionFailure failure ->
         getGeneralTestingFailureMessage (indenter.Indent ()) failure
         
@@ -177,7 +177,7 @@ let fullTestTitleFormatter (timingHeader: string) (testInfo: ITestInfo) =
     
 type TimingHeader = string
     
-let detailedTestExecutionResultTransformer (timingTransformer: TestTiming option -> TimingHeader) (titleTransformer: TimingHeader -> ITestInfo -> string) (pathTransformer: Assembly -> ITestInfo -> string) (resultTransformer: Assembly -> IIndentTransformer -> TestExecutionResult -> string) (assembly: Assembly) (indenter: IIndentTransformer) (testInfo: ITestInfo) (timing: TestTiming option) (result: TestExecutionResult) =
+let detailedTestItemTransformer (timingTransformer: TestTiming option -> TimingHeader) (titleTransformer: TimingHeader -> ITestInfo -> string) (pathTransformer: Assembly -> ITestInfo -> string) (resultTransformer: Assembly -> IIndentTransformer -> 'itemType -> string) (assembly: Assembly) (indenter: IIndentTransformer) (testInfo: ITestInfo) (timing: TestTiming option) (result: 'itemType) =
     let transformedResult = resultTransformer assembly indenter result
     let timingStr = timingTransformer timing
     let title = titleTransformer timingStr testInfo
@@ -192,4 +192,4 @@ let detailedTestExecutionResultTransformer (timingTransformer: TestTiming option
     
 let defaultDetailedTestExecutionResultTransformer (indenter: IIndentTransformer) (testInfo: ITestInfo) (timing: TestTiming option) (result: TestExecutionResult) =
     let assembly = Assembly.GetCallingAssembly ()
-    detailedTestExecutionResultTransformer getTitleTimingString fullTestTitleFormatter getRelativeFilePath getExecutionResultMessage assembly indenter testInfo timing result
+    detailedTestItemTransformer getTitleTimingString fullTestTitleFormatter getRelativeFilePath getExecutionResultMessage assembly indenter testInfo timing result

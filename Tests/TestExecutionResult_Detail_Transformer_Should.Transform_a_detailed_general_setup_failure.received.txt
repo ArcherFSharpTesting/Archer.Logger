@@ -1,0 +1,7 @@
+﻿TestExecutionResult Detail Transformer Should.Transform a detailed general setup failure @ 54
+(.\Tests\TestExecutionResult Detail Transformer Should.fs)
+		SetupExecutionFailure @ ".\Tests\TestExecutionResult Detail Transformer Should.fs@58"
+			General Failure:
+				This setup is wrong
+				Just Wrong
+				Bail out
