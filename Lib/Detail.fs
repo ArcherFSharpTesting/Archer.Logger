@@ -157,13 +157,13 @@ let getGeneralTestingFailureMessage (indenter: IIndentTransformer) (testResult: 
     
 let getExecutionResultMessage assembly (indenter: IIndentTransformer) = function
     | SetupExecutionFailure failure ->
-        getSetupTeardownFailureMessage "SetupExecutionFailure" assembly (indenter.Indent ()) failure
+        getSetupTeardownFailureMessage "SetupExecutionFailure" assembly indenter failure
     | TestExecutionResult testResult ->
-        getTestResultMessage assembly (indenter.Indent ()) testResult
+        getTestResultMessage assembly indenter testResult
     | TeardownExecutionFailure failure ->
-        getSetupTeardownFailureMessage "TeardownExecutionFailure" assembly (indenter.Indent ()) failure
+        getSetupTeardownFailureMessage "TeardownExecutionFailure" assembly indenter failure
     | GeneralExecutionFailure failure ->
-        getGeneralTestingFailureMessage (indenter.Indent ()) failure
+        getGeneralTestingFailureMessage indenter failure
         
 let getTitleTimingString = function
     | None -> ""
@@ -178,7 +178,7 @@ let fullTestTitleFormatter (timingHeader: string) (testInfo: ITestInfo) =
 type TimingHeader = string
     
 let detailedTestItemTransformer (timingTransformer: TestTiming option -> TimingHeader) (titleTransformer: TimingHeader -> ITestInfo -> string) (pathTransformer: Assembly -> ITestInfo -> string) (resultTransformer: Assembly -> IIndentTransformer -> 'itemType -> string) (assembly: Assembly) (indenter: IIndentTransformer) (testInfo: ITestInfo) (timing: TestTiming option) (result: 'itemType) =
-    let transformedResult = resultTransformer assembly indenter result
+    let transformedResult = resultTransformer assembly (indenter.Indent ()) result
     let timingStr = timingTransformer timing
     let title = titleTransformer timingStr testInfo
     let path = pathTransformer assembly testInfo

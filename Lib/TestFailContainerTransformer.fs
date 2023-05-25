@@ -9,14 +9,11 @@ open Archer.Logger.Detail
 open Archer.Logger.LocationHelpers
 open Archer.Logger.StringHelpers
 
-let getIndentedSetupTeardownFailureMessage name (assembly: Assembly) (indenter: IIndentTransformer) (failure: SetupTeardownFailure) =
-    getSetupTeardownFailureMessage name assembly (indenter.Indent ()) failure
+let getWrappedTestFailureMessage assembly (indenter: IIndentTransformer) (failure: TestFailure) =
+    getTestResultMessage assembly indenter (TestFailure failure)
     
-let getIndentedTestFailureMessage assembly (indenter: IIndentTransformer) (failure: TestFailure) =
-    getTestResultMessage assembly (indenter.Indent ()) (TestFailure failure)
-    
-let getIndentedGeneralTestingFailureMessage (_: Assembly) (indenter: IIndentTransformer) (failure: GeneralTestingFailure) =
-    getGeneralTestingFailureMessage (indenter.Indent ()) failure
+let getIgnoreAssemblyGeneralTestingFailureMessage (_: Assembly) (indenter: IIndentTransformer) (failure: GeneralTestingFailure) =
+    getGeneralTestingFailureMessage indenter failure
 
 let transformTestFailureType (indenter: IIndentTransformer) (failure: TestFailureType, test: ITest) =
     let assembly = Assembly.GetAssembly typeof<IndentTransformer>
@@ -26,13 +23,13 @@ let transformTestFailureType (indenter: IIndentTransformer) (failure: TestFailur
         
     match failure with
     | SetupFailureType failure ->
-        baseTransformer (getIndentedSetupTeardownFailureMessage "SetupExecutionFailure") failure
+        baseTransformer (getSetupTeardownFailureMessage "SetupExecutionFailure") failure
     | TestRunFailureType testFailure ->
-        baseTransformer getIndentedTestFailureMessage testFailure
+        baseTransformer getWrappedTestFailureMessage testFailure
     | TeardownFailureType failure ->
-        baseTransformer (getIndentedSetupTeardownFailureMessage "TeardownExecutionFailure") failure
+        baseTransformer (getSetupTeardownFailureMessage "TeardownExecutionFailure") failure
     | GeneralFailureType failure ->
-        baseTransformer getIndentedGeneralTestingFailureMessage failure
+        baseTransformer getIgnoreAssemblyGeneralTestingFailureMessage failure
 
 let defaultTestFailContainerTransformer (indenter: IIndentTransformer) (failures: TestFailContainer) =
     let rec defaultTestFailContainerTransformer acc (indenter: IIndentTransformer) (failures: TestFailContainer) =
