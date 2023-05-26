@@ -15,6 +15,7 @@
     <Compile Include="Detail.fs" />
     <Compile Include="TestFailContainerTransformer.fs" />
     <Compile Include="TestSuccessContainerTransformer.fs" />
+    <Compile Include="TestIgnoreContainerTransformer.fs" />
   </ItemGroup>
 
   <ItemGroup>

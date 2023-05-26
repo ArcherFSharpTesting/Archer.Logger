@@ -47,6 +47,7 @@
     <Content Include="TestSuccessContainer_Transformer_Should.Transform_all_SucceededTests_container.approved.txt" />
     <Content Include="TestSuccessContainer_Transformer_Should.Transform_an_Succeeding_Tests_success_container.approved.txt" />
     <Content Include="TestSuccessContainer_Transformer_Should.Transform_SucceededTests_container.approved.txt" />
+    <Compile Include="TestIgnoreContainer Transformer Should.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 

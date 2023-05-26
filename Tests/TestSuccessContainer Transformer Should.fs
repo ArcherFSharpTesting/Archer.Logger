@@ -8,8 +8,8 @@ open Archer.Logger
 open Archer.Logger.TestSuccessContainerTransformer
 
 let private buildSuccesses n path name =
-    [1..5] |> List.map (fun i -> FakeTestBuilder.BuildTest (i + n) path name
-                        )
+    FakeTestBuilder.BuildNTests 5 (StartNamingAt (n + 1)) path name
+    
 let private feature =
     loggerTestBuilder
     |> Sub.Feature (
