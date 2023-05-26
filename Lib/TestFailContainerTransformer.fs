@@ -31,12 +31,12 @@ let transformTestFailureType (indenter: IIndentTransformer) (failure: TestFailur
     | GeneralFailureType failure ->
         baseTransformer getIgnoreAssemblyGeneralTestingFailureMessage failure
 
-let defaultTestFailContainerTransformer (indenter: IIndentTransformer) (failures: TestFailContainer) =
-    let rec defaultTestFailContainerTransformer acc (indenter: IIndentTransformer) (failures: TestFailContainer) =
+let testFailContainerTransformer (testFailureTypeTransformer: IIndentTransformer -> TestFailureType * ITest -> string) (indenter: IIndentTransformer) (failures: TestFailContainer) =
+    let rec testFailContainerTransformer acc (indenter: IIndentTransformer) (failures: TestFailContainer) =
         match failures with
         | EmptyFailures -> acc
         | FailedTests failures ->
-            let transformer = transformTestFailureType indenter
+            let transformer = testFailureTypeTransformer indenter
             
             let failureString =
                 failures
@@ -54,7 +54,7 @@ let defaultTestFailContainerTransformer (indenter: IIndentTransformer) (failures
         | FailContainer (name, testFailContainers) ->
             let transforms =
                 testFailContainers
-                |> List.map (defaultTestFailContainerTransformer "" (indenter.Indent ()))
+                |> List.map (testFailContainerTransformer "" (indenter.Indent ()))
                 |> List.filter (String.IsNullOrWhiteSpace >> not)
             
             if transforms.IsEmpty then acc
@@ -67,7 +67,10 @@ let defaultTestFailContainerTransformer (indenter: IIndentTransformer) (failures
                 |> linesToString
                 |> trimEnd
         
-    defaultTestFailContainerTransformer "" indenter failures
+    testFailContainerTransformer "" indenter failures
+
+let defaultTestFailContainerTransformer (indenter: IIndentTransformer) (failures: TestFailContainer) =
+    testFailContainerTransformer transformTestFailureType indenter failures
     
 let defaultTestFailContainerAllTransformer (indenter: IIndentTransformer) (failures: TestFailContainer list) =
     failures
