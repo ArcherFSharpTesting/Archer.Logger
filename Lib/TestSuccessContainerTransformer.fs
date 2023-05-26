@@ -2,21 +2,21 @@
 
 open System
 open System.Reflection
+open Archer
 open Archer.CoreTypes.InternalTypes.RunnerTypes
 open Archer.Logger.Detail
 open Archer.Logger.StringHelpers
 open Archer.Logger.LocationHelpers
 
-let defaultTestSuccessContainerTransformer (indenter: IIndentTransformer) (successContainer: TestSuccessContainer) =
-    let assembly = Assembly.GetCallingAssembly ()
-    let rec defaultTestSuccessContainerTransformer (indenter: IIndentTransformer) (successContainer: TestSuccessContainer) =
+let testAssemblySuccessContainerTransformer (titleFormatter: string -> ITestInfo -> string) (pathFormatter: Assembly -> ITestLocationInfo -> string) (assembly: Assembly) (indenter: IIndentTransformer) (successContainer: TestSuccessContainer) =
+    let rec testSuccessContainerTransformer (indenter: IIndentTransformer) (successContainer: TestSuccessContainer) =
         match successContainer with
         | EmptySuccesses -> ""
         | SucceededTests tests ->
             tests
             |> List.map (fun testInfo ->
-                let title = shortTestTitleFormatter "" testInfo
-                let path = getRelativeFilePath assembly testInfo
+                let title = titleFormatter "" testInfo
+                let path = pathFormatter assembly testInfo
 
                 [
                     indenter.Transform $"%s{title}: Success"
@@ -28,7 +28,7 @@ let defaultTestSuccessContainerTransformer (indenter: IIndentTransformer) (succe
         | SuccessContainer (name, testSuccessContainers) ->
             let details =
                 testSuccessContainers
-                |> List.map (defaultTestSuccessContainerTransformer (indenter.Indent ()) >> appendNewLine)
+                |> List.map (testSuccessContainerTransformer (indenter.Indent ()) >> appendNewLine)
                 |> List.filter (String.IsNullOrWhiteSpace >> not)
                 |> linesToString
                 
@@ -38,11 +38,22 @@ let defaultTestSuccessContainerTransformer (indenter: IIndentTransformer) (succe
             ]
             |> linesToString
         
-    defaultTestSuccessContainerTransformer indenter successContainer
+    testSuccessContainerTransformer indenter successContainer
     |> trimEnd
+    
+let singleTestAssemblySuccessContainerTransformer (titleFormatter: string -> ITestInfo -> string) (pathFormatter: Assembly -> ITestLocationInfo -> string) (indenter: IIndentTransformer) (successContainer: TestSuccessContainer) =
+    let assembly = Assembly.GetCallingAssembly ()
+    
+    testAssemblySuccessContainerTransformer titleFormatter pathFormatter assembly indenter successContainer
+
+let defaultSingleTestSuccessContainerTransformer (indenter: IIndentTransformer) (successContainer: TestSuccessContainer) =
+    singleTestAssemblySuccessContainerTransformer shortTestTitleFormatter getRelativeFilePath indenter successContainer
+    
+let defaultTestSuccessContainer (assembly: Assembly) (indenter: IIndentTransformer) (successContainer: TestSuccessContainer) =
+    testAssemblySuccessContainerTransformer shortTestTitleFormatter getRelativeFilePath assembly indenter successContainer
     
 let defaultAllTestSuccessContainerTransformer (indenter: IIndentTransformer) (successContainers: TestSuccessContainer list) =
     successContainers
-    |> List.map (defaultTestSuccessContainerTransformer indenter >> appendNewLine)
+    |> List.map (defaultSingleTestSuccessContainerTransformer indenter >> appendNewLine)
     |> linesToString
     |> trimEnd

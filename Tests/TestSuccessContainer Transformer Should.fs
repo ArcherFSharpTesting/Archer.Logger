@@ -1,16 +1,10 @@
 ﻿module Archer.Logger.Tests.``TestSuccessContainer Transformer Should``
 
-open System
-open System.Reflection
 open Archer
 open Archer.Arrows
 open Archer.ApprovalsSupport
 open Archer.CoreTypes.InternalTypes.RunnerTypes
-open Archer.Fletching.Types.Internal
 open Archer.Logger
-open Archer.Logger.Detail
-open Archer.Logger.LocationHelpers
-open Archer.Logger.StringHelpers
 open Archer.Logger.TestSuccessContainerTransformer
 
 let private buildSuccesses n path name =
@@ -64,14 +58,14 @@ let private feature =
 let ``Transform an empty success container`` =
     feature.Test (fun (_, indenter, _) ->
         EmptySuccesses
-        |> defaultTestSuccessContainerTransformer indenter
+        |> defaultSingleTestSuccessContainerTransformer indenter
         |> Should.BeEqualTo ""
     )
     
 let ``Transform an Succeeding Tests success container`` =
     feature.Test (fun (reporter, indenter, _) environment ->
         SucceededTests (buildSuccesses 99 "" "")
-        |> defaultTestSuccessContainerTransformer indenter
+        |> defaultSingleTestSuccessContainerTransformer indenter
         |> Should.MeetStandard reporter environment.TestInfo
     )
     
@@ -79,7 +73,7 @@ let ``Transform SucceededTests container`` =
     feature.Test (fun (reporter, indenter, containers) environment ->
         containers
         |> List.head
-        |> defaultTestSuccessContainerTransformer indenter
+        |> defaultSingleTestSuccessContainerTransformer indenter
         |> Should.MeetStandard reporter environment.TestInfo
     )
     

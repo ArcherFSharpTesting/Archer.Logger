@@ -1,47 +1,47 @@
 ﻿My test Container
-	Test 31 @ 17: Success
+	Test 31 @ 11: Success
 		(.\Tests\TestSuccessContainer Transformer Should.fs)
-	Test 32 @ 17: Success
+	Test 32 @ 11: Success
 		(.\Tests\TestSuccessContainer Transformer Should.fs)
-	Test 33 @ 17: Success
+	Test 33 @ 11: Success
 		(.\Tests\TestSuccessContainer Transformer Should.fs)
-	Test 34 @ 17: Success
+	Test 34 @ 11: Success
 		(.\Tests\TestSuccessContainer Transformer Should.fs)
-	Test 35 @ 17: Success
+	Test 35 @ 11: Success
 		(.\Tests\TestSuccessContainer Transformer Should.fs)
 
 	is awesome
-		Test 61 @ 17: Success
+		Test 61 @ 11: Success
 			(.\Tests\TestSuccessContainer Transformer Should.fs)
-		Test 62 @ 17: Success
+		Test 62 @ 11: Success
 			(.\Tests\TestSuccessContainer Transformer Should.fs)
-		Test 63 @ 17: Success
+		Test 63 @ 11: Success
 			(.\Tests\TestSuccessContainer Transformer Should.fs)
-		Test 64 @ 17: Success
+		Test 64 @ 11: Success
 			(.\Tests\TestSuccessContainer Transformer Should.fs)
-		Test 65 @ 17: Success
+		Test 65 @ 11: Success
 			(.\Tests\TestSuccessContainer Transformer Should.fs)
 
 My second test Container
-	Test 31 @ 17: Success
+	Test 31 @ 11: Success
 		(.\Tests\TestSuccessContainer Transformer Should.fs)
-	Test 32 @ 17: Success
+	Test 32 @ 11: Success
 		(.\Tests\TestSuccessContainer Transformer Should.fs)
-	Test 33 @ 17: Success
+	Test 33 @ 11: Success
 		(.\Tests\TestSuccessContainer Transformer Should.fs)
-	Test 34 @ 17: Success
+	Test 34 @ 11: Success
 		(.\Tests\TestSuccessContainer Transformer Should.fs)
-	Test 35 @ 17: Success
+	Test 35 @ 11: Success
 		(.\Tests\TestSuccessContainer Transformer Should.fs)
 
 	is done
-		Test 61 @ 17: Success
+		Test 61 @ 11: Success
 			(.\Tests\TestSuccessContainer Transformer Should.fs)
-		Test 62 @ 17: Success
+		Test 62 @ 11: Success
 			(.\Tests\TestSuccessContainer Transformer Should.fs)
-		Test 63 @ 17: Success
+		Test 63 @ 11: Success
 			(.\Tests\TestSuccessContainer Transformer Should.fs)
-		Test 64 @ 17: Success
+		Test 64 @ 11: Success
 			(.\Tests\TestSuccessContainer Transformer Should.fs)
-		Test 65 @ 17: Success
+		Test 65 @ 11: Success
 			(.\Tests\TestSuccessContainer Transformer Should.fs)
