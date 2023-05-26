@@ -25,42 +25,39 @@ let private feature =
             Only
         ],
         Setup (fun reporter ->
-            let mutable cnt = 0
-            
             let indenter = IndentTransformer ()
             let fbSetup = SetupTeardownResultFailureBuilder SetupFailureType
             let fbTest = TestFailureBuilder TestRunFailureType
             let fbTear = SetupTeardownResultFailureBuilder TeardownFailureType
             let fbGen = GeneralFailureBuilder GeneralFailureType
             
-            let getTest (path: string) (name: string) (failure: TestFailureType) =
+            let getTestI cnt (path: string) (name: string) (failure: TestFailureType) =
                 let f = Arrow.NewFeature (path, name)
                 let t = f.Ignore ($"Test %d{cnt}", TestBody "Ignore")
-                cnt <- cnt + 1
                 failure, t
                 
             let getTests n path name =
-                cnt <- n
                 [
-                    getTest path name (fbSetup.CancelFailure ())
-                    getTest path name (fbSetup.ExceptionFailure (Exception "Setup went boom"))
-                    getTest path name (fbSetup.GeneralFailure "Setup generally did not work")
+                    (fbSetup.CancelFailure ())
+                    (fbSetup.ExceptionFailure (Exception "Setup went boom"))
+                    (fbSetup.GeneralFailure "Setup generally did not work")
                     
-                    getTest path name (fbTest.ExceptionFailure (ArgumentException "This test won the argument"))
-                    getTest path name (fbTest.IgnoreFailure ())
-                    getTest path name (fbTest.ValidationFailure ("good things", 666))
-                    getTest path name (fbTest.GeneralTestExpectationFailure "Generally tests should work\nbut this one did not")
+                    (fbTest.ExceptionFailure (ArgumentException "This test won the argument"))
+                    (fbTest.IgnoreFailure ())
+                    (fbTest.ValidationFailure ("good things", 666))
+                    (fbTest.GeneralTestExpectationFailure "Generally tests should work\nbut this one did not")
                     
-                    getTest path name (fbTear.CancelFailure ())
-                    getTest path name (fbTear.ExceptionFailure (OutOfMemoryException "I cannot remember what I was doing"))
-                    getTest path name (fbTear.GeneralFailure "Nope!")
+                    (fbTear.CancelFailure ())
+                    (fbTear.ExceptionFailure (OutOfMemoryException "I cannot remember what I was doing"))
+                    (fbTear.GeneralFailure "Nope!")
                     
-                    getTest path name (fbGen.CancelFailure ())
-                    getTest path name (fbGen.ExceptionFailure (IndexOutOfRangeException "Don't point that thing at me"))
-                    getTest path name (fbGen.GeneralFailure "In general nothing will work\Not by the hair on my\nchinny chin chin")
+                    (fbGen.CancelFailure ())
+                    (fbGen.ExceptionFailure (IndexOutOfRangeException "Don't point that thing at me"))
+                    (fbGen.GeneralFailure "In general nothing will work\Not by the hair on my\nchinny chin chin")
+                    
                 ]
-
-            
+                |> List.mapi (fun i -> getTestI (n + i) path name)
+                
             let failContainers =
                 [
                     FailContainer ("My First", [

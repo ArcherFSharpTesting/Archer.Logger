@@ -5,6 +5,7 @@ open System.Reflection
 open Archer
 open Archer.Arrows
 open Archer.ApprovalsSupport
+open Archer.CoreTypes.InternalTypes.RunnerTypes
 open Archer.Fletching.Types.Internal
 open Archer.Logger
 open Archer.Logger.Detail
@@ -13,7 +14,7 @@ open Archer.Logger.StringHelpers
 
 let private feature =
     loggerTestBuilder
-    |> Sub.Ignore (
+    |> Sub.Feature (
         TestTags [
             Category "Detail Transformers"
             Category "Transformers"
@@ -24,5 +25,7 @@ let private feature =
             Ok (reporter)
         )
     )
+    
+// let ``Transform a success container``
     
 let ``Test Cases`` = feature.GetTests ()
