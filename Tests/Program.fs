@@ -34,5 +34,6 @@ runner
     ``Indent Transformer Should``.``Test Cases``
     ``TestExecutionResult Detail Transformer Should``.``Test Cases``
     ``TestFailContainer Transformer Should``.``Test Cases``
+    ``TestSuccessContainer Transformer Should``.``Test Cases``
 ]
 |> runAndReport

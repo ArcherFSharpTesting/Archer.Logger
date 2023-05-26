@@ -43,6 +43,7 @@
     <Content Include="TestExecutionResult_Detail_Transformer_Should.Transformer_a_detailed_general_cancel_failure.approved.txt" />
     <Content Include="TestExecutionResult_Detail_Transformer_Should.Transformer_a_detailed_general_general_failure.approved.txt" />
     <Compile Include="TestFailContainer Transformer Should.fs" />
+    <Compile Include="TestSuccessContainer Transformer Should.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 
