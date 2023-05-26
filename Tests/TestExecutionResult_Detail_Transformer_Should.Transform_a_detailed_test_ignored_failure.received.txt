@@ -1,3 +1,0 @@
-﻿TestExecutionResult Detail Transformer Should.Transform a detailed test ignored failure @ 78
-(.\Tests\TestExecutionResult Detail Transformer Should.fs)
-		Test Failure: (Ignored "This is an ignored test") @82

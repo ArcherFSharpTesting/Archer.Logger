@@ -62,7 +62,7 @@ let testFailContainerTransformer (testFailureTypeTransformer: IIndentTransformer
                 [
                     acc |> appendNewLineIfNotEmpty
                     indenter.Transform name
-                    transforms |> String.concat Environment.NewLine
+                    transforms |> linesToString
                 ]
                 |> linesToString
                 |> trimEnd

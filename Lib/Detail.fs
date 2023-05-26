@@ -19,7 +19,7 @@ let rec private getExceptionString (indenter: IIndentTransformer) (ex : exn) =
         indenter.Indent().Transform (ex.StackTrace |> trim)
         inner
     ]
-    |> String.concat Environment.NewLine
+    |> linesToString
     |> trimEnd
     
 let getExceptionDetail (indenter: IIndentTransformer) name (ex: Exception) =
@@ -27,7 +27,7 @@ let getExceptionDetail (indenter: IIndentTransformer) name (ex: Exception) =
         indenter.Transform name
         getExceptionString (indenter.Indent ()) ex
     ]
-    |> String.concat Environment.NewLine
+    |> linesToString
     
 let getSetupTeardownFailureMessage name (assembly: Assembly) (indenter: IIndentTransformer) (failure: SetupTeardownFailure) =
     match failure with
@@ -47,7 +47,7 @@ let getSetupTeardownFailureMessage name (assembly: Assembly) (indenter: IIndentT
             indenter.Indent().Transform $"General Failure:"
             indenter.Indent().Indent().Transform message
         ]
-    |> String.concat Environment.NewLine
+    |> linesToString
     |> trimEnd
     
 let rec private getTestExpectationMessage (indenter: IIndentTransformer) (codeLocation: CodeLocation) (failure: TestExpectationFailure) =
@@ -69,7 +69,7 @@ let rec private getTestExpectationMessage (indenter: IIndentTransformer) (codeLo
             indenter.Transform "Failure Comment:"
             indenter.Indent().Transform message
         ]
-    |> String.concat Environment.NewLine
+    |> linesToString
 
 let private getTestFailureMessage assembly (indenter: IIndentTransformer) (failure: TestFailure) =
     
@@ -129,7 +129,7 @@ let private getTestFailureMessage assembly (indenter: IIndentTransformer) (failu
                 ]
                 |> List.concat
         message                
-        |> String.concat Environment.NewLine
+        |> linesToString
         
     getTestFailureMessage indenter failure
 
@@ -153,7 +153,7 @@ let getGeneralTestingFailureMessage (indenter: IIndentTransformer) (testResult: 
         [
             getExceptionDetail indenter "General Failure" ex
         ]
-    |> String.concat Environment.NewLine
+    |> linesToString
     
 let getExecutionResultMessage assembly (indenter: IIndentTransformer) = function
     | SetupExecutionFailure failure ->
@@ -188,7 +188,7 @@ let detailedTestItemTransformer (timingTransformer: TestTiming option -> TimingH
         indenter.Transform $"(%s{path})"
         transformedResult
     ]
-    |> String.concat Environment.NewLine
+    |> linesToString
     
 let defaultDetailedTestExecutionResultTransformer (indenter: IIndentTransformer) (testInfo: ITestInfo) (timing: TestTiming option) (result: TestExecutionResult) =
     let assembly = Assembly.GetCallingAssembly ()

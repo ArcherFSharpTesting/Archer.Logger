@@ -1,3 +1,0 @@
-﻿TestExecutionResult Detail Transformer Should.Transform a detailed setup canceled failure @ 44
-(.\Tests\TestExecutionResult Detail Transformer Should.fs)
-		SetupExecutionFailure: (Canceled)

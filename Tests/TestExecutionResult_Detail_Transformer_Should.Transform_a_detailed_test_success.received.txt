@@ -1,3 +1,0 @@
-﻿TestExecutionResult Detail Transformer Should.Transform a detailed test success @ 151
-(.\Tests\TestExecutionResult Detail Transformer Should.fs)
-		Test Result: Success

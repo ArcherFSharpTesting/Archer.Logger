@@ -1,7 +1,0 @@
-﻿TestExecutionResult Detail Transformer Should.Transform a detailed test validation failure with failure comment with no message @ 118
-(.\Tests\TestExecutionResult Detail Transformer Should.fs)
-		Validation Failure
-			Expected: "The World Is Great"
-			Actual:   "The world is greater"
-		Failure Comment:
-			Things are not great

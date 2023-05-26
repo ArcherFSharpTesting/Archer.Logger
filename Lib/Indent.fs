@@ -2,6 +2,7 @@
 module Archer.Logger.Indent
 
 open System
+open Archer.Logger.StringHelpers
 
 let private indenter (indent: string) indentCount (value: string) =
     if 0 < indentCount
@@ -15,7 +16,8 @@ let private indenter (indent: string) indentCount (value: string) =
                 
             $"%s{tabs}%s{line}"
         )
-        |> String.concat Environment.NewLine
+        |> Array.toList
+        |> linesToString
         
     else
         value

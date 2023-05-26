@@ -1,109 +1,109 @@
 ﻿
 My First
-	Test 0 @ 36
+	Test 0 @ 53
 	(.\Tests\TestFailContainer Transformer Should.fs)
 		SetupExecutionFailure: (Canceled)
-	Test 1 @ 36
+	Test 1 @ 53
 	(.\Tests\TestFailContainer Transformer Should.fs)
 		SetupExecutionFailure
 			System.Exception: Setup went boom
-	Test 2 @ 36
+	Test 2 @ 53
 	(.\Tests\TestFailContainer Transformer Should.fs)
-		SetupExecutionFailure @ ".\Tests\TestFailContainer Transformer Should.fs@43"
+		SetupExecutionFailure @ ".\Tests\TestFailContainer Transformer Should.fs@37"
 			General Failure:
 				Setup generally did not work
-	Test 3 @ 36
+	Test 3 @ 53
 	(.\Tests\TestFailContainer Transformer Should.fs)
 		Test Failure
 			System.ArgumentException: This test won the argument
-	Test 4 @ 36
+	Test 4 @ 53
 	(.\Tests\TestFailContainer Transformer Should.fs)
-		Test Failure: (Ignored) @46
-	Test 5 @ 36
+		Test Failure: (Ignored) @40
+	Test 5 @ 53
 	(.\Tests\TestFailContainer Transformer Should.fs)
 		Validation Failure
 			Expected: "good things"
 			Actual:   666
-	Test 6 @ 36
+	Test 6 @ 53
 	(.\Tests\TestFailContainer Transformer Should.fs)
 		Expectation Failure (Other)
 			Generally tests should work
 			but this one did not
-	Test 7 @ 36
+	Test 7 @ 53
 	(.\Tests\TestFailContainer Transformer Should.fs)
 		TeardownExecutionFailure: (Canceled)
-	Test 8 @ 36
+	Test 8 @ 53
 	(.\Tests\TestFailContainer Transformer Should.fs)
 		TeardownExecutionFailure
 			System.OutOfMemoryException: I cannot remember what I was doing
-	Test 9 @ 36
+	Test 9 @ 53
 	(.\Tests\TestFailContainer Transformer Should.fs)
-		TeardownExecutionFailure @ ".\Tests\TestFailContainer Transformer Should.fs@52"
+		TeardownExecutionFailure @ ".\Tests\TestFailContainer Transformer Should.fs@46"
 			General Failure:
 				Nope!
-	Test 10 @ 36
+	Test 10 @ 53
 	(.\Tests\TestFailContainer Transformer Should.fs)
 		General Failure: (Canceled)
-	Test 11 @ 36
+	Test 11 @ 53
 	(.\Tests\TestFailContainer Transformer Should.fs)
 		General Failure
 			System.IndexOutOfRangeException: Don't point that thing at me
-	Test 12 @ 36
+	Test 12 @ 53
 	(.\Tests\TestFailContainer Transformer Should.fs)
 		General Failure:
 			In general nothing will work\Not by the hair on my
 			chinny chin chin
 
 	Failing containers
-		Test 100 @ 36
+		Test 100 @ 53
 		(.\Tests\TestFailContainer Transformer Should.fs)
 			SetupExecutionFailure: (Canceled)
-		Test 101 @ 36
+		Test 101 @ 53
 		(.\Tests\TestFailContainer Transformer Should.fs)
 			SetupExecutionFailure
 				System.Exception: Setup went boom
-		Test 102 @ 36
+		Test 102 @ 53
 		(.\Tests\TestFailContainer Transformer Should.fs)
-			SetupExecutionFailure @ ".\Tests\TestFailContainer Transformer Should.fs@43"
+			SetupExecutionFailure @ ".\Tests\TestFailContainer Transformer Should.fs@37"
 				General Failure:
 					Setup generally did not work
-		Test 103 @ 36
+		Test 103 @ 53
 		(.\Tests\TestFailContainer Transformer Should.fs)
 			Test Failure
 				System.ArgumentException: This test won the argument
-		Test 104 @ 36
+		Test 104 @ 53
 		(.\Tests\TestFailContainer Transformer Should.fs)
-			Test Failure: (Ignored) @46
-		Test 105 @ 36
+			Test Failure: (Ignored) @40
+		Test 105 @ 53
 		(.\Tests\TestFailContainer Transformer Should.fs)
 			Validation Failure
 				Expected: "good things"
 				Actual:   666
-		Test 106 @ 36
+		Test 106 @ 53
 		(.\Tests\TestFailContainer Transformer Should.fs)
 			Expectation Failure (Other)
 				Generally tests should work
 				but this one did not
-		Test 107 @ 36
+		Test 107 @ 53
 		(.\Tests\TestFailContainer Transformer Should.fs)
 			TeardownExecutionFailure: (Canceled)
-		Test 108 @ 36
+		Test 108 @ 53
 		(.\Tests\TestFailContainer Transformer Should.fs)
 			TeardownExecutionFailure
 				System.OutOfMemoryException: I cannot remember what I was doing
-		Test 109 @ 36
+		Test 109 @ 53
 		(.\Tests\TestFailContainer Transformer Should.fs)
-			TeardownExecutionFailure @ ".\Tests\TestFailContainer Transformer Should.fs@52"
+			TeardownExecutionFailure @ ".\Tests\TestFailContainer Transformer Should.fs@46"
 				General Failure:
 					Nope!
-		Test 110 @ 36
+		Test 110 @ 53
 		(.\Tests\TestFailContainer Transformer Should.fs)
 			General Failure: (Canceled)
-		Test 111 @ 36
+		Test 111 @ 53
 		(.\Tests\TestFailContainer Transformer Should.fs)
 			General Failure
 				System.IndexOutOfRangeException: Don't point that thing at me
-		Test 112 @ 36
+		Test 112 @ 53
 		(.\Tests\TestFailContainer Transformer Should.fs)
 			General Failure:
 				In general nothing will work\Not by the hair on my

@@ -22,7 +22,6 @@ let private feature =
             Category "Transformers"
             Category "Approvals"
             Category "TestExecutionResult"
-            Only
         ],
         Setup (fun reporter ->
             let indenter = IndentTransformer ()
@@ -30,13 +29,8 @@ let private feature =
             let fbTest = TestFailureBuilder TestRunFailureType
             let fbTear = SetupTeardownResultFailureBuilder TeardownFailureType
             let fbGen = GeneralFailureBuilder GeneralFailureType
-            
-            let getTestI cnt (path: string) (name: string) (failure: TestFailureType) =
-                let f = Arrow.NewFeature (path, name)
-                let t = f.Ignore ($"Test %d{cnt}", TestBody "Ignore")
-                failure, t
                 
-            let getTests n path name =
+            let buildTestFailures n path name =
                 [
                     (fbSetup.CancelFailure ())
                     (fbSetup.ExceptionFailure (Exception "Setup went boom"))
@@ -56,17 +50,18 @@ let private feature =
                     (fbGen.GeneralFailure "In general nothing will work\Not by the hair on my\nchinny chin chin")
                     
                 ]
-                |> List.mapi (fun i -> getTestI (n + i) path name)
+                |> List.mapi (fun i value -> value, FakeTestBuilder.BuildTest (n + i) path name)
                 
             let failContainers =
                 [
                     FailContainer ("My First", [
-                        FailedTests (getTests 0 "" "My First")
+                        EmptyFailures
+                        FailedTests (buildTestFailures 0 "" "My First")
                         FailContainer ("Failing containers", [
-                            FailedTests (getTests 100 "My First" "Failing containers")
+                            FailedTests (buildTestFailures 100 "My First" "Failing containers")
                         ])
                     ])
-                    FailContainer ("Your First Container", [FailedTests (getTests 33 "" "Your First Container")])
+                    FailContainer ("Your First Container", [FailedTests (buildTestFailures 33 "" "Your First Container")])
                 ]
                 
             Ok (reporter, indenter, failContainers)

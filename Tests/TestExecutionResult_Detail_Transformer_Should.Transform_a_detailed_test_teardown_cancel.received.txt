@@ -1,3 +1,0 @@
-﻿TestExecutionResult Detail Transformer Should.Transform a detailed test teardown cancel @ 162
-(.\Tests\TestExecutionResult Detail Transformer Should.fs)
-		TeardownExecutionFailure: (Canceled)
