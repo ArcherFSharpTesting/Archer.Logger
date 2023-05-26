@@ -30,6 +30,7 @@ let private feature =
                 SuccessContainer (
                     "My test Container",
                     [
+                        EmptySuccesses
                         SucceededTests (buildSuccesses 30 "" "My test Container")
                         SuccessContainer (
                             "is awesome",

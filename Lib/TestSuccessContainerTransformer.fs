@@ -1,5 +1,6 @@
 ﻿module Archer.Logger.TestSuccessContainerTransformer
 
+open System
 open System.Reflection
 open Archer.CoreTypes.InternalTypes.RunnerTypes
 open Archer.Logger.Detail
@@ -28,6 +29,7 @@ let defaultTestSuccessContainerTransformer (indenter: IIndentTransformer) (succe
             let details =
                 testSuccessContainers
                 |> List.map (defaultTestSuccessContainerTransformer (indenter.Indent ()) >> appendNewLine)
+                |> List.filter (String.IsNullOrWhiteSpace >> not)
                 |> linesToString
                 
             [
