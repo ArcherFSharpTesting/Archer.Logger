@@ -1,4 +1,3 @@
-
 (section-meta
 	(title Archer.Logger: Test Output Logger for F#)
 	(include
@@ -7,6 +6,7 @@
 		(Helpers ./string-helpers.md)
 		(Helpers ./summaries.md)
 		(Helpers ./location-helpers.md)
+		(Transformers ./test-fail-container-transformer.md)
 	)
 )
 (content

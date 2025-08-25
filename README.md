@@ -11,6 +11,7 @@
 3. Helpers: [Archer.Logger String Helpers](#archerlogger-string-helpers)
 4. Helpers: [Archer.Logger Summaries](#archerlogger-summaries)
 5. Helpers: [Archer.Logger Location Helpers](#archerlogger-location-helpers)
+6. Transformers: [Archer.Logger Test Fail Container Transformer](#archerlogger-test-fail-container-transformer)
 
 ## Archer.Logger Overview ##
 
@@ -195,6 +196,46 @@ This document describes the location helper functions in Archer.Logger. These he
 **getRelativeFilePath**
 - Returns the relative file path (including file name) for a test's location.
 - Signature: `Assembly -> ITestLocationInfo -> string`
+
+## Archer.Logger Test Fail Container Transformer ##
+
+This document describes the Test Fail Container Transformer in Archer.Logger. This module provides functions to transform and format test failure containers for reporting and output.
+
+### getWrappedTestFailureMessage ###
+
+**getWrappedTestFailureMessage**
+- Wraps a test failure in a formatted message using the provided indenter and assembly.
+- Signature: `Assembly -> IIndentTransformer -> TestFailure -> string`
+
+### getIgnoreAssemblyGeneralTestingFailureMessage ###
+
+**getIgnoreAssemblyGeneralTestingFailureMessage**
+- Formats a general testing failure message for ignored assemblies.
+- Signature: `Assembly -> IIndentTransformer -> GeneralTestingFailure -> string`
+
+### transformTestFailureType ###
+
+**transformTestFailureType**
+- Transforms a test failure type and test into a detailed string using the appropriate transformer for each failure type.
+- Signature: `IIndentTransformer -> (TestFailureType * ITest) -> string`
+
+### testFailContainerTransformer ###
+
+**testFailContainerTransformer**
+- Recursively transforms a `TestFailContainer` into a formatted string, handling nested containers and failures.
+- Signature: `(IIndentTransformer -> (TestFailureType * ITest) -> string) -> IIndentTransformer -> TestFailContainer -> string`
+
+### defaultTestFailContainerTransformer ###
+
+**defaultTestFailContainerTransformer**
+- Default transformer for a single `TestFailContainer` using the standard failure type transformer.
+- Signature: `IIndentTransformer -> TestFailContainer -> string`
+
+### defaultTestFailContainerAllTransformer ###
+
+**defaultTestFailContainerAllTransformer**
+- Transforms a list of `TestFailContainer` values into a single formatted string.
+- Signature: `IIndentTransformer -> TestFailContainer list -> string`
 
 <!-- markdownlint-restore -->
 <!-- prettier-ignore-end -->
