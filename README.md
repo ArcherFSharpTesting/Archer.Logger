@@ -13,6 +13,7 @@
 5. Helpers: [Archer.Logger Location Helpers](#archerlogger-location-helpers)
 6. Transformers: [Archer.Logger Test Fail Container Transformer](#archerlogger-test-fail-container-transformer)
 7. Transformers: [Archer.Logger Test Ignore Container Transformer](#archerlogger-test-ignore-container-transformer)
+8. Transformers: [Archer.Logger Test Success Container Transformer](#archerlogger-test-success-container-transformer)
 
 ## Archer.Logger Overview ##
 
@@ -271,6 +272,40 @@ This document describes the Test Ignore Container Transformer in Archer.Logger. 
 **defaultTestIgnoreContainerAllTransformer**
 - Transforms a list of `TestIgnoreContainer` values into a single formatted string.
 - Signature: `IIndentTransformer -> TestIgnoreContainer list -> string`
+
+## Archer.Logger Test Success Container Transformer ##
+
+This document describes the Test Success Container Transformer in Archer.Logger. This module provides functions to transform and format test success containers for reporting and output.
+
+### getWrappedTestSuccessMessage ###
+
+**getWrappedTestSuccessMessage**
+- Wraps a test success in a formatted message using the provided indenter and assembly.
+- Signature: `Assembly -> IIndentTransformer -> TestSuccess -> string`
+
+### transformTestSuccessType ###
+
+**transformTestSuccessType**
+- Transforms a test success type and test into a detailed string using the appropriate transformer for each success type.
+- Signature: `IIndentTransformer -> (TestSuccessType * ITest) -> string`
+
+### testSuccessContainerTransformer ###
+
+**testSuccessContainerTransformer**
+- Recursively transforms a `TestSuccessContainer` into a formatted string, handling nested containers and successes.
+- Signature: `(IIndentTransformer -> (TestSuccessType * ITest) -> string) -> IIndentTransformer -> TestSuccessContainer -> string`
+
+### defaultTestSuccessContainerTransformer ###
+
+**defaultTestSuccessContainerTransformer**
+- Default transformer for a single `TestSuccessContainer` using the standard success type transformer.
+- Signature: `IIndentTransformer -> TestSuccessContainer -> string`
+
+### defaultTestSuccessContainerAllTransformer ###
+
+**defaultTestSuccessContainerAllTransformer**
+- Transforms a list of `TestSuccessContainer` values into a single formatted string.
+- Signature: `IIndentTransformer -> TestSuccessContainer list -> string`
 
 <!-- markdownlint-restore -->
 <!-- prettier-ignore-end -->
