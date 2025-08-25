@@ -12,6 +12,7 @@
 4. Helpers: [Archer.Logger Summaries](#archerlogger-summaries)
 5. Helpers: [Archer.Logger Location Helpers](#archerlogger-location-helpers)
 6. Transformers: [Archer.Logger Test Fail Container Transformer](#archerlogger-test-fail-container-transformer)
+7. Transformers: [Archer.Logger Test Ignore Container Transformer](#archerlogger-test-ignore-container-transformer)
 
 ## Archer.Logger Overview ##
 
@@ -236,6 +237,40 @@ This document describes the Test Fail Container Transformer in Archer.Logger. Th
 **defaultTestFailContainerAllTransformer**
 - Transforms a list of `TestFailContainer` values into a single formatted string.
 - Signature: `IIndentTransformer -> TestFailContainer list -> string`
+
+## Archer.Logger Test Ignore Container Transformer ##
+
+This document describes the Test Ignore Container Transformer in Archer.Logger. This module provides functions to transform and format test ignore containers for reporting and output.
+
+### getWrappedTestIgnoreMessage ###
+
+**getWrappedTestIgnoreMessage**
+- Wraps a test ignore in a formatted message using the provided indenter and assembly.
+- Signature: `Assembly -> IIndentTransformer -> TestIgnore -> string`
+
+### transformTestIgnoreType ###
+
+**transformTestIgnoreType**
+- Transforms a test ignore type and test into a detailed string using the appropriate transformer for each ignore type.
+- Signature: `IIndentTransformer -> (TestIgnoreType * ITest) -> string`
+
+### testIgnoreContainerTransformer ###
+
+**testIgnoreContainerTransformer**
+- Recursively transforms a `TestIgnoreContainer` into a formatted string, handling nested containers and ignores.
+- Signature: `(IIndentTransformer -> (TestIgnoreType * ITest) -> string) -> IIndentTransformer -> TestIgnoreContainer -> string`
+
+### defaultTestIgnoreContainerTransformer ###
+
+**defaultTestIgnoreContainerTransformer**
+- Default transformer for a single `TestIgnoreContainer` using the standard ignore type transformer.
+- Signature: `IIndentTransformer -> TestIgnoreContainer -> string`
+
+### defaultTestIgnoreContainerAllTransformer ###
+
+**defaultTestIgnoreContainerAllTransformer**
+- Transforms a list of `TestIgnoreContainer` values into a single formatted string.
+- Signature: `IIndentTransformer -> TestIgnoreContainer list -> string`
 
 <!-- markdownlint-restore -->
 <!-- prettier-ignore-end -->

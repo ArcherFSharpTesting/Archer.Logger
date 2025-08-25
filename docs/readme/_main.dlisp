@@ -7,6 +7,7 @@
 		(Helpers ./summaries.md)
 		(Helpers ./location-helpers.md)
 		(Transformers ./test-fail-container-transformer.md)
+		(Transformers ./test-ignore-container-transformer.md)
 	)
 )
 (content
