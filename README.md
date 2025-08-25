@@ -8,8 +8,8 @@
 
 1. Overview: [Archer.Logger Overview](#archerlogger-overview)
 2. Types: [Archer.Logger Types](#archerlogger-types)
-3. StringHelpers: [Archer.Logger String Helpers](#archerlogger-string-helpers)
-4. Summaries: [Archer.Logger Summaries](#archerlogger-summaries)
+3. Helpers: [Archer.Logger String Helpers](#archerlogger-string-helpers)
+4. Helpers: [Archer.Logger Summaries](#archerlogger-summaries)
 
 ## Archer.Logger Overview ##
 
