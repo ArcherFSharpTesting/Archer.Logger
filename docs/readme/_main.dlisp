@@ -4,4 +4,6 @@
 			(Overview ./overview.md)
 		)
 )
-(content)
+(content
+	(toc numbered-labeled)
+)
