@@ -1,11 +1,13 @@
+
 (section-meta
 	(title Archer.Logger: Test Output Logger for F#)
-		(include
-			(Overview ./overview.md)
-			(Types ./types.md)
-			(Helpers ./string-helpers.md)
-			(Helpers ./summaries.md)
-		)
+	(include
+		(Overview ./overview.md)
+		(Types ./types.md)
+		(Helpers ./string-helpers.md)
+		(Helpers ./summaries.md)
+		(Helpers ./location-helpers.md)
+	)
 )
 (content
 	(toc numbered-labeled)

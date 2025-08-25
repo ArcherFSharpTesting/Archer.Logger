@@ -10,6 +10,7 @@
 2. Types: [Archer.Logger Types](#archerlogger-types)
 3. Helpers: [Archer.Logger String Helpers](#archerlogger-string-helpers)
 4. Helpers: [Archer.Logger Summaries](#archerlogger-summaries)
+5. Helpers: [Archer.Logger Location Helpers](#archerlogger-location-helpers)
 
 ## Archer.Logger Overview ##
 
@@ -160,6 +161,40 @@ This document describes the summary transformation functions in Archer.Logger. T
 **defaultTestExecutionResultSummaryTransformer**
 - Default summary transformer for test execution results.
 - Signature: `TestExecutionResult -> ITestInfo -> string`
+
+## Archer.Logger Location Helpers ##
+
+This document describes the location helper functions in Archer.Logger. These helpers are used to determine solution roots and generate relative file paths for test reporting and logging.
+
+### getSolutionRoot ###
+
+**getSolutionRoot**
+- Finds the root directory of the solution by searching for a `.sln` file, starting from the given assembly's location and moving up the directory tree.
+- Signature: `Assembly -> string`
+
+### getRelativePath ###
+
+**getRelativePath**
+- Returns the relative path from the solution root to the given directory.
+- Signature: `Assembly -> DirectoryInfo -> string`
+
+### getRelativePathFromPath ###
+
+**getRelativePathFromPath**
+- Returns the relative path from the solution root to the directory specified by a path string.
+- Signature: `Assembly -> string -> string`
+
+### getRelativePathFromTest ###
+
+**getRelativePathFromTest**
+- Returns the relative path from the solution root to the file location of a test.
+- Signature: `Assembly -> ITestLocationInfo -> string`
+
+### getRelativeFilePath ###
+
+**getRelativeFilePath**
+- Returns the relative file path (including file name) for a test's location.
+- Signature: `Assembly -> ITestLocationInfo -> string`
 
 <!-- markdownlint-restore -->
 <!-- prettier-ignore-end -->
