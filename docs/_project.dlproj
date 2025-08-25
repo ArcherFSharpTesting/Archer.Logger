@@ -2,7 +2,7 @@
 	(document
 		(readme
 			(source ./readme/_main.dlisp)
-			(output ../../README.md)
+			(output ../README.md)
 		)
 	)
 )
