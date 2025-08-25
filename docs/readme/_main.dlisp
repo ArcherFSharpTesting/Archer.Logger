@@ -4,6 +4,7 @@
 			(Overview ./overview.md)
 			(Types ./types.md)
 			(StringHelpers ./string-helpers.md)
+			(Summaries ./summaries.md)
 		)
 )
 (content

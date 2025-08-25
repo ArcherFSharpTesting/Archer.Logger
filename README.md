@@ -9,6 +9,7 @@
 1. Overview: [Archer.Logger Overview](#archerlogger-overview)
 2. Types: [Archer.Logger Types](#archerlogger-types)
 3. StringHelpers: [Archer.Logger String Helpers](#archerlogger-string-helpers)
+4. Summaries: [Archer.Logger Summaries](#archerlogger-summaries)
 
 ## Archer.Logger Overview ##
 
@@ -107,6 +108,58 @@ This document describes the string helper functions provided in the Archer.Logge
 
 **linesToString**
 - Joins a list of strings into a single string separated by newlines, and trims any trailing whitespace.
+
+## Archer.Logger Summaries ##
+
+This document describes the summary transformation functions in Archer.Logger. These functions are responsible for generating concise, human-readable summaries of test results and execution outcomes.
+
+### resultMessageSummaryTransformer ###
+
+**resultMessageSummaryTransformer**
+- Formats a summary string for a test result, including the container name, test name, result message, and line number.
+- Signature: `ITestInfo -> string -> string`
+
+### getTestResultMessage ###
+
+**getTestResultMessage**
+- Returns a string representing the outcome of a test result: "Ignored", "Failure", or "Success".
+- Signature: `TestResult -> string`
+
+### getGeneralExecutionFailureMessage ###
+
+**getGeneralExecutionFailureMessage**
+- Returns a string for general execution failures: "Canceled" or "General Failure".
+- Signature: `GeneralTestingFailure -> string`
+
+### getSetupTeardownFailureMessage ###
+
+**getSetupTeardownFailureMessage**
+- Returns a string for setup or teardown failures, using the provided name ("Setup" or "Teardown").
+- Signature: `string -> SetupTeardownFailure -> string`
+
+### getTestExecutionResultMessage ###
+
+**getTestExecutionResultMessage**
+- Returns a string describing the result of a test execution, handling general, setup, and teardown failures.
+- Signature: `TestExecutionResult -> string`
+
+### resultSummaryTransformer ###
+
+**resultSummaryTransformer**
+- Composes a summary string for a result using provided message and summary functions.
+- Signature: `('a -> string) -> (ITestInfo -> string -> string) -> 'a -> ITestInfo -> string`
+
+### defaultTestResultSummaryTransformer ###
+
+**defaultTestResultSummaryTransformer**
+- Default summary transformer for test results.
+- Signature: `TestResult -> ITestInfo -> string`
+
+### defaultTestExecutionResultSummaryTransformer ###
+
+**defaultTestExecutionResultSummaryTransformer**
+- Default summary transformer for test execution results.
+- Signature: `TestExecutionResult -> ITestInfo -> string`
 
 <!-- markdownlint-restore -->
 <!-- prettier-ignore-end -->
