@@ -8,6 +8,7 @@
 
 1. Overview: [Archer.Logger Overview](#archerlogger-overview)
 2. Types: [Archer.Logger Types](#archerlogger-types)
+3. StringHelpers: [Archer.Logger String Helpers](#archerlogger-string-helpers)
 
 ## Archer.Logger Overview ##
 
@@ -66,6 +67,46 @@ Interface for logging collections of test results.
 - `LogFailures: density: InformationDensity -> failures: TestFailContainer list -> unit`
 - `LogSuccesses: density: InformationDensity -> successes: TestSuccessContainer list -> unit`
 - `LogIgnored: density: InformationDensity -> ignored: TestIgnoreContainer list -> unit`
+
+## Archer.Logger String Helpers ##
+
+This document describes the string helper functions provided in the Archer.Logger library. These helpers are used for common string manipulations and formatting tasks within the logger.
+
+### trim ###
+
+**trim**
+- Removes whitespace from both ends of a string. Returns the original value if it is null.
+
+### trimEnd ###
+
+**trimEnd**
+- Removes whitespace from the end of a string. Returns the original value if it is null.
+
+### replace ###
+
+**replace**
+- Replaces all occurrences of a substring with another substring in the given string.
+- Parameters: `toBeReplaced`, `toReplace`, `inValue`
+
+### appendNewLine ###
+
+**appendNewLine**
+- Appends a newline character to the end of the given string.
+
+### appendNewLineIfNotEmpty ###
+
+**appendNewLineIfNotEmpty**
+- Appends a newline character to the string only if it is not empty or null.
+
+### removeLastChar ###
+
+**removeLastChar**
+- Removes the last character from the string.
+
+### linesToString ###
+
+**linesToString**
+- Joins a list of strings into a single string separated by newlines, and trims any trailing whitespace.
 
 <!-- markdownlint-restore -->
 <!-- prettier-ignore-end -->
