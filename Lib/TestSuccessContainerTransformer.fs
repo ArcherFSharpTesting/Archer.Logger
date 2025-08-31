@@ -1,5 +1,5 @@
 ﻿/// <summary>
-/// Provides functions for transforming test success containers into formatted strings for logging.
+/// Provides functions for transforming test success containers into formatted strings for reporting.
 /// </summary>
 module Archer.Reporting.TestSuccessContainerTransformer
 
@@ -12,14 +12,14 @@ open Archer.Reporting.StringHelpers
 open Archer.Reporting.LocationHelpers
 
 /// <summary>
-/// Transforms a test success container into a formatted string for logging, using the provided title and path formatters and assembly context.
+/// Transforms a test success container into a formatted string for reporting, using the provided title and path formatters and assembly context.
 /// </summary>
 /// <param name="titleFormatter">A function to format the test title.</param>
 /// <param name="pathFormatter">A function to format the test path.</param>
 /// <param name="assembly">The assembly context.</param>
 /// <param name="indenter">The indenter used for formatting.</param>
 /// <param name="successContainer">The test success container to transform.</param>
-/// <returns>A formatted string representing all successes in the container.</returns>
+/// <returns>A formatted string representing all successes in the container for reporting.</returns>
 let testAssemblySuccessContainerTransformer (titleFormatter: string -> ITestInfo -> string) (pathFormatter: Assembly -> ITestLocationInfo -> string) (assembly: Assembly) (indenter: IIndentTransformer) (successContainer: TestSuccessContainer) =
     let rec testSuccessContainerTransformer (indenter: IIndentTransformer) (successContainer: TestSuccessContainer) =
         match successContainer with
@@ -54,43 +54,43 @@ let testAssemblySuccessContainerTransformer (titleFormatter: string -> ITestInfo
     |> trimEnd
 
 /// <summary>
-/// Transforms a test success container into a formatted string for logging, using the calling assembly.
+/// Transforms a test success container into a formatted string for reporting, using the calling assembly.
 /// </summary>
 /// <param name="titleFormatter">A function to format the test title.</param>
 /// <param name="pathFormatter">A function to format the test path.</param>
 /// <param name="indenter">The indenter used for formatting.</param>
 /// <param name="successContainer">The test success container to transform.</param>
-/// <returns>A formatted string representing all successes in the container.</returns>
+/// <returns>A formatted string representing all successes in the container for reporting.</returns>
 let singleTestAssemblySuccessContainerTransformer (titleFormatter: string -> ITestInfo -> string) (pathFormatter: Assembly -> ITestLocationInfo -> string) (indenter: IIndentTransformer) (successContainer: TestSuccessContainer) =
     let assembly = Assembly.GetCallingAssembly ()
 
     testAssemblySuccessContainerTransformer titleFormatter pathFormatter assembly indenter successContainer
 
 /// <summary>
-/// The default transformer for a single test success container using the calling assembly.
+/// The default transformer for a single test success container using the calling assembly for reporting.
 /// </summary>
 /// <param name="indenter">The indenter used for formatting.</param>
 /// <param name="successContainer">The test success container to transform.</param>
-/// <returns>A formatted string representing all successes in the container.</returns>
+/// <returns>A formatted string representing all successes in the container for reporting.</returns>
 let defaultSingleTestSuccessContainerTransformer (indenter: IIndentTransformer) (successContainer: TestSuccessContainer) =
     singleTestAssemblySuccessContainerTransformer shortTestTitleFormatter getRelativeFilePath indenter successContainer
 
 /// <summary>
-/// The default transformer for a single test success container with explicit assembly context.
+/// The default transformer for a single test success container with explicit assembly context for reporting.
 /// </summary>
 /// <param name="assembly">The assembly context.</param>
 /// <param name="indenter">The indenter used for formatting.</param>
 /// <param name="successContainer">The test success container to transform.</param>
-/// <returns>A formatted string representing all successes in the container.</returns>
+/// <returns>A formatted string representing all successes in the container for reporting.</returns>
 let defaultTestSuccessContainer (assembly: Assembly) (indenter: IIndentTransformer) (successContainer: TestSuccessContainer) =
     testAssemblySuccessContainerTransformer shortTestTitleFormatter getRelativeFilePath assembly indenter successContainer
 
 /// <summary>
-/// The default transformer for a list of test success containers using the calling assembly.
+/// The default transformer for a list of test success containers using the calling assembly for reporting.
 /// </summary>
 /// <param name="indenter">The indenter used for formatting.</param>
 /// <param name="successContainers">The list of test success containers to transform.</param>
-/// <returns>A formatted string representing all successes in the list of containers.</returns>
+/// <returns>A formatted string representing all successes in the list of containers for reporting.</returns>
 let defaultAllTestSuccessContainerTransformer (indenter: IIndentTransformer) (successContainers: TestSuccessContainer list) =
     successContainers
     |> List.map (defaultSingleTestSuccessContainerTransformer indenter >> appendNewLine)

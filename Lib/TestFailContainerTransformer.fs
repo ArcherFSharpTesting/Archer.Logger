@@ -1,5 +1,5 @@
 ﻿/// <summary>
-/// Provides functions for transforming test failure containers into formatted strings for logging.
+/// Provides functions for transforming test failure containers into formatted strings for reporting.
 /// </summary>
 module Archer.Reporting.TestFailContainerTransformer
 
@@ -13,7 +13,7 @@ open Archer.Reporting.LocationHelpers
 open Archer.Reporting.StringHelpers
 
 /// <summary>
-/// Gets a formatted message for a wrapped test failure.
+/// Gets a formatted message for a wrapped test failure for reporting.
 /// </summary>
 /// <param name="assembly">The assembly context.</param>
 /// <param name="indenter">The indenter used for formatting.</param>
@@ -23,7 +23,7 @@ let getWrappedTestFailureMessage assembly (indenter: IIndentTransformer) (failur
     getTestResultMessage assembly indenter (TestFailure failure)
 
 /// <summary>
-/// Gets a formatted message for a general testing failure that should be ignored for assembly context.
+/// Gets a formatted message for a general testing failure that should be ignored for assembly context for reporting.
 /// </summary>
 /// <param name="_">The assembly context (ignored).</param>
 /// <param name="indenter">The indenter used for formatting.</param>
@@ -33,11 +33,11 @@ let getIgnoreAssemblyGeneralTestingFailureMessage (_: Assembly) (indenter: IInde
     getGeneralTestingFailureMessage indenter failure
 
 /// <summary>
-/// Transforms a test failure type and test into a formatted string for logging.
+/// Transforms a test failure type and test into a formatted string for reporting.
 /// </summary>
 /// <param name="indenter">The indenter used for formatting.</param>
 /// <param name="failure">A tuple of the test failure type and the test.</param>
-/// <returns>A formatted string representing the test failure.</returns>
+/// <returns>A formatted string representing the test failure for reporting.</returns>
 let transformTestFailureType (indenter: IIndentTransformer) (failure: TestFailureType, test: ITest) =
     let assembly = Assembly.GetAssembly typeof<IndentTransformer>
 
@@ -55,12 +55,12 @@ let transformTestFailureType (indenter: IIndentTransformer) (failure: TestFailur
         baseTransformer getIgnoreAssemblyGeneralTestingFailureMessage failure
 
 /// <summary>
-/// Recursively transforms a test failure container into a formatted string for logging.
+/// Recursively transforms a test failure container into a formatted string for reporting.
 /// </summary>
 /// <param name="testFailureTypeTransformer">A function to transform individual test failure types.</param>
 /// <param name="indenter">The indenter used for formatting.</param>
 /// <param name="failures">The test failure container to transform.</param>
-/// <returns>A formatted string representing all failures in the container.</returns>
+/// <returns>A formatted string representing all failures in the container for reporting.</returns>
 let testFailContainerTransformer (testFailureTypeTransformer: IIndentTransformer -> TestFailureType * ITest -> string) (indenter: IIndentTransformer) (failures: TestFailContainer) =
     let rec testFailContainerTransformer acc (indenter: IIndentTransformer) (failures: TestFailContainer) =
         match failures with
@@ -100,20 +100,20 @@ let testFailContainerTransformer (testFailureTypeTransformer: IIndentTransformer
     testFailContainerTransformer "" indenter failures
 
 /// <summary>
-/// The default transformer for a single test failure container.
+/// The default transformer for a single test failure container for reporting.
 /// </summary>
 /// <param name="indenter">The indenter used for formatting the output.</param>
 /// <param name="failures">The test failure container to transform.</param>
-/// <returns>A formatted string representing all failures in the container.</returns>
+/// <returns>A formatted string representing all failures in the container for reporting.</returns>
 let defaultTestFailContainerTransformer (indenter: IIndentTransformer) (failures: TestFailContainer) =
     testFailContainerTransformer transformTestFailureType indenter failures
 
 /// <summary>
-/// The default transformer for a list of test failure containers.
+/// The default transformer for a list of test failure containers for reporting.
 /// </summary>
 /// <param name="indenter">The indenter used for formatting the output.</param>
 /// <param name="failures">The list of test failure containers to transform.</param>
-/// <returns>A formatted string representing all failures in the list of containers.</returns>
+/// <returns>A formatted string representing all failures in the list of containers for reporting.</returns>
 let defaultTestFailContainerAllTransformer (indenter: IIndentTransformer) (failures: TestFailContainer list) =
     failures
     |> List.map (defaultTestFailContainerTransformer indenter)
