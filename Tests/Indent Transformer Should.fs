@@ -1,9 +1,9 @@
-﻿module Archer.Logger.Tests.``Indent Transformer Should``
+﻿module Archer.Reporting.Tests.``Indent Transformer Should``
 
 open System
 open Archer
-open Archer.Arrows
-open Archer.Logger
+open Archer.Core
+open Archer.Reporting
 
 let private feature =
     loggerTestBuilder

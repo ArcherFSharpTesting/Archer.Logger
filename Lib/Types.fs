@@ -1,9 +1,9 @@
 ﻿
 /// <summary>
-/// Contains core types for the Archer.Logger library, including logging density, scope, and logger interfaces.
+/// Contains core types for the Archer.Reporting library, including reporting density, scope, and reporter interfaces.
 /// </summary>
 [<AutoOpen>]
-module Archer.Logger.Types
+module Archer.Reporting.Types
 
 open Archer
 open Archer.Types.InternalTypes.RunnerTypes

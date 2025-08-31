@@ -1,15 +1,15 @@
-﻿module Archer.Logger.Tests.``TestExecutionResult Detail Transformer Should``
+﻿module Archer.Reporting.Tests.``TestExecutionResult Detail Transformer Should``
 
 open System
 open System.Reflection
 open Archer
-open Archer.Arrows
+open Archer.Core
 open Archer.ApprovalsSupport
-open Archer.Fletching.Types.Internal
-open Archer.Logger
-open Archer.Logger.Detail
-open Archer.Logger.LocationHelpers
-open Archer.Logger.StringHelpers
+open Archer.Validations.Types.Internal
+open Archer.Reporting
+open Archer.Reporting.Detail
+open Archer.Reporting.LocationHelpers
+open Archer.Reporting.StringHelpers
 
 let private feature =
     loggerTestBuilder

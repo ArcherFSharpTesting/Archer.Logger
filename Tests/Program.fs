@@ -1,9 +1,9 @@
-﻿open Archer.Bow
+﻿open Archer.Runner
 open Archer
-open Archer.CoreTypes.InternalTypes
-open Archer.CoreTypes.InternalTypes.RunnerTypes
-open Archer.Logger.Summaries
-open Archer.Logger.Tests
+open Archer.Types.InternalTypes
+open Archer.Types.InternalTypes.RunnerTypes
+open Archer.Reporting.Summaries
+open Archer.Reporting.Tests
 open MicroLang.Lang
 
 let runner = bow.Runner ()

@@ -1,15 +1,15 @@
 ﻿[<AutoOpen>]
-module Archer.Logger.Tests.Helpers
+module Archer.Reporting.Tests.Helpers
 
 open System.Runtime.CompilerServices
 open System.Runtime.InteropServices
-open Archer.Arrows
+open Archer.Core
 open Archer.ApprovalsSupport
 open ApprovalTests
-open Archer.CoreTypes.InternalTypes.RunnerTypes
+open Archer.Types.InternalTypes.RunnerTypes
 
 let loggerTestBuilder = Arrow.NewFeature (
-    "Archer.Logger.Tests",
+    "Archer.Reporting.Tests",
     "",
     
     Setup (fun _ ->

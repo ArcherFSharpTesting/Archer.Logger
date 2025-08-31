@@ -1,10 +1,10 @@
-﻿module Archer.Logger.Tests.``Test Execution Result Summary Transformer Should``
+﻿module Archer.Reporting.Tests.``Test Execution Result Summary Transformer Should``
 
 open Archer
-open Archer.Arrows
+open Archer.Core
 open Archer.ApprovalsSupport
-open Archer.Fletching.Types.Internal
-open Archer.Logger.Summaries
+open Archer.Validations.Types.Internal
+open Archer.Reporting.Summaries
 
 let private feature =
     loggerTestBuilder
