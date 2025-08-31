@@ -6,7 +6,7 @@ module Archer.Reporting.TestIgnoreContainerTransformer
 open System
 open System.Reflection
 open Archer
-open Archer.CoreTypes.InternalTypes.RunnerTypes
+open Archer.Types.InternalTypes.RunnerTypes
 open Archer.Reporting.Detail
 open Archer.Reporting.LocationHelpers
 open Archer.Reporting.StringHelpers

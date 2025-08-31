@@ -6,7 +6,7 @@
 module Archer.Logger.Types
 
 open Archer
-open Archer.CoreTypes.InternalTypes.RunnerTypes
+open Archer.Types.InternalTypes.RunnerTypes
 
 /// <summary>
 /// Represents the level of detail to include in log output.

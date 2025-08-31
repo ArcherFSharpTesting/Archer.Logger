@@ -7,7 +7,7 @@ open System
 open System.IO
 open System.Reflection
 open Archer
-open Archer.CoreTypes.InternalTypes
+open Archer.Types.InternalTypes
 open Archer.Reporting.StringHelpers
 open Archer.Reporting.LocationHelpers
 open Archer.Reporting.Indent
