@@ -20,7 +20,7 @@ type InformationDensity =
 /// <summary>
 /// Represents the scope or category of a report entry.
 /// </summary>
-type LogScope =
+type ReportScope =
     /// <summary>Indicates an error report entry.</summary>
     | ErrorScope
     /// <summary>Indicates a test failure report entry.</summary>
@@ -40,49 +40,49 @@ type ITestLogger =
     /// <param name="density">The level of detail for the report output.</param>
     /// <param name="scope">The category or scope of the report entry.</param>
     /// <param name="message">The message to report.</param>
-    abstract member Log: density: InformationDensity -> scope: LogScope -> string -> unit
+    abstract member Report: density: InformationDensity -> scope: ReportScope -> string -> unit
 
 /// <summary>
 /// Interface for reporting test results.
 /// </summary>
-type ITestResultLogger =
+type ITestResultReporter =
     /// <summary>
     /// Reports a test result with the specified information density.
     /// </summary>
     /// <param name="density">The level of detail for the report output.</param>
     /// <param name="result">The test result to report.</param>
-    abstract member LogTestResult: density: InformationDensity -> result: TestResult -> unit
+    abstract member ReportTestResult: density: InformationDensity -> result: TestResult -> unit
 
 /// <summary>
 /// Interface for reporting test execution results.
 /// </summary>
-type ITestExecutionResultLogger =
+type ITestExecutionResultReporter =
     /// <summary>
     /// Reports a test execution result with the specified information density.
     /// </summary>
     /// <param name="density">The level of detail for the report output.</param>
     /// <param name="result">The test execution result to report.</param>
-    abstract member LogExecutionResult: density: InformationDensity -> result: TestExecutionResult -> unit
+    abstract member ReportExecutionResult: density: InformationDensity -> result: TestExecutionResult -> unit
 
 /// <summary>
 /// Interface for reporting collections of test results, such as failures, successes, and ignored tests.
 /// </summary>
-type ITestContainerLogger =
+type ITestContainerReporter =
     /// <summary>
     /// Reports a list of test failures with the specified information density.
     /// </summary>
     /// <param name="density">The level of detail for the report output.</param>
     /// <param name="failures">The list of test failure containers to report.</param>
-    abstract member LogFailures: density: InformationDensity -> failures: TestFailContainer list -> unit
+    abstract member ReportFailures: density: InformationDensity -> failures: TestFailContainer list -> unit
     /// <summary>
     /// Reports a list of test successes with the specified information density.
     /// </summary>
     /// <param name="density">The level of detail for the report output.</param>
     /// <param name="successes">The list of test success containers to report.</param>
-    abstract member LogSuccesses: density: InformationDensity -> successes: TestSuccessContainer list -> unit
+    abstract member ReportSuccesses: density: InformationDensity -> successes: TestSuccessContainer list -> unit
     /// <summary>
     /// Reports a list of ignored tests with the specified information density.
     /// </summary>
     /// <param name="density">The level of detail for the report output.</param>
     /// <param name="ignored">The list of ignored test containers to report.</param>
-    abstract member LogIgnored: density: InformationDensity -> ignored: TestIgnoreContainer list -> unit
+    abstract member ReportIgnored: density: InformationDensity -> ignored: TestIgnoreContainer list -> unit
