@@ -1,15 +1,15 @@
 ﻿/// <summary>
 /// Provides functions for transforming test ignore containers into formatted strings for logging.
 /// </summary>
-module Archer.Logger.TestIgnoreContainerTransformer
+module Archer.Reporting.TestIgnoreContainerTransformer
 
 open System
 open System.Reflection
 open Archer
 open Archer.CoreTypes.InternalTypes.RunnerTypes
-open Archer.Logger.Detail
-open Archer.Logger.LocationHelpers
-open Archer.Logger.StringHelpers
+open Archer.Reporting.Detail
+open Archer.Reporting.LocationHelpers
+open Archer.Reporting.StringHelpers
 open Microsoft.FSharp.Core
 
 /// <summary>

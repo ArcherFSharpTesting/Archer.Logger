@@ -1,24 +1,21 @@
-﻿[<AutoOpen>]
-module Archer.Logger.Indent
+﻿ [<AutoOpen>]
+module Archer.Reporting.Indent
 
 open System
-open Archer.Logger.StringHelpers
+open Archer.Reporting.StringHelpers
 
 let private indenter (indent: string) indentCount (value: string) =
-    if 0 < indentCount
-    then
+    if 0 < indentCount then
         let lines = value.Split ([|Environment.NewLine; "\n"; "\r"|], StringSplitOptions.None)
         lines
         |> Array.map (fun line ->
             let tabs =
                 [for _ in 1..indentCount do yield indent]
                 |> String.concat ""
-                
             $"%s{tabs}%s{line}"
         )
         |> Array.toList
         |> linesToString
-        
     else
         value
         

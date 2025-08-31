@@ -1,7 +1,7 @@
 ﻿/// <summary>
 /// Provides functions for transforming test results and execution results into summary strings.
 /// </summary>
-module Archer.Logger.Summaries
+module Archer.Reporting.Summaries
 
 open Archer
 

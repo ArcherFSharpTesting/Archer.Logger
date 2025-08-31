@@ -1,15 +1,15 @@
 ﻿/// <summary>
 /// Provides functions for transforming test success containers into formatted strings for logging.
 /// </summary>
-module Archer.Logger.TestSuccessContainerTransformer
+module Archer.Reporting.TestSuccessContainerTransformer
 
 open System
 open System.Reflection
 open Archer
 open Archer.CoreTypes.InternalTypes.RunnerTypes
-open Archer.Logger.Detail
-open Archer.Logger.StringHelpers
-open Archer.Logger.LocationHelpers
+open Archer.Reporting.Detail
+open Archer.Reporting.StringHelpers
+open Archer.Reporting.LocationHelpers
 
 /// <summary>
 /// Transforms a test success container into a formatted string for logging, using the provided title and path formatters and assembly context.

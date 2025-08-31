@@ -1,7 +1,7 @@
 ﻿/// <summary>
 /// Provides helper functions for string manipulation and formatting.
 /// </summary>
-module Archer.Logger.StringHelpers
+module Archer.Reporting.StringHelpers
 
 open System
 

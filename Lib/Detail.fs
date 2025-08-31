@@ -1,15 +1,16 @@
 ﻿/// <summary>
 /// Provides detailed formatting and transformation functions for test results, failures, and execution details.
 /// </summary>
-module Archer.Logger.Detail
+module Archer.Reporting.Detail
 
 open System
 open System.IO
 open System.Reflection
 open Archer
 open Archer.CoreTypes.InternalTypes
-open Archer.Logger.StringHelpers
-open Archer.Logger.LocationHelpers
+open Archer.Reporting.StringHelpers
+open Archer.Reporting.LocationHelpers
+open Archer.Reporting.Indent
 
 /// <summary>
 /// Recursively formats an exception and its inner exceptions as a string with indentation.

@@ -1,4 +1,4 @@
-﻿module Archer.Logger.LocationHelpers
+﻿module Archer.Reporting.LocationHelpers
 
 open System.IO
 open System.Reflection

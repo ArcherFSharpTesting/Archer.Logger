@@ -1,16 +1,16 @@
 ﻿/// <summary>
 /// Provides functions for transforming test failure containers into formatted strings for logging.
 /// </summary>
-module Archer.Logger.TestFailContainerTransformer
+module Archer.Reporting.TestFailContainerTransformer
 
 open System
 open System.Reflection
 open Archer
 open Archer.CoreTypes.InternalTypes
 open Archer.CoreTypes.InternalTypes.RunnerTypes
-open Archer.Logger.Detail
-open Archer.Logger.LocationHelpers
-open Archer.Logger.StringHelpers
+open Archer.Reporting.Detail
+open Archer.Reporting.LocationHelpers
+open Archer.Reporting.StringHelpers
 
 /// <summary>
 /// Gets a formatted message for a wrapped test failure.
