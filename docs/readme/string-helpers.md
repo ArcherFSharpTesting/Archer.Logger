@@ -1,10 +1,10 @@
 <!-- (dl
 (section-meta
-    (title Archer.Logger String Helpers)
+    (title Archer.Reporting String Helpers)
 )
 ) -->
 
-This document describes the string helper functions provided in the Archer.Logger library. These helpers are used for common string manipulations and formatting tasks within the logger.
+This document describes the string helper functions provided in the Archer.Reporting library. These helpers are used for common string manipulations and formatting tasks within the reporter.
 
 <!-- (dl (# trim)) -->
 **trim**

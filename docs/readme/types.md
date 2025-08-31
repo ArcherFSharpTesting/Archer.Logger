@@ -1,10 +1,10 @@
 <!-- (dl
 (section-meta
-    (title Archer.Logger Types)
+    (title Archer.Reporting Types)
 )
 ) -->
 
-This page provides an overview of the core types and interfaces used by Archer.Logger for formatting and outputting test results. These types define the structure and contracts for logging, reporting, and handling test execution outcomes in the Archer F# test framework.
+This page provides an overview of the core types and interfaces used by Archer.Reporting for formatting and outputting test results. These types define the structure and contracts for reporting and handling test execution outcomes in the Archer F# test framework.
 
 <!-- (dl (# InformationDensity)) -->
 Represents the level of detail for logging information.

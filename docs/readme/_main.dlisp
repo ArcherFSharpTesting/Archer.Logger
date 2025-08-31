@@ -1,5 +1,5 @@
 (section-meta
-	(title Archer.Logger: Test Output Logger for F#)
+	(title Archer.Reporting: Test Output Reporter for F#)
 	(include
 		(Overview ./overview.md)
 		(Types ./types.md)

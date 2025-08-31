@@ -1,10 +1,10 @@
 <!-- (dl
 (section-meta
-    (title Archer.Logger Test Success Container Transformer)
+    (title Archer.Reporting Test Success Container Transformer)
 )
 ) -->
 
-This document describes the Test Success Container Transformer in Archer.Logger. This module provides functions to transform and format test success containers for reporting and output.
+This document describes the Test Success Container Transformer in Archer.Reporting. This module provides functions to transform and format test success containers for reporting and output.
 
 <!-- (dl (# getWrappedTestSuccessMessage)) -->
 **getWrappedTestSuccessMessage**

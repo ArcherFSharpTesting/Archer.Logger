@@ -1,10 +1,10 @@
 <!-- (dl
 (section-meta
-    (title Archer.Logger Test Ignore Container Transformer)
+    (title Archer.Reporting Test Ignore Container Transformer)
 )
 ) -->
 
-This document describes the Test Ignore Container Transformer in Archer.Logger. This module provides functions to transform and format test ignore containers for reporting and output.
+This document describes the Test Ignore Container Transformer in Archer.Reporting. This module provides functions to transform and format test ignore containers for reporting and output.
 
 <!-- (dl (# getWrappedTestIgnoreMessage)) -->
 **getWrappedTestIgnoreMessage**

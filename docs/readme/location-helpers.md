@@ -1,10 +1,10 @@
 <!-- (dl
 (section-meta
-    (title Archer.Logger Location Helpers)
+    (title Archer.Reporting Location Helpers)
 )
 ) -->
 
-This document describes the location helper functions in Archer.Logger. These helpers are used to determine solution roots and generate relative file paths for test reporting and logging.
+This document describes the location helper functions in Archer.Reporting. These helpers are used to determine solution roots and generate relative file paths for test reporting and output.
 
 <!-- (dl (# getSolutionRoot)) -->
 **getSolutionRoot**

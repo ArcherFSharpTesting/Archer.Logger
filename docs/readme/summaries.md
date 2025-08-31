@@ -1,10 +1,10 @@
 <!-- (dl
 (section-meta
-    (title Archer.Logger Summaries)
+    (title Archer.Reporting Summaries)
 )
 ) -->
 
-This document describes the summary transformation functions in Archer.Logger. These functions are responsible for generating concise, human-readable summaries of test results and execution outcomes.
+This document describes the summary transformation functions in Archer.Reporting. These functions are responsible for generating concise, human-readable summaries of test results and execution outcomes.
 
 <!-- (dl (# resultMessageSummaryTransformer)) -->
 **resultMessageSummaryTransformer**

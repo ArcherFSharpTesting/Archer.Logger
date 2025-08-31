@@ -4,20 +4,20 @@
 
 <!-- Compiled with doculisp https://www.npmjs.com/package/doculisp -->
 
-# Archer.Logger: Test Output Logger for F# #
+# Archer.Reporting: Test Output Reporter for F# #
 
-1. Overview: [Archer.Logger Overview](#archerlogger-overview)
-2. Types: [Archer.Logger Types](#archerlogger-types)
-3. Helpers: [Archer.Logger String Helpers](#archerlogger-string-helpers)
-4. Helpers: [Archer.Logger Summaries](#archerlogger-summaries)
-5. Helpers: [Archer.Logger Location Helpers](#archerlogger-location-helpers)
-6. Transformers: [Archer.Logger Test Fail Container Transformer](#archerlogger-test-fail-container-transformer)
-7. Transformers: [Archer.Logger Test Ignore Container Transformer](#archerlogger-test-ignore-container-transformer)
-8. Transformers: [Archer.Logger Test Success Container Transformer](#archerlogger-test-success-container-transformer)
+1. Overview: [Archer.Reporting Overview](#archerreporting-overview)
+2. Types: [Archer.Reporting Types](#archerreporting-types)
+3. Helpers: [Archer.Reporting String Helpers](#archerreporting-string-helpers)
+4. Helpers: [Archer.Reporting Summaries](#archerreporting-summaries)
+5. Helpers: [Archer.Reporting Location Helpers](#archerreporting-location-helpers)
+6. Transformers: [Archer.Reporting Test Fail Container Transformer](#archerreporting-test-fail-container-transformer)
+7. Transformers: [Archer.Reporting Test Ignore Container Transformer](#archerreporting-test-ignore-container-transformer)
+8. Transformers: [Archer.Reporting Test Success Container Transformer](#archerreporting-test-success-container-transformer)
 
-## Archer.Logger Overview ##
+## Archer.Reporting Overview ##
 
-Archer.Logger is a component of the Archer F# test framework responsible for formatting and outputting test results. It provides clear, structured, and customizable output for test execution, making it easier to interpret test results and debug issues.
+Archer.Reporting is a component of the Archer F# test framework responsible for formatting and outputting test results. It provides clear, structured, and customizable output for test execution, making it easier to interpret test results and debug issues.
 
 ### Features ###
 
@@ -31,11 +31,11 @@ Refer to the main README for setup and integration instructions.
 
 ---
 
-*This is an overview document for the Archer.Logger component. For more details, see the main documentation and source code.*
+*This is an overview document for the Archer.Reporting component. For more details, see the main documentation and source code.*
 
-## Archer.Logger Types ##
+## Archer.Reporting Types ##
 
-This page provides an overview of the core types and interfaces used by Archer.Logger for formatting and outputting test results. These types define the structure and contracts for logging, reporting, and handling test execution outcomes in the Archer F# test framework.
+This page provides an overview of the core types and interfaces used by Archer.Reporting for formatting and outputting test results. These types define the structure and contracts for reporting and handling test execution outcomes in the Archer F# test framework.
 
 ### InformationDensity ###
 
@@ -73,9 +73,9 @@ Interface for logging collections of test results.
 - `LogSuccesses: density: InformationDensity -> successes: TestSuccessContainer list -> unit`
 - `LogIgnored: density: InformationDensity -> ignored: TestIgnoreContainer list -> unit`
 
-## Archer.Logger String Helpers ##
+## Archer.Reporting String Helpers ##
 
-This document describes the string helper functions provided in the Archer.Logger library. These helpers are used for common string manipulations and formatting tasks within the logger.
+This document describes the string helper functions provided in the Archer.Reporting library. These helpers are used for common string manipulations and formatting tasks within the reporter.
 
 ### trim ###
 
@@ -113,9 +113,9 @@ This document describes the string helper functions provided in the Archer.Logge
 **linesToString**
 - Joins a list of strings into a single string separated by newlines, and trims any trailing whitespace.
 
-## Archer.Logger Summaries ##
+## Archer.Reporting Summaries ##
 
-This document describes the summary transformation functions in Archer.Logger. These functions are responsible for generating concise, human-readable summaries of test results and execution outcomes.
+This document describes the summary transformation functions in Archer.Reporting. These functions are responsible for generating concise, human-readable summaries of test results and execution outcomes.
 
 ### resultMessageSummaryTransformer ###
 
@@ -165,9 +165,9 @@ This document describes the summary transformation functions in Archer.Logger. T
 - Default summary transformer for test execution results.
 - Signature: `TestExecutionResult -> ITestInfo -> string`
 
-## Archer.Logger Location Helpers ##
+## Archer.Reporting Location Helpers ##
 
-This document describes the location helper functions in Archer.Logger. These helpers are used to determine solution roots and generate relative file paths for test reporting and logging.
+This document describes the location helper functions in Archer.Reporting. These helpers are used to determine solution roots and generate relative file paths for test reporting and output.
 
 ### getSolutionRoot ###
 
@@ -199,9 +199,9 @@ This document describes the location helper functions in Archer.Logger. These he
 - Returns the relative file path (including file name) for a test's location.
 - Signature: `Assembly -> ITestLocationInfo -> string`
 
-## Archer.Logger Test Fail Container Transformer ##
+## Archer.Reporting Test Fail Container Transformer ##
 
-This document describes the Test Fail Container Transformer in Archer.Logger. This module provides functions to transform and format test failure containers for reporting and output.
+This document describes the Test Fail Container Transformer in Archer.Reporting. This module provides functions to transform and format test failure containers for reporting and output.
 
 ### getWrappedTestFailureMessage ###
 
@@ -239,9 +239,9 @@ This document describes the Test Fail Container Transformer in Archer.Logger. Th
 - Transforms a list of `TestFailContainer` values into a single formatted string.
 - Signature: `IIndentTransformer -> TestFailContainer list -> string`
 
-## Archer.Logger Test Ignore Container Transformer ##
+## Archer.Reporting Test Ignore Container Transformer ##
 
-This document describes the Test Ignore Container Transformer in Archer.Logger. This module provides functions to transform and format test ignore containers for reporting and output.
+This document describes the Test Ignore Container Transformer in Archer.Reporting. This module provides functions to transform and format test ignore containers for reporting and output.
 
 ### getWrappedTestIgnoreMessage ###
 
@@ -273,9 +273,9 @@ This document describes the Test Ignore Container Transformer in Archer.Logger. 
 - Transforms a list of `TestIgnoreContainer` values into a single formatted string.
 - Signature: `IIndentTransformer -> TestIgnoreContainer list -> string`
 
-## Archer.Logger Test Success Container Transformer ##
+## Archer.Reporting Test Success Container Transformer ##
 
-This document describes the Test Success Container Transformer in Archer.Logger. This module provides functions to transform and format test success containers for reporting and output.
+This document describes the Test Success Container Transformer in Archer.Reporting. This module provides functions to transform and format test success containers for reporting and output.
 
 ### getWrappedTestSuccessMessage ###
 

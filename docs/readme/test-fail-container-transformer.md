@@ -1,10 +1,10 @@
 <!-- (dl
 (section-meta
-    (title Archer.Logger Test Fail Container Transformer)
+    (title Archer.Reporting Test Fail Container Transformer)
 )
 ) -->
 
-This document describes the Test Fail Container Transformer in Archer.Logger. This module provides functions to transform and format test failure containers for reporting and output.
+This document describes the Test Fail Container Transformer in Archer.Reporting. This module provides functions to transform and format test failure containers for reporting and output.
 
 <!-- (dl (# getWrappedTestFailureMessage)) -->
 **getWrappedTestFailureMessage**
