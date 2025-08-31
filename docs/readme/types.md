@@ -18,19 +18,19 @@ Specifies the context or scope for log messages.
 - `TestIgnoreScope`: Ignored test messages.
 - `TestSuccessScope`: Successful test messages.
 
-<!-- (dl (# ITestLogger)) -->
+<!-- (dl (# ITestReporting)) -->
 Interface for logging test information.
 - `Log: density: InformationDensity -> scope: LogScope -> string -> unit`
 
-<!-- (dl (# ITestResultLogger)) -->
+<!-- (dl (# ITestResultReporting)) -->
 Interface for logging test results.
 - `LogTestResult: density: InformationDensity -> result: TestResult -> unit`
 
-<!-- (dl (# ITestExecutionResultLogger)) -->
+<!-- (dl (# ITestExecutionResultReporting)) -->
 Interface for logging test execution results.
 - `LogExecutionResult: density: InformationDensity -> result: TestExecutionResult -> unit`
 
-<!-- (dl (# ITestContainerLogger)) -->
+<!-- (dl (# ITestContainerReporting)) -->
 Interface for logging collections of test results.
 - `LogFailures: density: InformationDensity -> failures: TestFailContainer list -> unit`
 - `LogSuccesses: density: InformationDensity -> successes: TestSuccessContainer list -> unit`

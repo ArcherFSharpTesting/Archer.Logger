@@ -8,7 +8,7 @@ open Archer.ApprovalsSupport
 open ApprovalTests
 open Archer.Types.InternalTypes.RunnerTypes
 
-let loggerTestBuilder = Arrow.NewFeature (
+let ReportingTestBuilder = FeatureFactory.NewFeature (
     "Archer.Reporting.Tests",
     "",
     
@@ -36,7 +36,7 @@ type NameStart =
 type FakeTestBuilder =
     static member BuildTest (nameModifier, [<CallerFilePath; Optional; DefaultParameterValue("")>] fileFullName: string, [<CallerLineNumber; Optional; DefaultParameterValue(-1)>] lineNumber: int) =
         let buildIt (path: string) (name: string) = 
-            let f = Arrow.NewFeature (path, name)
+            let f = FeatureFactory.NewFeature (path, name)
             let t = f.Ignore ($"Test %d{nameModifier}", Setup Ok, TestBody "Ignore", Teardown (fun _ _ -> Ok ()), fileFullName, lineNumber)
             t
             

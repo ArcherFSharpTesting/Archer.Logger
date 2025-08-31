@@ -1,21 +1,21 @@
-﻿module Archer.Logger.Tests.``TestFailContainer Transformer Should``
+﻿module Archer.Reporting.Tests.``TestFailContainer Transformer Should``
 
 open System
 open System.Reflection
 open Archer
-open Archer.Arrows
+open Archer.Core
 open Archer.ApprovalsSupport
-open Archer.Arrows.Internal.Types
-open Archer.CoreTypes.InternalTypes.RunnerTypes
-open Archer.Fletching.Types.Internal
-open Archer.Logger
-open Archer.Logger.Detail
-open Archer.Logger.LocationHelpers
-open Archer.Logger.StringHelpers
-open Archer.Logger.TestFailContainerTransformer
+open Archer.Core.Internal.Types
+open Archer.Types.InternalTypes.RunnerTypes
+open Archer.Validations.Types.Internal
+open Archer.Reporting
+open Archer.Reporting.Detail
+open Archer.Reporting.LocationHelpers
+open Archer.Reporting.StringHelpers
+open Archer.Reporting.TestFailContainerTransformer
 
 let private feature =
-    loggerTestBuilder
+    ReportingTestBuilder
     |> Sub.Feature (
         TestTags [
             Category "Detail Transformers"

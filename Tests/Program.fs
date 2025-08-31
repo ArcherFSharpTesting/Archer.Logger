@@ -6,7 +6,7 @@ open Archer.Reporting.Summaries
 open Archer.Reporting.Tests
 open MicroLang.Lang
 
-let runner = bow.Runner ()
+let runner = runnerFactory.Runner ()
 
 runner.RunnerLifecycleEvent
 |> Event.add (fun args ->

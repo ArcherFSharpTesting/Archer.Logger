@@ -33,7 +33,7 @@ type ReportScope =
 /// <summary>
 /// Interface for reporting general test information.
 /// </summary>
-type ITestLogger =
+type ITestReporting =
     /// <summary>
     /// Reports a message with the specified information density and scope.
     /// </summary>

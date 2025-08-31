@@ -1,11 +1,11 @@
-﻿module Archer.Logger.Tests.``TestIgnoreContainer Transformer Should``
+﻿module Archer.Reporting.Tests.``TestIgnoreContainer Transformer Should``
 
 open Archer
-open Archer.Arrows
+open Archer.Core
 open Archer.ApprovalsSupport
-open Archer.CoreTypes.InternalTypes.RunnerTypes
-open Archer.Logger
-open Archer.Logger.TestIgnoreContainerTransformer
+open Archer.Types.InternalTypes.RunnerTypes
+open Archer.Reporting
+open Archer.Reporting.TestIgnoreContainerTransformer
 
 let private buildIgnored n path name =
     [
@@ -28,7 +28,7 @@ let private buildIgnored n path name =
         
     
 let private feature =
-    loggerTestBuilder
+    ReportingTestBuilder
     |> Sub.Feature (
         TestTags [
             Category "Detail Transformers"

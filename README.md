@@ -51,22 +51,22 @@ Specifies the context or scope for log messages.
 - `TestIgnoreScope`: Ignored test messages.
 - `TestSuccessScope`: Successful test messages.
 
-### ITestLogger ###
+### ITestReporting ###
 
 Interface for logging test information.
 - `Log: density: InformationDensity -> scope: LogScope -> string -> unit`
 
-### ITestResultLogger ###
+### ITestResultReporting ###
 
 Interface for logging test results.
 - `LogTestResult: density: InformationDensity -> result: TestResult -> unit`
 
-### ITestExecutionResultLogger ###
+### ITestExecutionResultReporting ###
 
 Interface for logging test execution results.
 - `LogExecutionResult: density: InformationDensity -> result: TestExecutionResult -> unit`
 
-### ITestContainerLogger ###
+### ITestContainerReporting ###
 
 Interface for logging collections of test results.
 - `LogFailures: density: InformationDensity -> failures: TestFailContainer list -> unit`

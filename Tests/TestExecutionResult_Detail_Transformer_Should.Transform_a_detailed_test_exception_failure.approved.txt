@@ -2,4 +2,4 @@
 (.\Tests\TestExecutionResult Detail Transformer Should.fs)
 	Test Failure
 		System.ArgumentException: A bad argument
-			at Archer.Logger.Tests.TestExecutionResult Detail Transformer Should.Transform a detailed test exception failure@64-1.Invoke(TestEnvironment environment) in .\Tests\TestExecutionResult Detail Transformer Should.fs:line 69
+			at Archer.Reporting.Tests.TestExecutionResult Detail Transformer Should.Transform a detailed test exception failure@64-1.Invoke(TestEnvironment environment) in .\Tests\TestExecutionResult Detail Transformer Should.fs:line 69

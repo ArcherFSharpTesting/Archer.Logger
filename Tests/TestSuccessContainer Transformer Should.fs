@@ -1,17 +1,17 @@
-﻿module Archer.Logger.Tests.``TestSuccessContainer Transformer Should``
+﻿module Archer.Reporting.Tests.``TestSuccessContainer Transformer Should``
 
 open Archer
-open Archer.Arrows
+open Archer.Core
 open Archer.ApprovalsSupport
-open Archer.CoreTypes.InternalTypes.RunnerTypes
-open Archer.Logger
-open Archer.Logger.TestSuccessContainerTransformer
+open Archer.Types.InternalTypes.RunnerTypes
+open Archer.Reporting
+open Archer.Reporting.TestSuccessContainerTransformer
 
 let private buildSuccesses n path name =
     FakeTestBuilder.BuildNTests 5 (StartNamingAt (n + 1)) path name
     
 let private feature =
-    loggerTestBuilder
+    ReportingTestBuilder
     |> Sub.Feature (
         TestTags [
             Category "Detail Transformers"

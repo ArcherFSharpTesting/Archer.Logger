@@ -2,7 +2,7 @@
 /shelf/
 /workspace.xml
 # Rider ignored files
-/.idea.Archer.Logger.iml
+/.idea.Archer.Reporting.iml
 /contentModel.xml
 /modules.xml
 /projectSettingsUpdater.xml

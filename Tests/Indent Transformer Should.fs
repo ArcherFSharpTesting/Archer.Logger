@@ -6,7 +6,7 @@ open Archer.Core
 open Archer.Reporting
 
 let private feature =
-    loggerTestBuilder
+    ReportingTestBuilder
     |> Sub.Feature (
         TestTags [
             Category "Indent Transformer"

@@ -7,7 +7,7 @@ open Archer.Validations.Types.Internal
 open Archer.Reporting.Summaries
 
 let private feature =
-    loggerTestBuilder
+    ReportingTestBuilder
     |> Sub.Feature (
         TestTags [
             Category "Transformers"

@@ -12,7 +12,7 @@ open Archer.Reporting.LocationHelpers
 open Archer.Reporting.StringHelpers
 
 let private feature =
-    loggerTestBuilder
+    ReportingTestBuilder
     |> Sub.Feature (
         TestTags [
             Category "Detail Transformers"
